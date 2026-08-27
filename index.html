@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Monero Miner · Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background: #0b0e14;
+            color: #eef2f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .app-container {
+            max-width: 1000px;
+            width: 100%;
+            background: #141a24;
+            border-radius: 32px;
+            padding: 28px 30px 35px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.04);
+        }
+
+        .miner-header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 28px;
+            gap: 15px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand i {
+            font-size: 2rem;
+            color: #f2a900;
+            filter: drop-shadow(0 0 6px #f2a90055);
+        }
+
+        .brand h1 {
+            font-weight: 600;
+            font-size: 1.7rem;
+            letter-spacing: -0.5px;
+            background: linear-gradient(145deg, #f5e7c8, #d9b86c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .status-badge {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #1e2733;
+            padding: 8px 18px 8px 16px;
+            border-radius: 60px;
+            border: 1px solid #2b3646;
+        }
+
+        .status-dot {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            background: #4cd964;
+            border-radius: 50%;
+            box-shadow: 0 0 12px #4cd964aa;
+            animation: pulse-dot 2s infinite;
+        }
+
+        @keyframes pulse-dot {
+            0% { opacity: 0.7; transform: scale(0.95); }
+            50% { opacity: 1; transform: scale(1.1); }
+            100% { opacity: 0.7; transform: scale(0.95); }
+        }
+
+        .status-text {
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            color: #cbd5e1;
+        }
+
+        .status-text strong {
+            color: #4cd964;
+            font-weight: 600;
+        }
+
+        .hashrate-card {
+            background: #1b232f;
+            border-radius: 28px;
+            padding: 22px 28px 26px;
+            margin-bottom: 28px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            border: 1px solid #29313f;
+            box-shadow: inset 0 2px 6px rgba(0,0,0,0.5);
+        }
+
+        .hashrate-number {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .hashrate-number .value {
+            font-size: 3.2rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            background: linear-gradient(135deg, #f5e7c8, #d9b86c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.1;
+        }
+
+        .hashrate-number .unit {
+            font-size: 1.4rem;
+            font-weight: 400;
+            color: #94a3b8;
+        }
+
+        .hashrate-label {
+            color: #94a3b8;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #10161e;
+            padding: 8px 18px 8px 16px;
+            border-radius: 40px;
+            border: 1px solid #2a3442;
+        }
+
+        .hashrate-label i {
+            color: #f2a900;
+        }
+
+        .grid-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 680px) {
+            .grid-2col {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+
+        .info-panel {
+            background: #1b232f;
+            border-radius: 28px;
+            padding: 22px 24px 26px;
+            border: 1px solid #29313f;
+        }
+
+        .info-panel h3 {
+            font-weight: 500;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: #8899b0;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .info-panel h3 i {
+            color: #f2a900;
+            font-size: 1rem;
+        }
+
+        .monero-address {
+            background: #10161e;
+            border-radius: 60px;
+            padding: 14px 20px;
+            font-family: 'Menlo', 'Consolas', monospace;
+            font-size: 0.95rem;
+            color: #d6dce6;
+            border: 1px solid #2f3a4a;
+            word-break: break-all;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 6px;
+        }
+
+        .monero-address i {
+            color: #f2a900;
+            font-size: 1.1rem;
+        }
+
+        .address-lock {
+            font-size: 0.8rem;
+            color: #7d8da3;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .address-lock i {
+            color: #8b9bb3;
+        }
+
+        .chart-bars {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            height: 100px;
+            margin-top: 16px;
+            gap: 5px;
+        }
+
+        .bar {
+            flex: 1;
+            background: linear-gradient(180deg, #f2a900, #c97d0e);
+            border-radius: 8px 8px 4px 4px;
+            min-height: 12px;
+            height: calc(20% + 20% * var(--h, 0.5));
+            transition: height 0.2s;
+            box-shadow: 0 -2px 10px rgba(242, 169, 0, 0.2);
+        }
+
+        .bar-label {
+            font-size: 0.6rem;
+            color: #6f7f96;
+            text-align: center;
+            margin-top: 6px;
+        }
+
+        .stats-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 18px;
+            margin-top: 18px;
+        }
+
+        .stat-item {
+            background: #10161e;
+            border-radius: 40px;
+            padding: 10px 18px 10px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border: 1px solid #2a3442;
+            flex: 1 1 auto;
+        }
+
+        .stat-item .stat-icon {
+            font-size: 1.4rem;
+            color: #f2a900;
+            width: 28px;
+            text-align: center;
+        }
+
+        .stat-item .stat-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-item .stat-value {
+            font-weight: 700;
+            font-size: 1.4rem;
+            line-height: 1.2;
+        }
+
+        .stat-item .stat-label {
+            font-size: 0.75rem;
+            color: #8899b0;
+            letter-spacing: 0.3px;
+        }
+
+        .temp-indicator {
+            color: #ff9f6e;
+        }
+
+        .contribution-area {
+            margin-top: 30px;
+            border-top: 1px solid #29313f;
+            padding-top: 24px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .contrib-graph {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            max-width: 420px;
+        }
+
+        .contrib-square {
+            width: 16px;
+            height: 16px;
+            background: #1f2a38;
+            border-radius: 4px;
+            transition: 0.1s;
+        }
+
+        .contrib-square.active {
+            background: #f2a900;
+            box-shadow: 0 0 8px #f2a90077;
+        }
+
+        .contrib-square.mid {
+            background: #c97d0e;
+        }
+
+        .contrib-label {
+            color: #7d8da3;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contrib-label i {
+            color: #f2a900;
+        }
+
+        .action-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px 20px;
+            margin-top: 12px;
+        }
+
+        .action-links a {
+            color: #b2c2d8;
+            text-decoration: none;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.2s;
+            padding: 6px 10px;
+            border-radius: 40px;
+            background: #10161e;
+            border: 1px solid #29313f;
+        }
+
+        .action-links a:hover {
+            background: #1f2a38;
+            color: #f5e7c8;
+            border-color: #f2a90055;
+        }
+
+        .action-links i {
+            color: #f2a900;
+            width: 18px;
+        }
+
+        .profile-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            margin: 12px 0 8px;
+        }
+
+        .profile-badge {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #1b232f;
+            padding: 6px 18px 6px 14px;
+            border-radius: 60px;
+            border: 1px solid #2f3a4a;
+        }
+
+        .profile-badge i {
+            color: #f2a900;
+        }
+
+        .profile-badge span {
+            font-weight: 400;
+            color: #cbd5e1;
+        }
+
+        .profile-badge small {
+            color: #7d8da3;
+        }
+
+        .text-gold {
+            color: #f2a900;
+        }
+
+        .flex {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        @media (max-width: 480px) {
+            .app-container { padding: 20px 16px; }
+            .hashrate-number .value { font-size: 2.4rem; }
+            .brand h1 { font-size: 1.3rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+
+        <!-- HEADER -->
+        <div class="miner-header">
+            <div class="brand">
+                <i class="fas fa-cube"></i>
+                <h1>Monero Miner</h1>
+            </div>
+            <div class="status-badge">
+                <span class="status-dot"></span>
+                <span class="status-text"><strong>MINERIA ACTIVA</strong> · ONLINE</span>
+                <i class="fas fa-chevron-down" style="color: #4a5a6e; font-size: 0.8rem;"></i>
+            </div>
+        </div>
+
+        <!-- HASHRATE -->
+        <div class="hashrate-card">
+            <div class="hashrate-number">
+                <span class="value">88</span>
+                <span class="unit">H/s</span>
+            </div>
+            <div class="hashrate-label">
+                <i class="fas fa-microchip"></i>
+                <span>Hashrate actual del dispositivo sobre el pool configurado.</span>
+            </div>
+        </div>
+
+        <!-- 2 COLUMNAS -->
+        <div class="grid-2col">
+            <!-- Dirección -->
+            <div class="info-panel">
+                <h3><i class="fas fa-wallet"></i> Dirección de cobro</h3>
+                <div class="monero-address">
+                    <i class="fas fa-coins"></i>
+                    <span>Ht5BsdzjCUf8hqA6XCwio116sjNw25HACZJ24</span>
+                    <i class="fas fa-copy" style="color: #5d6f86; margin-left: auto; opacity: 0.6; cursor: default;"></i>
+                </div>
+                <div class="address-lock">
+                    <i class="fas fa-lock"></i> La dirección se bloquea durante el minado.
+                </div>
+                <div style="margin-top: 16px; font-size: 0.85rem; color: #7d8da3;">
+                    <i class="fas fa-circle-info"></i> La recompensa se asociará a esta dirección Monero.
+                </div>
+            </div>
+
+            <!-- Rendimiento -->
+            <div class="info-panel">
+                <h3><i class="fas fa-chart-line"></i> Rendimiento de minado</h3>
+                <div style="color: #b2c2d8; font-size: 0.9rem; margin-bottom: 6px;">Hashrate de los últimos 24 intervalos</div>
+                <div class="chart-container">
+                    <div class="chart-bars">
+                        <div style="--h:0.4;" class="bar"></div>
+                        <div style="--h:0.7;" class="bar"></div>
+                        <div style="--h:0.5;" class="bar"></div>
+                        <div style="--h:0.9;" class="bar"></div>
+                        <div style="--h:0.6;" class="bar"></div>
+                        <div style="--h:0.8;" class="bar"></div>
+                        <div style="--h:0.3;" class="bar"></div>
+                        <div style="--h:0.7;" class="bar"></div>
+                        <div style="--h:1.0;" class="bar"></div>
+                        <div style="--h:0.65;" class="bar"></div>
+                        <div style="--h:0.5;" class="bar"></div>
+                        <div style="--h:0.85;" class="bar"></div>
+                        <div style="--h:0.45;" class="bar"></div>
+                        <div style="--h:0.75;" class="bar"></div>
+                        <div style="--h:0.55;" class="bar"></div>
+                        <div style="--h:0.9;" class="bar"></div>
+                        <div style="--h:0.6;" class="bar"></div>
+                        <div style="--h:0.8;" class="bar"></div>
+                        <div style="--h:0.7;" class="bar"></div>
+                        <div style="--h:0.4;" class="bar"></div>
+                        <div style="--h:0.95;" class="bar"></div>
+                        <div style="--h:0.5;" class="bar"></div>
+                        <div style="--h:0.7;" class="bar"></div>
+                        <div style="--h:0.6;" class="bar"></div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.6rem; color: #4f637c; margin-top: 4px;">
+                        <span>0h</span><span>6h</span><span>12h</span><span>18h</span><span>24h</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SHARES & TEMPERATURA -->
+        <div class="stats-row">
+            <div class="stat-item">
+                <span class="stat-icon"><i class="fas fa-share-alt"></i></span>
+                <div class="stat-info">
+                    <span class="stat-value">1629</span>
+                    <span class="stat-label">Shares</span>
+                </div>
+                <span style="color: #f2a900; font-weight: 500; margin-left: 4px;">47 C</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-icon"><i class="fas fa-temperature-high"></i></span>
+                <div class="stat-info">
+                    <span class="stat-value temp-indicator">39%</span>
+                    <span class="stat-label">Temperatura</span>
+                </div>
+                <div style="width: 44px; height: 6px; background: #2a3442; border-radius: 20px; overflow: hidden; margin-left: 4px;">
+                    <div style="width: 39%; height: 100%; background: #f2a900; border-radius: 20px;"></div>
+                </div>
+            </div>
+            <div class="stat-item" style="flex: 0 1 auto; background: transparent; border: none; padding: 0;">
+                <i class="fas fa-ellipsis-v" style="color: #3f4f66;"></i>
+            </div>
+        </div>
+
+        <!-- CONTRIBUCIÓN Y PERFIL -->
+        <div class="contribution-area">
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+                <div class="contrib-label">
+                    <i class="fas fa-code-commit"></i> Contribución · últimos 12 meses
+                </div>
+                <div class="contrib-graph">
+                    <div class="contrib-square active"></div><div class="contrib-square mid"></div><div class="contrib-square active"></div>
+                    <div class="contrib-square"></div><div class="contrib-square active"></div><div class="contrib-square mid"></div>
+                    <div class="contrib-square active"></div><div class="contrib-square"></div><div class="contrib-square mid"></div>
+                    <div class="contrib-square active"></div><div class="contrib-square"></div><div class="contrib-square active"></div>
+                    <div class="contrib-square mid"></div><div class="contrib-square active"></div><div class="contrib-square"></div>
+                    <div class="contrib-square active"></div><div class="contrib-square mid"></div><div class="contrib-square active"></div>
+                    <div class="contrib-square"></div><div class="contrib-square active"></div><div class="contrib-square mid"></div>
+                    <div class="contrib-square active"></div><div class="contrib-square"></div><div class="contrib-square active"></div>
+                    <div class="contrib-square mid"></div><div class="contrib-square active"></div><div class="contrib-square"></div>
+                    <div class="contrib-square active"></div><div class="contrib-square mid"></div><div class="contrib-square active"></div>
+                    <div class="contrib-square"></div><div class="contrib-square active"></div><div class="contrib-square mid"></div>
+                    <div class="contrib-square active"></div><div class="contrib-square"></div><div class="contrib-square active"></div>
+                    <div class="contrib-square mid"></div><div class="contrib-square active"></div><div class="contrib-square"></div>
+                    <div class="contrib-square active"></div><div class="contrib-square mid"></div><div class="contrib-square active"></div>
+                    <div class="contrib-square"></div><div class="contrib-square active"></div><div class="contrib-square mid"></div>
+                    <div class="contrib-square active"></div><div class="contrib-square"></div><div class="contrib-square active"></div>
+                    <div class="contrib-square mid"></div><div class="contrib-square active"></div><div class="contrib-square"></div>
+                </div>
+            </div>
+
+            <div class="profile-row" style="margin:0;">
+                <div class="profile-badge">
+                    <i class="fas fa-building"></i>
+                    <span>MaxStudio COMPANY</span>
+                    <small>·</small>
+                    <span style="color:#f2a900;">MaxStudiotoken</span>
+                    <i class="fas fa-pen" style="color:#5d6f86; font-size:0.7rem; margin-left:6px;"></i>
+                </div>
+                <div style="display: flex; gap: 12px; color: #7d8da3; font-size:0.9rem;">
+                    <span><i class="fas fa-user"></i> 1 follower</span>
+                    <span><i class="fas fa-user-plus"></i> 1 following</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ACCIONES -->
+        <div class="action-links">
+            <a href="#"><i class="fas fa-plus-circle"></i> New issue</a>
+            <a href="#"><i class="fas fa-book"></i> New repository</a>
+            <a href="#"><i class="fas fa-cloud-upload-alt"></i> Import repository</a>
+            <a href="#"><i class="fas fa-code"></i> New codespace</a>
+            <a href="#"><i class="fas fa-paste"></i> New gist</a>
+            <a href="#"><i class="fas fa-users"></i> New organization</a>
+            <a href="#"><i class="fas fa-project-diagram"></i> New project</a>
+        </div>
+
+        <!-- FOOTER -->
+        <div style="margin-top: 22px; border-top: 1px solid #1e2733; padding-top: 16px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size:0.8rem; color:#5d6f86;">
+            <span><i class="fas fa-globe"></i> Hosteado con GitHub Pages · Diseño app Monero</span>
+            <span><i class="fas fa-cube"></i> zip-world-NFT-BNB · Página oficial</span>
+        </div>
+    </div>
+</body>
+</html>
