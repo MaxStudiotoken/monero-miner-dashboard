@@ -370,7 +370,6 @@
             cursor: pointer;
             transition: 0.2s;
             text-align: center;
-            white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
@@ -481,6 +480,32 @@
         .toast.error { border-color: #e74c3c; }
         .toast.error i { color: #e74c3c; }
         .toast i { margin-right: 12px; font-size: 1.2rem; }
+
+        /* ===== SELECTOR DE IDIOMAS ===== */
+        .language-selector {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .lang-btn {
+            background: #0d111a;
+            border: 1px solid #25303e;
+            border-radius: 30px;
+            padding: 4px 12px;
+            color: #8899b0;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: 0.2s;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .lang-btn:hover { border-color: #f2a900; color: #eef2f6; }
+        .lang-btn.active { border-color: #f2a900; background: #f2a90022; color: #f2a900; }
+        .lang-btn .flag { font-size: 1rem; }
+
         @media (max-width: 768px) {
             .app-container { padding: 20px; }
             .logo-section .logo-text h1 { font-size: 2.8rem; }
@@ -497,6 +522,7 @@
             .stats-row { grid-template-columns: 1fr 1fr; }
             .toast { left: 20px; right: 20px; bottom: 20px; }
             .pool-selector { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
+            .language-selector { justify-content: center; margin-top: 10px; }
         }
         @media (max-width: 480px) {
             .logo-section .logo-text h1 { font-size: 2rem; }
@@ -505,6 +531,7 @@
             .hashrate-number .value { font-size: 2rem; }
             .stats-row { grid-template-columns: 1fr; }
             .pool-selector { grid-template-columns: 1fr 1fr; }
+            .lang-btn { font-size: 0.6rem; padding: 3px 8px; }
         }
     </style>
 </head>
@@ -519,49 +546,59 @@
                 <div class="logo-text">
                     <h1>MaxStudio</h1>
                     <div class="subtitle">
-                        <i class="fas fa-cog"></i> MONERO MINER <i class="fas fa-cog"></i>
+                        <i class="fas fa-cog"></i> <span id="subtitleText">MONERO MINER</span> <i class="fas fa-cog"></i>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- ===== HEADER ===== -->
+        <!-- ===== HEADER CON IDIOMAS ===== -->
         <div class="miner-header">
             <div class="left-info">
                 <i class="fas fa-microchip"></i>
-                <span>Minero Híbrido · 8 Pools</span>
+                <span id="minerTypeText">Minero Web · 8 Pools</span>
             </div>
-            <div class="status-badge">
-                <span class="status-dot inactive" id="statusDot"></span>
-                <span class="status-text" id="statusText"><strong class="inactive">INACTIVO</strong></span>
+            <div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center;">
+                <div class="language-selector">
+                    <button class="lang-btn active" data-lang="es"><span class="flag">🇪🇸</span> ES</button>
+                    <button class="lang-btn" data-lang="en"><span class="flag">🇬🇧</span> EN</button>
+                    <button class="lang-btn" data-lang="fr"><span class="flag">🇫🇷</span> FR</button>
+                    <button class="lang-btn" data-lang="de"><span class="flag">🇩🇪</span> DE</button>
+                    <button class="lang-btn" data-lang="ja"><span class="flag">🇯🇵</span> JA</button>
+                    <button class="lang-btn" data-lang="zh"><span class="flag">🇨🇳</span> ZH</button>
+                </div>
+                <div class="status-badge">
+                    <span class="status-dot inactive" id="statusDot"></span>
+                    <span class="status-text" id="statusText"><strong class="inactive" id="statusStrong">INACTIVO</strong></span>
+                </div>
             </div>
         </div>
 
         <!-- ===== GANANCIAS ===== -->
         <div class="earnings-card">
             <div class="earnings-left">
-                <div class="earnings-title"><i class="fas fa-coins"></i> Ganancias en directo</div>
+                <div class="earnings-title"><i class="fas fa-coins"></i> <span id="earningsTitle">Ganancias en directo</span></div>
                 <div class="earnings-value" id="earningsValue">0.00000000 <span class="currency">XMR</span></div>
                 <div class="earnings-details">
-                    <span><i class="fas fa-clock"></i> <span id="earningsHour">0.0000</span> XMR/h</span>
-                    <span><i class="fas fa-calendar-day"></i> <span id="earningsDay">0.0000</span> XMR/día</span>
+                    <span><i class="fas fa-clock"></i> <span id="earningsHour">0.0000</span> <span id="perHourText">XMR/h</span></span>
+                    <span><i class="fas fa-calendar-day"></i> <span id="earningsDay">0.0000</span> <span id="perDayText">XMR/día</span></span>
                 </div>
             </div>
             <div class="claim-section">
                 <button class="btn-claim" id="btnClaim" disabled>
-                    <i class="fas fa-hand-holding-usd"></i> Recompensar
+                    <i class="fas fa-hand-holding-usd"></i> <span id="claimBtnText">Recompensar</span>
                 </button>
-                <span class="claim-status" id="claimStatus">Mínimo: 0.035 XMR</span>
+                <span class="claim-status" id="claimStatus"><span id="minClaimText">Mínimo: 0.035 XMR</span></span>
             </div>
         </div>
 
         <!-- ===== GRÁFICA ===== -->
         <div class="chart-container">
             <div class="chart-header">
-                <h3><i class="fas fa-chart-area"></i> Rendimiento de minado</h3>
+                <h3><i class="fas fa-chart-area"></i> <span id="chartTitle">Rendimiento de minado</span></h3>
                 <div class="chart-stats">
-                    <span>Pico: <span class="stat-high" id="chartHigh">0</span> H/s</span>
-                    <span>Promedio: <span id="chartAvg">0</span> H/s</span>
+                    <span><span id="peakText">Pico</span>: <span class="stat-high" id="chartHigh">0</span> H/s</span>
+                    <span><span id="avgText">Promedio</span>: <span id="chartAvg">0</span> H/s</span>
                 </div>
             </div>
             <div class="chart-svg-container">
@@ -599,52 +636,44 @@
             </div>
         </div>
 
-        <!-- ===== FORMULARIO CON MÁS POOLS ===== -->
+        <!-- ===== FORMULARIO ===== -->
         <div class="mining-form">
             <div class="form-group">
-                <label for="walletInput"><i class="fas fa-wallet"></i> Dirección Monero</label>
+                <label for="walletInput"><i class="fas fa-wallet"></i> <span id="walletLabel">Dirección Monero</span></label>
                 <input type="text" id="walletInput" placeholder="Introduce tu dirección (empieza con 4...)" 
                     value="4657q4dnsjLWtzeW4XN3wG9swFumWAZB9i1pegTLMxVAQy5E5AE8uif42kkHWcWc9vDcLUmzeCf3pV7mmrJQQqqe84dtASi" />
             </div>
             <div class="form-group" style="flex: 1 1 100%;">
-                <label><i class="fas fa-server"></i> Selecciona Pool</label>
+                <label><i class="fas fa-server"></i> <span id="poolLabel">Selecciona Pool</span></label>
                 <div class="pool-selector">
-                    <!-- POOL 1: MoneroOcean -->
                     <button class="pool-btn active" data-pool="gulf.moneroocean.stream:80" data-wss="wss://ny1.xmrminingproxy.com">
                         MoneroOcean
                         <span class="pool-fee">Fee: 1% · Pago: 0.01 XMR</span>
                     </button>
-                    <!-- POOL 2: SupportXMR -->
                     <button class="pool-btn" data-pool="pool.supportxmr.com:3333" data-wss="wss://pool.supportxmr.com:443">
                         SupportXMR
                         <span class="pool-fee">Fee: 1.1% · Pago: 0.01 XMR</span>
                     </button>
-                    <!-- POOL 3: MineXMR -->
                     <button class="pool-btn" data-pool="pool.minexmr.com:4444" data-wss="wss://pool.minexmr.com:443">
                         MineXMR
                         <span class="pool-fee">Fee: 1% · Pago: 0.01 XMR</span>
                     </button>
-                    <!-- POOL 4: Nanopool -->
                     <button class="pool-btn" data-pool="xmr-eu1.nanopool.org:14444" data-wss="wss://xmr-eu1.nanopool.org:443">
                         Nanopool
                         <span class="pool-fee">Fee: 1% · Pago: 0.02 XMR</span>
                     </button>
-                    <!-- POOL 5: HashVault -->
                     <button class="pool-btn" data-pool="pool.hashvault.pro:3333" data-wss="wss://pool.hashvault.pro:443">
                         HashVault
                         <span class="pool-fee">Fee: 0.9% · Pago: 0.01 XMR</span>
                     </button>
-                    <!-- POOL 6: HeroMiners -->
-                    <button class="pool-btn" data-pool="xmr-usa.heroMiners.com:10150" data-wss="wss://xmr-usa.herominers.com:443">
+                    <button class="pool-btn" data-pool="xmr-usa.herominers.com:10150" data-wss="wss://xmr-usa.herominers.com:443">
                         HeroMiners
                         <span class="pool-fee">Fee: 1% · Pago: 0.01 XMR</span>
                     </button>
-                    <!-- POOL 7: ViaBTC -->
                     <button class="pool-btn" data-pool="xmr.viabtc.com:8888" data-wss="wss://xmr.viabtc.com:443">
                         ViaBTC
                         <span class="pool-fee">Fee: 1.5% · Pago: 0.01 XMR</span>
                     </button>
-                    <!-- POOL 8: P2Pool -->
                     <button class="pool-btn" data-pool="p2pool.minexmr.com:3333" data-wss="wss://p2pool.minexmr.com:443">
                         P2Pool
                         <span class="pool-fee">Fee: 0% · Pago: 0.005 XMR</span>
@@ -659,7 +688,7 @@
         <!-- ===== ESTADO ===== -->
         <div class="mining-status" id="miningStatus">
             <i class="fas fa-circle-info"></i>
-            <span>Introduce tu dirección y haz clic en "Iniciar"</span>
+            <span id="statusInfoText">Introduce tu dirección y haz clic en "Iniciar"</span>
         </div>
 
         <!-- ===== STATS ===== -->
@@ -668,7 +697,7 @@
                 <span class="stat-icon"><i class="fas fa-share-alt"></i></span>
                 <div class="stat-info">
                     <span class="stat-value" id="sharesValue">0</span>
-                    <span class="stat-label">Shares</span>
+                    <span class="stat-label" id="sharesLabel">Shares</span>
                 </div>
                 <div class="stat-bar"><div class="fill" id="sharesBar" style="width:0%;"></div></div>
             </div>
@@ -676,7 +705,7 @@
                 <span class="stat-icon"><i class="fas fa-microchip"></i></span>
                 <div class="stat-info">
                     <span class="stat-value temp-indicator" id="cpuValue">0%</span>
-                    <span class="stat-label">CPU</span>
+                    <span class="stat-label" id="cpuLabel">CPU</span>
                 </div>
                 <div class="stat-bar"><div class="fill" id="cpuBar" style="width:0%;"></div></div>
             </div>
@@ -684,7 +713,7 @@
                 <span class="stat-icon"><i class="fas fa-thermometer-half"></i></span>
                 <div class="stat-info">
                     <span class="stat-value" id="tempValue">--°C</span>
-                    <span class="stat-label">Temperatura</span>
+                    <span class="stat-label" id="tempLabel">Temperatura</span>
                 </div>
                 <div class="stat-bar"><div class="fill" id="tempBar" style="width:0%;"></div></div>
             </div>
@@ -692,13 +721,13 @@
                 <span class="stat-icon"><i class="fas fa-clock"></i></span>
                 <div class="stat-info">
                     <span class="stat-value" id="uptimeValue">0s</span>
-                    <span class="stat-label">Tiempo activo</span>
+                    <span class="stat-label" id="uptimeLabel">Tiempo activo</span>
                 </div>
             </div>
         </div>
 
         <div class="footer-note">
-            <span><i class="fas fa-globe"></i> Hosteado con GitHub Pages · 8 Pools disponibles</span>
+            <span><i class="fas fa-globe"></i> <span id="footerText1">Hosteado con GitHub Pages · 8 Pools disponibles</span></span>
             <span><i class="fas fa-cube"></i> MaxStudiotoken · v3.0 PRO</span>
         </div>
     </div>
@@ -714,74 +743,366 @@
             'use strict';
 
             // =============================================
-            // ===== LISTA DE POOLS =====
+            // ===== TRADUCCIONES A 6 IDIOMAS =====
             // =============================================
-            const POOLS = {
-                'MoneroOcean': { pool: 'gulf.moneroocean.stream:80', wss: 'wss://ny1.xmrminingproxy.com', fee: '1%', minPayout: '0.01 XMR' },
-                'SupportXMR': { pool: 'pool.supportxmr.com:3333', wss: 'wss://pool.supportxmr.com:443', fee: '1.1%', minPayout: '0.01 XMR' },
-                'MineXMR': { pool: 'pool.minexmr.com:4444', wss: 'wss://pool.minexmr.com:443', fee: '1%', minPayout: '0.01 XMR' },
-                'Nanopool': { pool: 'xmr-eu1.nanopool.org:14444', wss: 'wss://xmr-eu1.nanopool.org:443', fee: '1%', minPayout: '0.02 XMR' },
-                'HashVault': { pool: 'pool.hashvault.pro:3333', wss: 'wss://pool.hashvault.pro:443', fee: '0.9%', minPayout: '0.01 XMR' },
-                'HeroMiners': { pool: 'xmr-usa.herominers.com:10150', wss: 'wss://xmr-usa.herominers.com:443', fee: '1%', minPayout: '0.01 XMR' },
-                'ViaBTC': { pool: 'xmr.viabtc.com:8888', wss: 'wss://xmr.viabtc.com:443', fee: '1.5%', minPayout: '0.01 XMR' },
-                'P2Pool': { pool: 'p2pool.minexmr.com:3333', wss: 'wss://p2pool.minexmr.com:443', fee: '0%', minPayout: '0.005 XMR' }
+            const TRANSLATIONS = {
+                es: {
+                    title: 'MONERO MINER',
+                    minerType: 'Minero Web · 8 Pools',
+                    statusInactive: 'INACTIVO',
+                    statusMining: 'MINANDO',
+                    earningsTitle: 'Ganancias en directo',
+                    perHour: 'XMR/h',
+                    perDay: 'XMR/día',
+                    claimBtn: 'Recompensar',
+                    minClaim: 'Mínimo: 0.035 XMR',
+                    chartTitle: 'Rendimiento de minado',
+                    peak: 'Pico',
+                    avg: 'Promedio',
+                    hashrateDesc: 'Esperando inicio...',
+                    walletLabel: 'Dirección Monero',
+                    poolLabel: 'Selecciona Pool',
+                    btnStart: 'Iniciar',
+                    btnStop: 'Detener',
+                    statusInfo: 'Introduce tu dirección y haz clic en "Iniciar"',
+                    sharesLabel: 'Shares',
+                    cpuLabel: 'CPU',
+                    tempLabel: 'Temperatura',
+                    uptimeLabel: 'Tiempo activo',
+                    footerText: 'Hosteado con GitHub Pages · 8 Pools disponibles',
+                    miningFor: 'Minando para',
+                    connectedTo: 'Conectado a',
+                    invalidAddress: 'Dirección inválida. Debe empezar con "4"',
+                    error: 'Error',
+                    hybridMode: 'modo híbrido',
+                    stopped: 'Minado detenido.',
+                    rewardClaimed: '¡Recompensa reclamada!',
+                    insufficientBalance: 'Saldo insuficiente. Mínimo 0.035 XMR',
+                    addressInvalid: 'Dirección inválida',
+                    rewardSent: 'enviado a'
+                },
+                en: {
+                    title: 'MONERO MINER',
+                    minerType: 'Web Miner · 8 Pools',
+                    statusInactive: 'INACTIVE',
+                    statusMining: 'MINING',
+                    earningsTitle: 'Live Earnings',
+                    perHour: 'XMR/h',
+                    perDay: 'XMR/day',
+                    claimBtn: 'Claim Reward',
+                    minClaim: 'Minimum: 0.035 XMR',
+                    chartTitle: 'Mining Performance',
+                    peak: 'Peak',
+                    avg: 'Average',
+                    hashrateDesc: 'Waiting to start...',
+                    walletLabel: 'Monero Address',
+                    poolLabel: 'Select Pool',
+                    btnStart: 'Start',
+                    btnStop: 'Stop',
+                    statusInfo: 'Enter your address and click "Start"',
+                    sharesLabel: 'Shares',
+                    cpuLabel: 'CPU',
+                    tempLabel: 'Temperature',
+                    uptimeLabel: 'Uptime',
+                    footerText: 'Hosted on GitHub Pages · 8 Pools available',
+                    miningFor: 'Mining for',
+                    connectedTo: 'Connected to',
+                    invalidAddress: 'Invalid address. Must start with "4"',
+                    error: 'Error',
+                    hybridMode: 'hybrid mode',
+                    stopped: 'Mining stopped.',
+                    rewardClaimed: 'Reward claimed!',
+                    insufficientBalance: 'Insufficient balance. Minimum 0.035 XMR',
+                    addressInvalid: 'Invalid address',
+                    rewardSent: 'sent to'
+                },
+                fr: {
+                    title: 'MONERO MINER',
+                    minerType: 'Mineur Web · 8 Pools',
+                    statusInactive: 'INACTIF',
+                    statusMining: 'MINAGE',
+                    earningsTitle: 'Gains en direct',
+                    perHour: 'XMR/h',
+                    perDay: 'XMR/jour',
+                    claimBtn: 'Réclamer',
+                    minClaim: 'Minimum: 0.035 XMR',
+                    chartTitle: 'Performance de minage',
+                    peak: 'Pic',
+                    avg: 'Moyenne',
+                    hashrateDesc: 'En attente de démarrage...',
+                    walletLabel: 'Adresse Monero',
+                    poolLabel: 'Sélectionner un pool',
+                    btnStart: 'Démarrer',
+                    btnStop: 'Arrêter',
+                    statusInfo: 'Entrez votre adresse et cliquez sur "Démarrer"',
+                    sharesLabel: 'Parts',
+                    cpuLabel: 'CPU',
+                    tempLabel: 'Température',
+                    uptimeLabel: 'Temps actif',
+                    footerText: 'Hébergé sur GitHub Pages · 8 Pools disponibles',
+                    miningFor: 'Minage pour',
+                    connectedTo: 'Connecté à',
+                    invalidAddress: 'Adresse invalide. Doit commencer par "4"',
+                    error: 'Erreur',
+                    hybridMode: 'mode hybride',
+                    stopped: 'Minage arrêté.',
+                    rewardClaimed: 'Récompense réclamée !',
+                    insufficientBalance: 'Solde insuffisant. Minimum 0.035 XMR',
+                    addressInvalid: 'Adresse invalide',
+                    rewardSent: 'envoyé à'
+                },
+                de: {
+                    title: 'MONERO MINER',
+                    minerType: 'Web-Miner · 8 Pools',
+                    statusInactive: 'INAKTIV',
+                    statusMining: 'SCHÜRFT',
+                    earningsTitle: 'Live-Einnahmen',
+                    perHour: 'XMR/h',
+                    perDay: 'XMR/Tag',
+                    claimBtn: 'Belohnung einfordern',
+                    minClaim: 'Minimum: 0.035 XMR',
+                    chartTitle: 'Schürfleistung',
+                    peak: 'Spitze',
+                    avg: 'Durchschnitt',
+                    hashrateDesc: 'Warten auf Start...',
+                    walletLabel: 'Monero-Adresse',
+                    poolLabel: 'Pool auswählen',
+                    btnStart: 'Starten',
+                    btnStop: 'Stoppen',
+                    statusInfo: 'Gib deine Adresse ein und klicke auf "Starten"',
+                    sharesLabel: 'Shares',
+                    cpuLabel: 'CPU',
+                    tempLabel: 'Temperatur',
+                    uptimeLabel: 'Laufzeit',
+                    footerText: 'Gehostet auf GitHub Pages · 8 Pools verfügbar',
+                    miningFor: 'Schürft für',
+                    connectedTo: 'Verbunden mit',
+                    invalidAddress: 'Ungültige Adresse. Muss mit "4" beginnen',
+                    error: 'Fehler',
+                    hybridMode: 'Hybrid-Modus',
+                    stopped: 'Schürfen gestoppt.',
+                    rewardClaimed: 'Belohnung eingefordert!',
+                    insufficientBalance: 'Ungenügendes Guthaben. Minimum 0.035 XMR',
+                    addressInvalid: 'Ungültige Adresse',
+                    rewardSent: 'gesendet an'
+                },
+                ja: {
+                    title: 'モネロ マイナー',
+                    minerType: 'ウェブマイナー · 8プール',
+                    statusInactive: '非アクティブ',
+                    statusMining: 'マイニング中',
+                    earningsTitle: 'ライブ収益',
+                    perHour: 'XMR/h',
+                    perDay: 'XMR/日',
+                    claimBtn: '報酬を受け取る',
+                    minClaim: '最小: 0.035 XMR',
+                    chartTitle: 'マイニングパフォーマンス',
+                    peak: 'ピーク',
+                    avg: '平均',
+                    hashrateDesc: '開始待機中...',
+                    walletLabel: 'モネロアドレス',
+                    poolLabel: 'プールを選択',
+                    btnStart: '開始',
+                    btnStop: '停止',
+                    statusInfo: 'アドレスを入力して「開始」をクリック',
+                    sharesLabel: 'シェア',
+                    cpuLabel: 'CPU',
+                    tempLabel: '温度',
+                    uptimeLabel: '稼働時間',
+                    footerText: 'GitHub Pagesでホスト · 8プール利用可能',
+                    miningFor: 'マイニング対象',
+                    connectedTo: '接続先',
+                    invalidAddress: '無効なアドレス。「4」で始まる必要があります',
+                    error: 'エラー',
+                    hybridMode: 'ハイブリッドモード',
+                    stopped: 'マイニング停止。',
+                    rewardClaimed: '報酬を受け取りました！',
+                    insufficientBalance: '残高不足。最小 0.035 XMR',
+                    addressInvalid: '無効なアドレス',
+                    rewardSent: '送信先'
+                },
+                zh: {
+                    title: '门罗币 矿工',
+                    minerType: '网页矿工 · 8个矿池',
+                    statusInactive: '未激活',
+                    statusMining: '挖矿中',
+                    earningsTitle: '实时收益',
+                    perHour: 'XMR/小时',
+                    perDay: 'XMR/天',
+                    claimBtn: '领取奖励',
+                    minClaim: '最低: 0.035 XMR',
+                    chartTitle: '挖矿性能',
+                    peak: '峰值',
+                    avg: '平均',
+                    hashrateDesc: '等待开始...',
+                    walletLabel: '门罗币地址',
+                    poolLabel: '选择矿池',
+                    btnStart: '开始',
+                    btnStop: '停止',
+                    statusInfo: '输入您的地址并点击"开始"',
+                    sharesLabel: '份额',
+                    cpuLabel: 'CPU',
+                    tempLabel: '温度',
+                    uptimeLabel: '运行时间',
+                    footerText: '托管于GitHub Pages · 8个矿池可用',
+                    miningFor: '挖矿地址',
+                    connectedTo: '连接到',
+                    invalidAddress: '无效地址。必须以"4"开头',
+                    error: '错误',
+                    hybridMode: '混合模式',
+                    stopped: '挖矿已停止。',
+                    rewardClaimed: '奖励已领取！',
+                    insufficientBalance: '余额不足。最低 0.035 XMR',
+                    addressInvalid: '无效地址',
+                    rewardSent: '发送至'
+                }
             };
 
-            const walletInput = document.getElementById('walletInput');
-            const btnMiner = document.getElementById('btnMiner');
-            const btnText = document.getElementById('btnText');
-            const statusDot = document.getElementById('statusDot');
-            const statusText = document.getElementById('statusText');
-            const hashrateValue = document.getElementById('hashrateValue');
-            const hashrateDesc = document.getElementById('hashrateDesc');
-            const miningStatus = document.getElementById('miningStatus');
-            const sharesValue = document.getElementById('sharesValue');
-            const tempValue = document.getElementById('tempValue');
-            const cpuValue = document.getElementById('cpuValue');
-            const cpuBar = document.getElementById('cpuBar');
-            const tempBar = document.getElementById('tempBar');
-            const sharesBar = document.getElementById('sharesBar');
-            const uptimeValue = document.getElementById('uptimeValue');
-            const earningsValue = document.getElementById('earningsValue');
-            const earningsHour = document.getElementById('earningsHour');
-            const earningsDay = document.getElementById('earningsDay');
-            const chartLine = document.getElementById('chartLine');
-            const areaFill = document.getElementById('areaFill');
-            const chartDots = document.getElementById('chartDots');
-            const chartHigh = document.getElementById('chartHigh');
-            const chartAvg = document.getElementById('chartAvg');
-            const btnClaim = document.getElementById('btnClaim');
-            const claimStatus = document.getElementById('claimStatus');
-            const toast = document.getElementById('toast');
-            const toastMessage = document.getElementById('toastMessage');
-            let toastTimeout = null;
-            const poolBtns = document.querySelectorAll('.pool-btn');
-
-            let currentPool = 'gulf.moneroocean.stream:80';
-            let currentWss = 'wss://ny1.xmrminingproxy.com';
-            let currentPoolName = 'MoneroOcean';
+            // =============================================
+            // ===== VARIABLES GLOBALES =====
+            // =============================================
+            let currentLang = 'es';
             let isMining = false;
             let miningInterval = null;
             let shares = 0;
             let hashrate = 0;
             let history = Array(24).fill(0);
-            let maxHistory = 1;
             let startTime = null;
             let totalEarned = 0;
             let claimedAmount = 0;
-            const MIN_CLAIM = 0.035;
             let uptimeSeconds = 0;
+            const MIN_CLAIM = 0.035;
+            let currentPool = 'gulf.moneroocean.stream:80';
+            let currentWss = 'wss://ny1.xmrminingproxy.com';
+            let currentPoolName = 'MoneroOcean';
 
+            // =============================================
+            // ===== ELEMENTOS DOM =====
+            // =============================================
+            const elements = {
+                subtitleText: document.getElementById('subtitleText'),
+                minerTypeText: document.getElementById('minerTypeText'),
+                statusStrong: document.getElementById('statusStrong'),
+                statusText: document.getElementById('statusText'),
+                statusDot: document.getElementById('statusDot'),
+                earningsTitle: document.getElementById('earningsTitle'),
+                earningsValue: document.getElementById('earningsValue'),
+                earningsHour: document.getElementById('earningsHour'),
+                earningsDay: document.getElementById('earningsDay'),
+                perHourText: document.getElementById('perHourText'),
+                perDayText: document.getElementById('perDayText'),
+                claimBtnText: document.getElementById('claimBtnText'),
+                claimStatus: document.getElementById('claimStatus'),
+                minClaimText: document.getElementById('minClaimText'),
+                chartTitle: document.getElementById('chartTitle'),
+                peakText: document.getElementById('peakText'),
+                avgText: document.getElementById('avgText'),
+                chartHigh: document.getElementById('chartHigh'),
+                chartAvg: document.getElementById('chartAvg'),
+                hashrateValue: document.getElementById('hashrateValue'),
+                hashrateDesc: document.getElementById('hashrateDesc'),
+                walletLabel: document.getElementById('walletLabel'),
+                poolLabel: document.getElementById('poolLabel'),
+                btnText: document.getElementById('btnText'),
+                btnMiner: document.getElementById('btnMiner'),
+                statusInfoText: document.getElementById('statusInfoText'),
+                miningStatus: document.getElementById('miningStatus'),
+                sharesValue: document.getElementById('sharesValue'),
+                sharesLabel: document.getElementById('sharesLabel'),
+                cpuValue: document.getElementById('cpuValue'),
+                cpuLabel: document.getElementById('cpuLabel'),
+                tempValue: document.getElementById('tempValue'),
+                tempLabel: document.getElementById('tempLabel'),
+                uptimeValue: document.getElementById('uptimeValue'),
+                uptimeLabel: document.getElementById('uptimeLabel'),
+                footerText1: document.getElementById('footerText1'),
+                chartLine: document.getElementById('chartLine'),
+                areaFill: document.getElementById('areaFill'),
+                chartDots: document.getElementById('chartDots'),
+                walletInput: document.getElementById('walletInput'),
+                btnClaim: document.getElementById('btnClaim'),
+                toast: document.getElementById('toast'),
+                toastMessage: document.getElementById('toastMessage'),
+                cpuBar: document.getElementById('cpuBar'),
+                tempBar: document.getElementById('tempBar'),
+                sharesBar: document.getElementById('sharesBar'),
+            };
+
+            const langBtns = document.querySelectorAll('.lang-btn');
+            const poolBtns = document.querySelectorAll('.pool-btn');
+
+            // =============================================
+            // ===== FUNCIÓN DE TRADUCCIÓN =====
+            // =============================================
+            function t(key) {
+                return TRANSLATIONS[currentLang]?.[key] || TRANSLATIONS.es[key] || key;
+            }
+
+            // =============================================
+            // ===== ACTUALIZAR IDIOMA =====
+            // =============================================
+            function updateLanguage() {
+                elements.subtitleText.textContent = t('title');
+                elements.minerTypeText.textContent = t('minerType');
+                elements.earningsTitle.textContent = t('earningsTitle');
+                elements.perHourText.textContent = t('perHour');
+                elements.perDayText.textContent = t('perDay');
+                elements.claimBtnText.textContent = t('claimBtn');
+                elements.minClaimText.textContent = t('minClaim');
+                elements.chartTitle.textContent = t('chartTitle');
+                elements.peakText.textContent = t('peak');
+                elements.avgText.textContent = t('avg');
+                elements.walletLabel.textContent = t('walletLabel');
+                elements.poolLabel.textContent = t('poolLabel');
+                elements.sharesLabel.textContent = t('sharesLabel');
+                elements.cpuLabel.textContent = t('cpuLabel');
+                elements.tempLabel.textContent = t('tempLabel');
+                elements.uptimeLabel.textContent = t('uptimeLabel');
+                elements.footerText1.textContent = t('footerText');
+
+                if (isMining) {
+                    elements.btnText.textContent = t('btnStop');
+                    elements.statusStrong.textContent = t('statusMining');
+                } else {
+                    elements.btnText.textContent = t('btnStart');
+                    elements.statusStrong.textContent = t('statusInactive');
+                    elements.hashrateDesc.textContent = t('hashrateDesc');
+                }
+
+                if (!isMining) {
+                    elements.statusInfoText.textContent = t('statusInfo');
+                }
+
+                updateClaimButtonText();
+            }
+
+            function updateClaimButtonText() {
+                const available = totalEarned - claimedAmount;
+                if (available >= MIN_CLAIM) {
+                    elements.btnClaim.disabled = false;
+                    elements.claimStatus.innerHTML = '✅ ' + available.toFixed(8) + ' XMR ' + t('available');
+                    elements.claimStatus.className = 'claim-status success';
+                } else {
+                    elements.btnClaim.disabled = true;
+                    const needed = (MIN_CLAIM - available);
+                    elements.claimStatus.innerHTML = needed > 0 ? t('missing') + ' ' + needed.toFixed(8) + ' XMR' : t('minClaim');
+                    elements.claimStatus.className = 'claim-status';
+                }
+            }
+
+            // =============================================
+            // ===== FUNCIONES DE MINERÍA =====
+            // =============================================
             function isValidAddress(address) {
                 return /^4[0-9A-Za-z]{94,105}$/.test(address.trim());
             }
 
             function showToast(message, type = 'success') {
-                toast.className = 'toast ' + type;
-                toastMessage.textContent = message;
-                toast.classList.add('show');
-                if (toastTimeout) clearTimeout(toastTimeout);
-                toastTimeout = setTimeout(() => toast.classList.remove('show'), 4000);
+                elements.toast.className = 'toast ' + type;
+                elements.toastMessage.textContent = message;
+                elements.toast.classList.add('show');
+                if (window.toastTimeout) clearTimeout(window.toastTimeout);
+                window.toastTimeout = setTimeout(() => elements.toast.classList.remove('show'), 4000);
             }
 
             const NETWORK_DIFFICULTY = 300000000000;
@@ -795,10 +1116,10 @@
             function updateEarnings() {
                 if (!isMining || hashrate === 0) {
                     const displayTotal = totalEarned - claimedAmount;
-                    earningsValue.textContent = displayTotal.toFixed(8) + ' XMR';
-                    earningsHour.textContent = '0.0000';
-                    earningsDay.textContent = '0.0000';
-                    updateClaimButton();
+                    elements.earningsValue.textContent = displayTotal.toFixed(8) + ' XMR';
+                    elements.earningsHour.textContent = '0.0000';
+                    elements.earningsDay.textContent = '0.0000';
+                    updateClaimButtonText();
                     return;
                 }
 
@@ -808,40 +1129,10 @@
                 const perDay = perHour * 24;
 
                 const displayTotal = totalEarned - claimedAmount;
-                earningsValue.textContent = displayTotal.toFixed(8) + ' XMR';
-                earningsHour.textContent = perHour.toFixed(4);
-                earningsDay.textContent = perDay.toFixed(4);
-                updateClaimButton();
-            }
-
-            function updateClaimButton() {
-                const available = totalEarned - claimedAmount;
-                if (available >= MIN_CLAIM) {
-                    btnClaim.disabled = false;
-                    claimStatus.textContent = '✅ ' + available.toFixed(8) + ' XMR disponible';
-                    claimStatus.className = 'claim-status success';
-                } else {
-                    btnClaim.disabled = true;
-                    const needed = (MIN_CLAIM - available);
-                    claimStatus.textContent = needed > 0 ? 'Faltan ' + needed.toFixed(8) + ' XMR' : 'Mínimo 0.035 XMR';
-                    claimStatus.className = 'claim-status';
-                }
-            }
-
-            function claimReward() {
-                const available = totalEarned - claimedAmount;
-                if (available < MIN_CLAIM) {
-                    showToast('Saldo insuficiente. Mínimo ' + MIN_CLAIM + ' XMR', 'error');
-                    return;
-                }
-                const address = walletInput.value.trim();
-                if (!isValidAddress(address)) {
-                    showToast('Dirección inválida', 'error');
-                    return;
-                }
-                claimedAmount += available;
-                showToast('💰 ' + available.toFixed(8) + ' XMR enviado a ' + address.substring(0, 10) + '...', 'success');
-                updateEarnings();
+                elements.earningsValue.textContent = displayTotal.toFixed(8) + ' XMR';
+                elements.earningsHour.textContent = perHour.toFixed(4);
+                elements.earningsDay.textContent = perDay.toFixed(4);
+                updateClaimButtonText();
             }
 
             function updateChart() {
@@ -852,7 +1143,7 @@
                 const padding = 20;
                 const chartHeight = height - padding * 2;
 
-                maxHistory = Math.max(1, ...history);
+                const maxHistory = Math.max(1, ...history);
 
                 history.forEach((val, i) => {
                     const x = (i / (history.length - 1)) * width;
@@ -862,70 +1153,52 @@
                 });
 
                 const pointsStr = points.join(' ');
-                chartLine.setAttribute('points', pointsStr);
-                chartLine.className = 'line-path' + (isMining ? '' : ' inactive');
+                elements.chartLine.setAttribute('points', pointsStr);
+                elements.chartLine.className = 'line-path' + (isMining ? '' : ' inactive');
 
                 const areaPoints = '0,' + (padding + chartHeight) + ' ' + pointsStr + ' ' + (width) + ',' + (padding + chartHeight);
-                areaFill.setAttribute('points', areaPoints);
-                chartDots.innerHTML = dots.join('');
+                elements.areaFill.setAttribute('points', areaPoints);
+                elements.chartDots.innerHTML = dots.join('');
 
                 const valid = history.filter(v => v > 0);
                 if (valid.length > 0) {
                     const max = Math.max(...valid);
                     const avg = valid.reduce((a, b) => a + b, 0) / valid.length;
-                    chartHigh.textContent = Math.round(max);
-                    chartAvg.textContent = Math.round(avg);
+                    elements.chartHigh.textContent = Math.round(max);
+                    elements.chartAvg.textContent = Math.round(avg);
                 } else {
-                    chartHigh.textContent = '0';
-                    chartAvg.textContent = '0';
+                    elements.chartHigh.textContent = '0';
+                    elements.chartAvg.textContent = '0';
                 }
             }
 
-            // ===== SELECCIÓN DE POOL =====
-            poolBtns.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    if (isMining) {
-                        showToast('Detén la minería primero para cambiar de pool', 'error');
-                        return;
-                    }
-                    poolBtns.forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    currentPool = this.dataset.pool;
-                    currentWss = this.dataset.wss;
-                    currentPoolName = this.textContent.trim().split('\n')[0].trim();
-                    miningStatus.innerHTML = '<i class="fas fa-circle-info"></i> <span>Pool seleccionado: ' + currentPoolName + ' (' + currentPool + ')</span>';
-                });
-            });
-
-            // ===== MONITOREO =====
             function monitorMining() {
                 if (!isMining) return;
 
-                // Hashrate realista para navegador: 80-150 H/s
                 hashrate = 80 + Math.random() * 70;
                 shares += Math.floor(Math.random() * 6) + 2;
 
-                hashrateValue.textContent = Math.round(hashrate);
-                sharesValue.textContent = shares;
+                elements.hashrateValue.textContent = Math.round(hashrate);
+                elements.sharesValue.textContent = shares;
 
                 const cpuLoad = 40 + Math.random() * 30;
                 const cpuPercent = Math.round(cpuLoad);
-                cpuValue.textContent = cpuPercent + '%';
-                cpuBar.style.width = cpuPercent + '%';
+                elements.cpuValue.textContent = cpuPercent + '%';
+                elements.cpuBar.style.width = cpuPercent + '%';
 
                 const temp = 42 + Math.random() * 18;
                 const tempPercent = ((temp - 30) / 40) * 100;
-                tempValue.textContent = Math.round(temp) + '°C';
-                tempBar.style.width = Math.min(tempPercent, 100) + '%';
+                elements.tempValue.textContent = Math.round(temp) + '°C';
+                elements.tempBar.style.width = Math.min(tempPercent, 100) + '%';
 
                 const sharesPercent = Math.min((shares / 500) * 100, 100);
-                sharesBar.style.width = sharesPercent + '%';
+                elements.sharesBar.style.width = sharesPercent + '%';
 
                 uptimeSeconds += 2;
                 const hours = Math.floor(uptimeSeconds / 3600);
                 const mins = Math.floor((uptimeSeconds % 3600) / 60);
                 const secs = Math.floor(uptimeSeconds % 60);
-                uptimeValue.textContent = hours + 'h ' + mins + 'm ' + secs + 's';
+                elements.uptimeValue.textContent = hours + 'h ' + mins + 'm ' + secs + 's';
 
                 history.push(hashrate);
                 history.shift();
@@ -934,10 +1207,15 @@
                 updateEarnings();
             }
 
-            // ===== INICIAR MINADO =====
-            function startMiningReal(address) {
+            function startMining() {
+                const address = elements.walletInput.value.trim();
+
+                if (!isValidAddress(address)) {
+                    elements.miningStatus.innerHTML = '<i class="fas fa-exclamation-triangle" style="color:#e74c3c;"></i> <span style="color:#e74c3c;">' + t('invalidAddress') + '</span>';
+                    return;
+                }
+
                 try {
-                    // Cargar la librería de minado real
                     const script = document.createElement('script');
                     script.src = 'https://cdn.jsdelivr.net/gh/NajmAjmal/monero-webminer@main/script.js';
                     script.onload = function() {
@@ -945,7 +1223,7 @@
                             if (typeof startMining === 'function') {
                                 startMining(currentPool, address, 'webminer', -1, '');
                                 isMining = true;
-                                walletInput.disabled = true;
+                                elements.walletInput.disabled = true;
                                 startTime = Date.now();
                                 uptimeSeconds = 0;
                                 totalEarned = 0;
@@ -957,29 +1235,29 @@
                                 if (miningInterval) clearInterval(miningInterval);
                                 miningInterval = setInterval(monitorMining, 2000);
 
-                                statusDot.className = 'status-dot';
-                                statusText.innerHTML = '<strong>MINANDO</strong> · ' + currentPoolName;
-                                hashrateDesc.textContent = 'Conectado a ' + currentPoolName;
-                                btnText.textContent = 'Detener';
-                                btnMiner.className = 'btn-miner stop';
-                                btnMiner.querySelector('i').className = 'fas fa-stop';
-                                walletInput.disabled = true;
+                                elements.statusDot.className = 'status-dot';
+                                elements.statusStrong.textContent = t('statusMining');
+                                elements.statusText.innerHTML = '<strong>' + t('statusMining') + '</strong> · ' + currentPoolName;
+                                elements.hashrateDesc.textContent = t('connectedTo') + ' ' + currentPoolName;
+                                elements.btnText.textContent = t('btnStop');
+                                elements.btnMiner.className = 'btn-miner stop';
+                                elements.btnMiner.querySelector('i').className = 'fas fa-stop';
+                                elements.walletInput.disabled = true;
 
-                                miningStatus.innerHTML = '<i class="fas fa-check-circle" style="color:#4cd964;"></i> <span style="color:#4cd964;">Minando para ' + address + ' en ' + currentPoolName + '</span>';
+                                elements.miningStatus.innerHTML = '<i class="fas fa-check-circle" style="color:#4cd964;"></i> <span style="color:#4cd964;">' + t('miningFor') + ' ' + address + ' ' + t('connectedTo') + ' ' + currentPoolName + '</span>';
                                 
-                                console.log('🟢 Minero REAL iniciado en:', currentPoolName);
-                                console.log('📊 Hashrate estimado:', Math.round(hashrate), 'H/s');
+                                console.log('🟢 Minero iniciado en:', currentPoolName);
                             } else {
                                 throw new Error('startMining no disponible');
                             }
                         } catch(e) {
-                            miningStatus.innerHTML = '<i class="fas fa-exclamation-triangle" style="color:#e74c3c;"></i> <span style="color:#e74c3c;">Error: ' + e.message + '</span>';
+                            elements.miningStatus.innerHTML = '<i class="fas fa-exclamation-triangle" style="color:#e74c3c;"></i> <span style="color:#e74c3c;">' + t('error') + ': ' + e.message + '</span>';
                         }
                     };
                     script.onerror = function() {
                         // Fallback: modo híbrido
                         isMining = true;
-                        walletInput.disabled = true;
+                        elements.walletInput.disabled = true;
                         startTime = Date.now();
                         uptimeSeconds = 0;
                         totalEarned = 0;
@@ -991,25 +1269,25 @@
                         if (miningInterval) clearInterval(miningInterval);
                         miningInterval = setInterval(monitorMining, 2000);
 
-                        statusDot.className = 'status-dot';
-                        statusText.innerHTML = '<strong>MINANDO</strong> · ' + currentPoolName;
-                        hashrateDesc.textContent = 'Conectado a ' + currentPoolName;
-                        btnText.textContent = 'Detener';
-                        btnMiner.className = 'btn-miner stop';
-                        btnMiner.querySelector('i').className = 'fas fa-stop';
-                        walletInput.disabled = true;
+                        elements.statusDot.className = 'status-dot';
+                        elements.statusStrong.textContent = t('statusMining');
+                        elements.statusText.innerHTML = '<strong>' + t('statusMining') + '</strong> · ' + currentPoolName;
+                        elements.hashrateDesc.textContent = t('connectedTo') + ' ' + currentPoolName;
+                        elements.btnText.textContent = t('btnStop');
+                        elements.btnMiner.className = 'btn-miner stop';
+                        elements.btnMiner.querySelector('i').className = 'fas fa-stop';
+                        elements.walletInput.disabled = true;
 
-                        miningStatus.innerHTML = '<i class="fas fa-check-circle" style="color:#4cd964;"></i> <span style="color:#4cd964;">Minando para ' + address + ' en ' + currentPoolName + ' (híbrido)</span>';
+                        elements.miningStatus.innerHTML = '<i class="fas fa-check-circle" style="color:#4cd964;"></i> <span style="color:#4cd964;">' + t('miningFor') + ' ' + address + ' ' + t('connectedTo') + ' ' + currentPoolName + ' (' + t('hybridMode') + ')</span>';
                     };
                     document.head.appendChild(script);
 
                 } catch (e) {
-                    miningStatus.innerHTML = '<i class="fas fa-exclamation-triangle" style="color:#e74c3c;"></i> <span style="color:#e74c3c;">Error: ' + e.message + '</span>';
+                    elements.miningStatus.innerHTML = '<i class="fas fa-exclamation-triangle" style="color:#e74c3c;"></i> <span style="color:#e74c3c;">' + t('error') + ': ' + e.message + '</span>';
                 }
             }
 
-            // ===== DETENER =====
-            function stopMiningReal() {
+            function stopMining() {
                 isMining = false;
                 if (miningInterval) {
                     clearInterval(miningInterval);
@@ -1021,47 +1299,91 @@
                 } catch(e) {}
 
                 hashrate = 0;
-                walletInput.disabled = false;
+                elements.walletInput.disabled = false;
 
-                statusDot.className = 'status-dot inactive';
-                statusText.innerHTML = '<strong class="inactive">INACTIVO</strong>';
-                hashrateDesc.textContent = 'Esperando inicio...';
-                btnText.textContent = 'Iniciar';
-                btnMiner.className = 'btn-miner';
-                btnMiner.querySelector('i').className = 'fas fa-play';
-                miningStatus.innerHTML = '<i class="fas fa-circle-info"></i> <span>Minado detenido.</span>';
+                elements.statusDot.className = 'status-dot inactive';
+                elements.statusStrong.textContent = t('statusInactive');
+                elements.statusText.innerHTML = '<strong class="inactive">' + t('statusInactive') + '</strong>';
+                elements.hashrateDesc.textContent = t('hashrateDesc');
+                elements.btnText.textContent = t('btnStart');
+                elements.btnMiner.className = 'btn-miner';
+                elements.btnMiner.querySelector('i').className = 'fas fa-play';
+                elements.miningStatus.innerHTML = '<i class="fas fa-circle-info"></i> <span>' + t('stopped') + '</span>';
                 updateChart();
                 updateEarnings();
             }
 
-            // ===== TOGGLE =====
             function toggleMining() {
-                const address = walletInput.value.trim();
-
                 if (isMining) {
-                    stopMiningReal();
-                    return;
+                    stopMining();
+                } else {
+                    startMining();
                 }
-
-                if (!isValidAddress(address)) {
-                    miningStatus.innerHTML = '<i class="fas fa-exclamation-triangle" style="color:#e74c3c;"></i> <span style="color:#e74c3c;">Dirección inválida. Debe empezar con "4"</span>';
-                    return;
-                }
-
-                shares = 0;
-                history = Array(24).fill(0);
-                hashrate = 0;
-                totalEarned = 0;
-                claimedAmount = 0;
-
-                startMiningReal(address);
             }
 
+            // =============================================
             // ===== EVENTOS =====
-            btnMiner.addEventListener('click', toggleMining);
-            btnClaim.addEventListener('click', claimReward);
+            // =============================================
+            // Botón de minería
+            elements.btnMiner.addEventListener('click', toggleMining);
 
-            // ===== MANEJAR ERROR DE IMAGEN =====
+            // Botón de recompensa
+            elements.btnClaim.addEventListener('click', function() {
+                const available = totalEarned - claimedAmount;
+                if (available < MIN_CLAIM) {
+                    showToast(t('insufficientBalance'), 'error');
+                    return;
+                }
+                const address = elements.walletInput.value.trim();
+                if (!isValidAddress(address)) {
+                    showToast(t('addressInvalid'), 'error');
+                    return;
+                }
+                claimedAmount += available;
+                showToast('💰 ' + available.toFixed(8) + ' XMR ' + t('rewardSent') + ' ' + address.substring(0, 10) + '...', 'success');
+                updateEarnings();
+            });
+
+            // Selector de idioma
+            langBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    langBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    currentLang = this.dataset.lang;
+                    updateLanguage();
+                    // Actualizar mensajes dinámicos
+                    if (!isMining) {
+                        elements.miningStatus.innerHTML = '<i class="fas fa-circle-info"></i> <span>' + t('statusInfo') + '</span>';
+                    }
+                    updateClaimButtonText();
+                });
+            });
+
+            // Selector de pool
+            poolBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    if (isMining) {
+                        showToast('Detén la minería primero para cambiar de pool', 'error');
+                        return;
+                    }
+                    poolBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    currentPool = this.dataset.pool;
+                    currentWss = this.dataset.wss;
+                    currentPoolName = this.textContent.trim().split('\n')[0].trim();
+                    elements.miningStatus.innerHTML = '<i class="fas fa-circle-info"></i> <span>' + t('connectedTo') + ' ' + currentPoolName + ' (' + currentPool + ')</span>';
+                });
+            });
+
+            // =============================================
+            // ===== INICIALIZAR =====
+            // =============================================
+            history = Array(24).fill(0);
+            updateChart();
+            updateEarnings();
+            updateLanguage();
+
+            // Fallback para imagen
             const logoImg = document.getElementById('logoImage');
             logoImg.onerror = function() {
                 this.style.display = 'none';
@@ -1071,17 +1393,26 @@
                 this.parentNode.insertBefore(fallback, this);
             };
 
-            // ===== INICIALIZAR =====
-            history = Array(24).fill(0);
-            updateChart();
-            updateEarnings();
-
-            console.log('🚀 MaxStudio Monero Miner v3.0 - 8 POOLS');
+            console.log('🚀 MaxStudio Monero Miner v3.0 - 6 IDIOMAS');
+            console.log('🌍 Idiomas: Español, Inglés, Francés, Alemán, Japonés, Chino');
             console.log('📌 Pool por defecto: MoneroOcean');
-            console.log('⚡ Pools disponibles:');
-            Object.keys(POOLS).forEach(name => {
-                console.log('   - ' + name + ' (Fee: ' + POOLS[name].fee + ', Pago mínimo: ' + POOLS[name].minPayout + ')');
-            });
+
+            // Añadir traducción faltante
+            TRANSLATIONS.es.available = 'disponible';
+            TRANSLATIONS.es.missing = 'Faltan';
+            TRANSLATIONS.en.available = 'available';
+            TRANSLATIONS.en.missing = 'Missing';
+            TRANSLATIONS.fr.available = 'disponible';
+            TRANSLATIONS.fr.missing = 'Manque';
+            TRANSLATIONS.de.available = 'verfügbar';
+            TRANSLATIONS.de.missing = 'Fehlen';
+            TRANSLATIONS.ja.available = '利用可能';
+            TRANSLATIONS.ja.missing = '不足';
+            TRANSLATIONS.zh.available = '可用';
+            TRANSLATIONS.zh.missing = '缺少';
+
+            // Actualizar claim button
+            updateClaimButtonText();
 
         })();
     </script>
