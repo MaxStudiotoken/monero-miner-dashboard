@@ -3,9 +3,13 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Monero Miner · Dashboard</title>
+    <title>Monero Miner · Web App</title>
+    
+    <!-- Font Awesome 6 (iconos) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    
     <style>
+        /* ========== ESTILOS GLOBALES ========== */
         * {
             margin: 0;
             padding: 0;
@@ -32,6 +36,7 @@
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.04);
         }
 
+        /* ========== HEADER ========== */
         .miner-header {
             display: flex;
             flex-wrap: wrap;
@@ -83,6 +88,12 @@
             animation: pulse-dot 2s infinite;
         }
 
+        .status-dot.inactive {
+            background: #6b7a8f;
+            box-shadow: none;
+            animation: none;
+        }
+
         @keyframes pulse-dot {
             0% { opacity: 0.7; transform: scale(0.95); }
             50% { opacity: 1; transform: scale(1.1); }
@@ -100,6 +111,11 @@
             font-weight: 600;
         }
 
+        .status-text strong.inactive {
+            color: #6b7a8f;
+        }
+
+        /* ========== HASHRATE CARD ========== */
         .hashrate-card {
             background: #1b232f;
             border-radius: 28px;
@@ -153,6 +169,118 @@
             color: #f2a900;
         }
 
+        /* ========== FORMULARIO DE MINADO ========== */
+        .mining-form {
+            background: #1b232f;
+            border-radius: 28px;
+            padding: 24px 28px;
+            margin-bottom: 28px;
+            border: 1px solid #29313f;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .mining-form .form-group {
+            flex: 1 1 280px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .mining-form label {
+            font-size: 0.85rem;
+            color: #8899b0;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .mining-form label i {
+            color: #f2a900;
+        }
+
+        .mining-form input {
+            background: #10161e;
+            border: 1px solid #2f3a4a;
+            border-radius: 40px;
+            padding: 14px 20px;
+            color: #eef2f6;
+            font-size: 0.95rem;
+            font-family: 'Menlo', 'Consolas', monospace;
+            outline: none;
+            transition: 0.2s;
+            width: 100%;
+        }
+
+        .mining-form input:focus {
+            border-color: #f2a900;
+            box-shadow: 0 0 0 3px #f2a90033;
+        }
+
+        .mining-form input::placeholder {
+            color: #4f637c;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-miner {
+            background: linear-gradient(145deg, #f2a900, #c97d0e);
+            border: none;
+            border-radius: 60px;
+            padding: 14px 32px;
+            font-weight: 700;
+            font-size: 1rem;
+            color: #0b0e14;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            white-space: nowrap;
+            flex: 0 0 auto;
+        }
+
+        .btn-miner:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 20px #f2a90066;
+        }
+
+        .btn-miner:active {
+            transform: scale(0.97);
+        }
+
+        .btn-miner i {
+            font-size: 1.1rem;
+        }
+
+        .btn-miner.stop {
+            background: linear-gradient(145deg, #e74c3c, #c0392b);
+        }
+
+        .btn-miner:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+
+        .mining-status {
+            font-size: 0.85rem;
+            color: #7d8da3;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 0;
+        }
+
+        .mining-status i {
+            color: #f2a900;
+        }
+
+        /* ========== 2 COLUMNAS ========== */
         .grid-2col {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -164,6 +292,13 @@
             .grid-2col {
                 grid-template-columns: 1fr;
                 gap: 20px;
+            }
+            .mining-form {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .btn-miner {
+                justify-content: center;
             }
         }
 
@@ -196,7 +331,7 @@
             border-radius: 60px;
             padding: 14px 20px;
             font-family: 'Menlo', 'Consolas', monospace;
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             color: #d6dce6;
             border: 1px solid #2f3a4a;
             word-break: break-all;
@@ -204,11 +339,18 @@
             align-items: center;
             gap: 12px;
             margin-top: 6px;
+            min-height: 60px;
         }
 
         .monero-address i {
             color: #f2a900;
             font-size: 1.1rem;
+        }
+
+        .monero-address .addr-text {
+            flex: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .address-lock {
@@ -224,6 +366,7 @@
             color: #8b9bb3;
         }
 
+        /* ========== GRÁFICO ========== */
         .chart-bars {
             display: flex;
             align-items: flex-end;
@@ -239,17 +382,16 @@
             border-radius: 8px 8px 4px 4px;
             min-height: 12px;
             height: calc(20% + 20% * var(--h, 0.5));
-            transition: height 0.2s;
+            transition: height 0.3s;
             box-shadow: 0 -2px 10px rgba(242, 169, 0, 0.2);
         }
 
-        .bar-label {
-            font-size: 0.6rem;
-            color: #6f7f96;
-            text-align: center;
-            margin-top: 6px;
+        .bar.inactive {
+            background: #2a3442;
+            box-shadow: none;
         }
 
+        /* ========== SHARES & TEMP ========== */
         .stats-row {
             display: flex;
             flex-wrap: wrap;
@@ -297,6 +439,7 @@
             color: #ff9f6e;
         }
 
+        /* ========== CONTRIBUCIÓN ========== */
         .contribution-area {
             margin-top: 30px;
             border-top: 1px solid #29313f;
@@ -344,6 +487,7 @@
             color: #f2a900;
         }
 
+        /* ========== ACCIONES ========== */
         .action-links {
             display: flex;
             flex-wrap: wrap;
@@ -376,6 +520,7 @@
             width: 18px;
         }
 
+        /* ========== PERFIL ========== */
         .profile-row {
             display: flex;
             flex-wrap: wrap;
@@ -407,99 +552,100 @@
             color: #7d8da3;
         }
 
-        .text-gold {
-            color: #f2a900;
-        }
-
-        .flex {
+        /* ========== FOOTER ========== */
+        .footer-note {
+            margin-top: 22px;
+            border-top: 1px solid #1e2733;
+            padding-top: 16px;
             display: flex;
-            align-items: center;
-            gap: 8px;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            font-size: 0.8rem;
+            color: #5d6f86;
         }
 
+        /* ========== RESPONSIVE ========== */
         @media (max-width: 480px) {
             .app-container { padding: 20px 16px; }
             .hashrate-number .value { font-size: 2.4rem; }
             .brand h1 { font-size: 1.3rem; }
+            .mining-form input { font-size: 0.8rem; padding: 12px 16px; }
         }
     </style>
 </head>
 <body>
     <div class="app-container">
 
-        <!-- HEADER -->
+        <!-- ===== HEADER ===== -->
         <div class="miner-header">
             <div class="brand">
                 <i class="fas fa-cube"></i>
                 <h1>Monero Miner</h1>
             </div>
             <div class="status-badge">
-                <span class="status-dot"></span>
-                <span class="status-text"><strong>MINERIA ACTIVA</strong> · ONLINE</span>
+                <span class="status-dot" id="statusDot"></span>
+                <span class="status-text" id="statusText"><strong>INACTIVO</strong> · esperando inicio</span>
                 <i class="fas fa-chevron-down" style="color: #4a5a6e; font-size: 0.8rem;"></i>
             </div>
         </div>
 
-        <!-- HASHRATE -->
+        <!-- ===== HASHRATE ===== -->
         <div class="hashrate-card">
             <div class="hashrate-number">
-                <span class="value">88</span>
+                <span class="value" id="hashrateValue">0</span>
                 <span class="unit">H/s</span>
             </div>
             <div class="hashrate-label">
                 <i class="fas fa-microchip"></i>
-                <span>Hashrate actual del dispositivo sobre el pool configurado.</span>
+                <span id="hashrateDesc">Esperando inicio de minería...</span>
             </div>
         </div>
 
-        <!-- 2 COLUMNAS -->
+        <!-- ===== FORMULARIO DE MINADO ===== -->
+        <div class="mining-form">
+            <div class="form-group">
+                <label for="walletInput"><i class="fas fa-wallet"></i> Dirección de Monero (XMR)</label>
+                <input 
+                    type="text" 
+                    id="walletInput" 
+                    placeholder="Introduce tu dirección Monero (ej: 4...)" 
+                    value="Ht5BsdzjCUf8hqA6XCwio116sjNw25HACZJ24"
+                />
+            </div>
+            <button class="btn-miner" id="btnMiner">
+                <i class="fas fa-play"></i> <span id="btnText">Iniciar Minería</span>
+            </button>
+        </div>
+
+        <!-- ===== ESTADO DEL MINADO ===== -->
+        <div class="mining-status" id="miningStatus">
+            <i class="fas fa-circle-info"></i>
+            <span>Introduce tu dirección de Monero y haz clic en "Iniciar Minería"</span>
+        </div>
+
+        <!-- ===== 2 COLUMNAS: dirección mostrada + gráfico ===== -->
         <div class="grid-2col">
-            <!-- Dirección -->
             <div class="info-panel">
-                <h3><i class="fas fa-wallet"></i> Dirección de cobro</h3>
+                <h3><i class="fas fa-coins"></i> Tu dirección configurada</h3>
                 <div class="monero-address">
-                    <i class="fas fa-coins"></i>
-                    <span>Ht5BsdzjCUf8hqA6XCwio116sjNw25HACZJ24</span>
-                    <i class="fas fa-copy" style="color: #5d6f86; margin-left: auto; opacity: 0.6; cursor: default;"></i>
+                    <i class="fas fa-qrcode"></i>
+                    <span class="addr-text" id="displayAddress">Ninguna configurada</span>
                 </div>
                 <div class="address-lock">
                     <i class="fas fa-lock"></i> La dirección se bloquea durante el minado.
                 </div>
                 <div style="margin-top: 16px; font-size: 0.85rem; color: #7d8da3;">
-                    <i class="fas fa-circle-info"></i> La recompensa se asociará a esta dirección Monero.
+                    <i class="fas fa-circle-info"></i> Las recompensas se enviarán a esta dirección.
                 </div>
             </div>
 
-            <!-- Rendimiento -->
             <div class="info-panel">
                 <h3><i class="fas fa-chart-line"></i> Rendimiento de minado</h3>
                 <div style="color: #b2c2d8; font-size: 0.9rem; margin-bottom: 6px;">Hashrate de los últimos 24 intervalos</div>
                 <div class="chart-container">
-                    <div class="chart-bars">
-                        <div style="--h:0.4;" class="bar"></div>
-                        <div style="--h:0.7;" class="bar"></div>
-                        <div style="--h:0.5;" class="bar"></div>
-                        <div style="--h:0.9;" class="bar"></div>
-                        <div style="--h:0.6;" class="bar"></div>
-                        <div style="--h:0.8;" class="bar"></div>
-                        <div style="--h:0.3;" class="bar"></div>
-                        <div style="--h:0.7;" class="bar"></div>
-                        <div style="--h:1.0;" class="bar"></div>
-                        <div style="--h:0.65;" class="bar"></div>
-                        <div style="--h:0.5;" class="bar"></div>
-                        <div style="--h:0.85;" class="bar"></div>
-                        <div style="--h:0.45;" class="bar"></div>
-                        <div style="--h:0.75;" class="bar"></div>
-                        <div style="--h:0.55;" class="bar"></div>
-                        <div style="--h:0.9;" class="bar"></div>
-                        <div style="--h:0.6;" class="bar"></div>
-                        <div style="--h:0.8;" class="bar"></div>
-                        <div style="--h:0.7;" class="bar"></div>
-                        <div style="--h:0.4;" class="bar"></div>
-                        <div style="--h:0.95;" class="bar"></div>
-                        <div style="--h:0.5;" class="bar"></div>
-                        <div style="--h:0.7;" class="bar"></div>
-                        <div style="--h:0.6;" class="bar"></div>
+                    <div class="chart-bars" id="chartBars">
+                        <!-- Se generarán 24 barras con JavaScript -->
                     </div>
                     <div style="display: flex; justify-content: space-between; font-size: 0.6rem; color: #4f637c; margin-top: 4px;">
                         <span>0h</span><span>6h</span><span>12h</span><span>18h</span><span>24h</span>
@@ -508,24 +654,24 @@
             </div>
         </div>
 
-        <!-- SHARES & TEMPERATURA -->
+        <!-- ===== SHARES Y TEMPERATURA ===== -->
         <div class="stats-row">
             <div class="stat-item">
                 <span class="stat-icon"><i class="fas fa-share-alt"></i></span>
                 <div class="stat-info">
-                    <span class="stat-value">1629</span>
+                    <span class="stat-value" id="sharesValue">0</span>
                     <span class="stat-label">Shares</span>
                 </div>
-                <span style="color: #f2a900; font-weight: 500; margin-left: 4px;">47 C</span>
+                <span style="color: #f2a900; font-weight: 500; margin-left: 4px;" id="tempValue">-- C</span>
             </div>
             <div class="stat-item">
                 <span class="stat-icon"><i class="fas fa-temperature-high"></i></span>
                 <div class="stat-info">
-                    <span class="stat-value temp-indicator">39%</span>
-                    <span class="stat-label">Temperatura</span>
+                    <span class="stat-value temp-indicator" id="cpuValue">0%</span>
+                    <span class="stat-label">Uso de CPU</span>
                 </div>
                 <div style="width: 44px; height: 6px; background: #2a3442; border-radius: 20px; overflow: hidden; margin-left: 4px;">
-                    <div style="width: 39%; height: 100%; background: #f2a900; border-radius: 20px;"></div>
+                    <div id="cpuBar" style="width: 0%; height: 100%; background: #f2a900; border-radius: 20px; transition: width 0.5s;"></div>
                 </div>
             </div>
             <div class="stat-item" style="flex: 0 1 auto; background: transparent; border: none; padding: 0;">
@@ -533,13 +679,14 @@
             </div>
         </div>
 
-        <!-- CONTRIBUCIÓN Y PERFIL -->
+        <!-- ===== CONTRIBUCIÓN Y PERFIL ===== -->
         <div class="contribution-area">
             <div style="display: flex; flex-direction: column; gap: 8px;">
                 <div class="contrib-label">
                     <i class="fas fa-code-commit"></i> Contribución · últimos 12 meses
                 </div>
                 <div class="contrib-graph">
+                    <!-- 48 cuadritos simulando contribuciones -->
                     <div class="contrib-square active"></div><div class="contrib-square mid"></div><div class="contrib-square active"></div>
                     <div class="contrib-square"></div><div class="contrib-square active"></div><div class="contrib-square mid"></div>
                     <div class="contrib-square active"></div><div class="contrib-square"></div><div class="contrib-square mid"></div>
@@ -575,7 +722,7 @@
             </div>
         </div>
 
-        <!-- ACCIONES -->
+        <!-- ===== ACCIONES ===== -->
         <div class="action-links">
             <a href="#"><i class="fas fa-plus-circle"></i> New issue</a>
             <a href="#"><i class="fas fa-book"></i> New repository</a>
@@ -586,11 +733,216 @@
             <a href="#"><i class="fas fa-project-diagram"></i> New project</a>
         </div>
 
-        <!-- FOOTER -->
-        <div style="margin-top: 22px; border-top: 1px solid #1e2733; padding-top: 16px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size:0.8rem; color:#5d6f86;">
-            <span><i class="fas fa-globe"></i> Hosteado con GitHub Pages · Diseño app Monero</span>
+        <!-- ===== FOOTER ===== -->
+        <div class="footer-note">
+            <span><i class="fas fa-globe"></i> Hosteado con GitHub Pages · Minero opt-in</span>
             <span><i class="fas fa-cube"></i> zip-world-NFT-BNB · Página oficial</span>
         </div>
     </div>
+
+    <!-- ============================================ -->
+    <!-- ===== JAVASCRIPT - MINERO SIMULADO ===== -->
+    <!-- ============================================ -->
+    <script>
+        (function() {
+            'use strict';
+
+            // === ELEMENTOS DOM ===
+            const walletInput = document.getElementById('walletInput');
+            const btnMiner = document.getElementById('btnMiner');
+            const btnText = document.getElementById('btnText');
+            const statusDot = document.getElementById('statusDot');
+            const statusText = document.getElementById('statusText');
+            const hashrateValue = document.getElementById('hashrateValue');
+            const hashrateDesc = document.getElementById('hashrateDesc');
+            const displayAddress = document.getElementById('displayAddress');
+            const miningStatus = document.getElementById('miningStatus');
+            const sharesValue = document.getElementById('sharesValue');
+            const tempValue = document.getElementById('tempValue');
+            const cpuValue = document.getElementById('cpuValue');
+            const cpuBar = document.getElementById('cpuBar');
+            const chartBars = document.getElementById('chartBars');
+
+            // === ESTADO ===
+            let isMining = false;
+            let miningInterval = null;
+            let shares = 0;
+            let hashrate = 0;
+            let cpuLoad = 0;
+            let temp = 0;
+            let chartHistory = Array(24).fill(0);
+
+            // === VALIDACIÓN SIMPLE DE DIRECCIÓN MONERO ===
+            function isValidMoneroAddress(address) {
+                // Validación básica: empieza con 4 y tiene entre 95-106 caracteres (formato Monero)
+                return /^4[0-9A-Za-z]{94,105}$/.test(address.trim());
+            }
+
+            // === ACTUALIZAR INTERFAZ ===
+            function updateUI() {
+                // Hasrate
+                hashrateValue.textContent = Math.round(hashrate);
+                
+                // Shares
+                sharesValue.textContent = shares;
+
+                // Temperatura simulada (entre 35-55 cuando mina, 20-30 cuando no)
+                if (isMining) {
+                    temp = 35 + Math.random() * 20;
+                } else {
+                    temp = 20 + Math.random() * 10;
+                }
+                tempValue.textContent = Math.round(temp) + ' C';
+
+                // CPU
+                if (isMining) {
+                    cpuLoad = 25 + Math.random() * 35; // 25-60%
+                } else {
+                    cpuLoad = 2 + Math.random() * 8; // 2-10%
+                }
+                const cpuPercent = Math.round(cpuLoad);
+                cpuValue.textContent = cpuPercent + '%';
+                cpuBar.style.width = cpuPercent + '%';
+
+                // Estado visual
+                if (isMining) {
+                    statusDot.className = 'status-dot';
+                    statusText.innerHTML = '<strong>MINANDO</strong> · activo';
+                    hashrateDesc.textContent = 'Hashrate actual sobre el pool configurado.';
+                    miningStatus.innerHTML = '<i class="fas fa-check-circle" style="color:#4cd964;"></i> <span style="color:#4cd964;">Minando activamente para ' + (walletInput.value.trim() || 'dirección configurada') + '</span>';
+                    btnText.textContent = 'Detener Minería';
+                    btnMiner.className = 'btn-miner stop';
+                    btnMiner.querySelector('i').className = 'fas fa-stop';
+                } else {
+                    statusDot.className = 'status-dot inactive';
+                    statusText.innerHTML = '<strong class="inactive">INACTIVO</strong> · esperando inicio';
+                    hashrateDesc.textContent = 'Esperando inicio de minería...';
+                    miningStatus.innerHTML = '<i class="fas fa-circle-info"></i> <span>Introduce tu dirección y haz clic en "Iniciar Minería"</span>';
+                    btnText.textContent = 'Iniciar Minería';
+                    btnMiner.className = 'btn-miner';
+                    btnMiner.querySelector('i').className = 'fas fa-play';
+                }
+
+                // Actualizar gráfico de barras
+                updateChart();
+            }
+
+            // === ACTUALIZAR GRÁFICO ===
+            function updateChart() {
+                const bars = chartBars.querySelectorAll('.bar');
+                const maxVal = Math.max(1, ...chartHistory);
+                bars.forEach((bar, index) => {
+                    const val = chartHistory[index] || 0;
+                    const heightPercent = (val / maxVal) * 80 + 20;
+                    bar.style.setProperty('--h', heightPercent / 100);
+                    if (isMining && val > 0) {
+                        bar.className = 'bar';
+                    } else {
+                        bar.className = 'bar inactive';
+                    }
+                });
+            }
+
+            // === SIMULAR MINADO ===
+            function simulateMining() {
+                if (!isMining) return;
+
+                // Generar hashrate entre 50-150 H/s
+                hashrate = 50 + Math.random() * 100;
+                
+                // Incrementar shares
+                shares += Math.floor(Math.random() * 5) + 1;
+
+                // Añadir a historial (desplazar y agregar nuevo)
+                chartHistory.push(hashrate);
+                chartHistory.shift();
+
+                // Actualizar UI
+                updateUI();
+            }
+
+            // === INICIAR / DETENER MINADO ===
+            function toggleMining() {
+                const address = walletInput.value.trim();
+
+                if (isMining) {
+                    // === DETENER ===
+                    isMining = false;
+                    if (miningInterval) {
+                        clearInterval(miningInterval);
+                        miningInterval = null;
+                    }
+                    hashrate = 0;
+                    updateUI();
+                    walletInput.disabled = false;
+                    return;
+                }
+
+                // === INICIAR ===
+                if (!isValidMoneroAddress(address)) {
+                    miningStatus.innerHTML = '<i class="fas fa-exclamation-triangle" style="color:#e74c3c;"></i> <span style="color:#e74c3c;">Dirección inválida. Debe empezar con "4" y tener 95-106 caracteres.</span>';
+                    return;
+                }
+
+                // Validación exitosa
+                isMining = true;
+                walletInput.disabled = true;
+                displayAddress.textContent = address;
+
+                // Reiniciar shares y historial
+                shares = 0;
+                chartHistory = Array(24).fill(0);
+                hashrate = 0;
+
+                // Iniciar simulación
+                if (miningInterval) clearInterval(miningInterval);
+                miningInterval = setInterval(simulateMining, 1000);
+
+                // Actualizar UI inmediatamente
+                updateUI();
+                miningStatus.innerHTML = '<i class="fas fa-check-circle" style="color:#4cd964;"></i> <span style="color:#4cd964;">Minando para ' + address + '</span>';
+            }
+
+            // === INICIALIZAR GRÁFICO ===
+            function initChart() {
+                chartBars.innerHTML = '';
+                for (let i = 0; i < 24; i++) {
+                    const bar = document.createElement('div');
+                    bar.className = 'bar inactive';
+                    bar.style.setProperty('--h', '0.2');
+                    chartBars.appendChild(bar);
+                    chartHistory[i] = 0;
+                }
+            }
+            initChart();
+
+            // === EVENTOS ===
+            btnMiner.addEventListener('click', toggleMining);
+
+            // Mostrar dirección en tiempo real
+            walletInput.addEventListener('input', function() {
+                if (!isMining) {
+                    const addr = this.value.trim();
+                    displayAddress.textContent = addr || 'Ninguna configurada';
+                }
+            });
+
+            // Al cargar, mostrar dirección por defecto
+            displayAddress.textContent = walletInput.value.trim() || 'Ninguna configurada';
+
+            // Actualizar UI inicial
+            updateUI();
+
+            // Simular actualización pasiva cada 5 segundos (para CPU/temp)
+            setInterval(() => {
+                if (!isMining) {
+                    updateUI();
+                }
+            }, 3000);
+
+            console.log('🟡 Monero Miner web cargado. Introduce tu dirección y haz clic en Iniciar.');
+            console.log('⚠️ Esta es una simulación educativa. No se mina realmente.');
+        })();
+    </script>
 </body>
 </html>
