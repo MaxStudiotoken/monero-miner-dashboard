@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Monero Miner PRO · MaxStudio</title>
+    <title>MaxStudio · Monero Miner</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     
@@ -23,33 +23,37 @@
             width: 100%;
             background: #0d111a;
             border-radius: 40px;
-            padding: 30px 35px 40px;
+            padding: 25px 30px 35px;
             box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.04);
         }
+
+        /* ===== LOGO ===== */
         .logo-section {
             text-align: center;
-            padding: 30px 0 25px 0;
+            padding: 20px 0 20px 0;
             border-bottom: 2px solid #1a2330;
-            margin-bottom: 30px;
-            position: relative;
+            margin-bottom: 25px;
         }
         .logo-section .logo-wrapper {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 25px;
+            gap: 20px;
             flex-wrap: wrap;
         }
         .logo-section .logo-wrapper img {
-            width: 120px;
-            height: 120px;
+            width: 100px;
+            height: 100px;
             object-fit: contain;
             filter: drop-shadow(0 0 40px #f2a90033);
-            transition: transform 0.3s;
         }
-        .logo-section .logo-wrapper img:hover { transform: scale(1.08); }
+        .logo-section .logo-wrapper .logo-icon {
+            font-size: 5rem;
+            color: #f2a900;
+            filter: drop-shadow(0 0 40px #f2a90033);
+        }
         .logo-section .logo-text h1 {
-            font-size: 4.5rem;
+            font-size: 3.5rem;
             font-weight: 800;
             background: linear-gradient(145deg, #f5e7c8, #d9b86c);
             -webkit-background-clip: text;
@@ -60,54 +64,73 @@
         }
         .logo-section .logo-text .subtitle {
             color: #7d8da3;
-            font-size: 1.1rem;
+            font-size: 0.95rem;
             letter-spacing: 4px;
-            margin-top: 6px;
+            margin-top: 4px;
         }
-        .logo-section .logo-text .subtitle i { color: #f2a900; margin: 0 8px; }
-        .logo-section .badge-pro {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: linear-gradient(145deg, #f2a900, #c97d0e);
-            color: #0b0e14;
-            font-weight: 700;
-            font-size: 0.7rem;
-            padding: 4px 14px;
-            border-radius: 30px;
-            letter-spacing: 1px;
-        }
-        .miner-header {
+        .logo-section .logo-text .subtitle i { color: #f2a900; margin: 0 6px; }
+
+        /* ===== SELECTOR DE IDIOMAS ARRIBA ===== */
+        .top-bar {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 22px;
-            gap: 15px;
+            margin-bottom: 20px;
+            gap: 10px;
         }
-        .miner-header .left-info {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-        .miner-header .left-info i { color: #f2a900; font-size: 1.2rem; }
-        .miner-header .left-info span { color: #7d8da3; font-size: 0.85rem; }
-        .status-badge {
+        .top-bar .left-info {
             display: flex;
             align-items: center;
             gap: 12px;
+        }
+        .top-bar .left-info i { color: #f2a900; font-size: 1rem; }
+        .top-bar .left-info span { color: #7d8da3; font-size: 0.8rem; }
+
+        .language-selector {
+            display: flex;
+            gap: 4px;
+            flex-wrap: wrap;
+            align-items: center;
             background: #161f2b;
-            padding: 8px 20px 8px 16px;
+            padding: 4px 8px;
+            border-radius: 40px;
+            border: 1px solid #25303e;
+        }
+        .lang-btn {
+            background: transparent;
+            border: none;
+            border-radius: 30px;
+            padding: 4px 10px;
+            color: #8899b0;
+            font-size: 0.65rem;
+            cursor: pointer;
+            transition: 0.2s;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+        .lang-btn:hover { color: #eef2f6; background: #1a2330; }
+        .lang-btn.active { background: #f2a90022; color: #f2a900; border: 1px solid #f2a90044; }
+        .lang-btn .flag { font-size: 0.8rem; }
+
+        .status-badge {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #161f2b;
+            padding: 5px 16px 5px 12px;
             border-radius: 60px;
             border: 1px solid #25303e;
         }
         .status-dot {
             display: inline-block;
-            width: 12px;
-            height: 12px;
+            width: 10px;
+            height: 10px;
             background: #4cd964;
             border-radius: 50%;
-            box-shadow: 0 0 16px #4cd964aa;
+            box-shadow: 0 0 12px #4cd964aa;
             animation: pulse-dot 2s infinite;
         }
         .status-dot.inactive { background: #6b7a8f; box-shadow: none; animation: none; }
@@ -116,33 +139,35 @@
             50% { opacity: 1; transform: scale(1.15); }
             100% { opacity: 0.7; transform: scale(0.95); }
         }
-        .status-text { font-weight: 500; color: #cbd5e1; font-size: 0.9rem; }
+        .status-text { font-weight: 500; color: #cbd5e1; font-size: 0.8rem; }
         .status-text strong { color: #4cd964; font-weight: 600; }
         .status-text strong.inactive { color: #6b7a8f; }
+
+        /* ===== GANANCIAS ===== */
         .earnings-card {
             background: linear-gradient(135deg, #141d2a, #1a2330);
-            border-radius: 28px;
-            padding: 24px 32px;
-            margin-bottom: 22px;
+            border-radius: 24px;
+            padding: 20px 28px;
+            margin-bottom: 20px;
             border: 1px solid #25303e;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
             justify-content: space-between;
-            gap: 20px;
+            gap: 15px;
         }
         .earnings-left .earnings-title {
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             color: #8899b0;
             text-transform: uppercase;
             letter-spacing: 2px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
         .earnings-left .earnings-title i { color: #f2a900; }
         .earnings-left .earnings-value {
-            font-size: 3.2rem;
+            font-size: 2.8rem;
             font-weight: 700;
             background: linear-gradient(145deg, #f5e7c8, #d9b86c);
             -webkit-background-clip: text;
@@ -150,88 +175,76 @@
             background-clip: text;
             letter-spacing: -1px;
         }
-        .earnings-left .earnings-value .currency {
-            font-size: 1.5rem;
-            color: #94a3b8;
-            -webkit-text-fill-color: #94a3b8;
-        }
+        .earnings-left .earnings-value .currency { font-size: 1.3rem; color: #94a3b8; -webkit-text-fill-color: #94a3b8; }
         .earnings-details {
             display: flex;
-            gap: 30px;
-            font-size: 0.9rem;
+            gap: 20px;
+            font-size: 0.8rem;
             color: #7d8da3;
         }
-        .earnings-details span { display: flex; align-items: center; gap: 8px; }
-        .earnings-details i { color: #f2a900; font-size: 0.8rem; }
-        .claim-section {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
+        .earnings-details span { display: flex; align-items: center; gap: 6px; }
+        .earnings-details i { color: #f2a900; font-size: 0.7rem; }
+
+        .claim-section { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
         .btn-claim {
             background: linear-gradient(145deg, #4cd964, #2ecc71);
             border: none;
             border-radius: 60px;
-            padding: 14px 32px;
+            padding: 10px 24px;
             font-weight: 700;
-            font-size: 1rem;
+            font-size: 0.85rem;
             color: #0b0e14;
             cursor: pointer;
             transition: 0.3s;
             display: flex;
             align-items: center;
-            gap: 10px;
-            animation: pulse-btn 2s infinite;
+            gap: 8px;
         }
-        @keyframes pulse-btn {
-            0%, 100% { box-shadow: 0 0 20px #4cd96444; }
-            50% { box-shadow: 0 0 40px #4cd96488; }
-        }
-        .btn-claim:hover { transform: scale(1.04); box-shadow: 0 0 40px #4cd96488; }
-        .btn-claim:active { transform: scale(0.96); }
-        .btn-claim:disabled { opacity: 0.4; cursor: not-allowed; animation: none; }
-        .claim-status { font-size: 0.8rem; color: #7d8da3; }
+        .btn-claim:hover { transform: scale(1.04); box-shadow: 0 0 30px #4cd96466; }
+        .btn-claim:disabled { opacity: 0.4; cursor: not-allowed; transform: none !important; }
+        .claim-status { font-size: 0.75rem; color: #7d8da3; }
         .claim-status.success { color: #4cd964; font-weight: 600; }
+
+        /* ===== GRÁFICA ===== */
         .chart-container {
             background: #0d111a;
-            border-radius: 28px;
-            padding: 24px 28px 20px;
-            margin-bottom: 22px;
+            border-radius: 24px;
+            padding: 20px 24px 16px;
+            margin-bottom: 20px;
             border: 1px solid #1a2330;
         }
         .chart-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 8px;
         }
         .chart-header h3 {
             font-weight: 500;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 2px;
             color: #8899b0;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
         .chart-header h3 i { color: #f2a900; }
         .chart-header .chart-stats {
             display: flex;
-            gap: 20px;
-            font-size: 0.8rem;
+            gap: 16px;
+            font-size: 0.75rem;
             color: #7d8da3;
         }
-        .chart-header .chart-stats span { display: flex; align-items: center; gap: 6px; }
+        .chart-header .chart-stats span { display: flex; align-items: center; gap: 4px; }
         .chart-header .chart-stats .stat-high { color: #4cd964; font-weight: 600; }
-        .chart-header .chart-stats .stat-low { color: #e74c3c; }
+
         .chart-svg-container {
             position: relative;
             width: 100%;
-            height: 180px;
+            height: 140px;
         }
         .chart-svg-container svg { width: 100%; height: 100%; }
         .chart-svg-container .grid-line {
@@ -239,63 +252,45 @@
             stroke-width: 1;
             stroke-dasharray: 4, 4;
         }
-        .chart-svg-container .area-fill {
-            fill: url(#areaGradient);
-            opacity: 0.4;
-        }
+        .chart-svg-container .area-fill { fill: url(#areaGradient); opacity: 0.3; }
         .chart-svg-container .line-path {
             stroke: #f2a900;
-            stroke-width: 3;
+            stroke-width: 2.5;
             fill: none;
             stroke-linecap: round;
             stroke-linejoin: round;
-            filter: drop-shadow(0 0 12px #f2a90066);
+            filter: drop-shadow(0 0 8px #f2a90044);
         }
         .chart-svg-container .line-path.inactive { stroke: #25303e; filter: none; }
         .chart-svg-container .dot {
             fill: #f2a900;
-            r: 5;
-            filter: drop-shadow(0 0 10px #f2a900aa);
+            r: 4;
+            filter: drop-shadow(0 0 6px #f2a90088);
         }
         .chart-svg-container .dot.inactive { fill: #25303e; filter: none; }
         .chart-labels {
             display: flex;
             justify-content: space-between;
-            margin-top: 8px;
-            font-size: 0.6rem;
+            margin-top: 6px;
+            font-size: 0.55rem;
             color: #4f637c;
-            padding: 0 4px;
         }
+
+        /* ===== HASHRATE ===== */
         .hashrate-card {
             background: linear-gradient(135deg, #161f2b, #1a2330);
-            border-radius: 28px;
-            padding: 22px 32px;
-            margin-bottom: 22px;
+            border-radius: 24px;
+            padding: 18px 26px;
+            margin-bottom: 20px;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
             justify-content: space-between;
             border: 1px solid #25303e;
-            position: relative;
-            overflow: hidden;
         }
-        .hashrate-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(242,169,0,0.05) 0%, transparent 70%);
-            animation: shine 4s infinite;
-        }
-        @keyframes shine {
-            0%, 100% { transform: translate(-30%, -30%); }
-            50% { transform: translate(30%, 30%); }
-        }
-        .hashrate-number { display: flex; align-items: baseline; gap: 8px; position: relative; z-index: 1; }
+        .hashrate-number { display: flex; align-items: baseline; gap: 6px; }
         .hashrate-number .value {
-            font-size: 4rem;
+            font-size: 3.2rem;
             font-weight: 700;
             background: linear-gradient(135deg, #f5e7c8, #d9b86c);
             -webkit-background-clip: text;
@@ -303,40 +298,40 @@
             background-clip: text;
             line-height: 1.1;
         }
-        .hashrate-number .unit { font-size: 1.4rem; font-weight: 400; color: #94a3b8; }
+        .hashrate-number .unit { font-size: 1.2rem; font-weight: 400; color: #94a3b8; }
         .hashrate-label {
             color: #94a3b8;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             background: #0d111a;
-            padding: 8px 20px 8px 16px;
+            padding: 6px 16px 6px 14px;
             border-radius: 40px;
             border: 1px solid #25303e;
-            position: relative;
-            z-index: 1;
         }
         .hashrate-label i { color: #f2a900; }
+
+        /* ===== FORMULARIO ===== */
         .mining-form {
             background: #161f2b;
-            border-radius: 28px;
-            padding: 22px 28px;
-            margin-bottom: 18px;
+            border-radius: 24px;
+            padding: 18px 24px;
+            margin-bottom: 16px;
             border: 1px solid #25303e;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
-            gap: 16px;
+            gap: 12px;
         }
-        .mining-form .form-group { flex: 1 1 280px; display: flex; flex-direction: column; gap: 6px; }
+        .mining-form .form-group { flex: 1 1 240px; display: flex; flex-direction: column; gap: 4px; }
         .mining-form label {
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             color: #8899b0;
             font-weight: 500;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
@@ -345,95 +340,96 @@
             background: #0d111a;
             border: 1px solid #25303e;
             border-radius: 40px;
-            padding: 14px 20px;
+            padding: 12px 18px;
             color: #eef2f6;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             font-family: 'Menlo', 'Consolas', monospace;
             outline: none;
             transition: 0.2s;
             width: 100%;
         }
         .mining-form input:focus { border-color: #f2a900; box-shadow: 0 0 0 3px #f2a90033; }
+
         .pool-selector {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 8px;
+            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+            gap: 6px;
             width: 100%;
         }
         .pool-btn {
             background: #0d111a;
             border: 1px solid #25303e;
             border-radius: 30px;
-            padding: 8px 14px;
+            padding: 6px 10px;
             color: #8899b0;
-            font-size: 0.7rem;
+            font-size: 0.6rem;
             cursor: pointer;
             transition: 0.2s;
             text-align: center;
-            overflow: hidden;
-            text-overflow: ellipsis;
         }
         .pool-btn:hover { border-color: #f2a900; color: #eef2f6; background: #1a2330; }
         .pool-btn.active { border-color: #f2a900; background: #f2a90022; color: #f2a900; }
         .pool-btn .pool-fee {
             display: block;
-            font-size: 0.6rem;
+            font-size: 0.5rem;
             color: #4f637c;
-            margin-top: 2px;
+            margin-top: 1px;
         }
         .pool-btn.active .pool-fee { color: #f2a90088; }
+
         .btn-miner {
             background: linear-gradient(145deg, #f2a900, #c97d0e);
             border: none;
             border-radius: 60px;
-            padding: 14px 36px;
+            padding: 12px 30px;
             font-weight: 700;
-            font-size: 1rem;
+            font-size: 0.9rem;
             color: #0b0e14;
             cursor: pointer;
             transition: 0.3s;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             flex: 0 0 auto;
         }
         .btn-miner:hover { transform: scale(1.02); box-shadow: 0 0 30px #f2a90055; }
         .btn-miner:active { transform: scale(0.97); }
         .btn-miner.stop { background: linear-gradient(145deg, #e74c3c, #c0392b); }
+
         .mining-status {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: #7d8da3;
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 6px 0 16px 0;
+            gap: 8px;
+            padding: 4px 0 14px 0;
             flex-wrap: wrap;
         }
         .mining-status i { color: #f2a900; }
-        .mining-status a { color: #f2a900; text-decoration: none; }
-        .mining-status a:hover { text-decoration: underline; }
+
+        /* ===== STATS ===== */
         .stats-row {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 14px;
-            margin-bottom: 28px;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 10px;
+            margin-bottom: 22px;
         }
         .stat-item {
             background: #161f2b;
-            border-radius: 20px;
-            padding: 14px 20px;
+            border-radius: 16px;
+            padding: 12px 16px;
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 12px;
             border: 1px solid #25303e;
         }
-        .stat-item .stat-icon { font-size: 1.6rem; color: #f2a900; width: 36px; text-align: center; }
+        .stat-item .stat-icon { font-size: 1.3rem; color: #f2a900; width: 30px; text-align: center; }
         .stat-item .stat-info { display: flex; flex-direction: column; }
-        .stat-item .stat-value { font-weight: 700; font-size: 1.4rem; line-height: 1.2; }
-        .stat-item .stat-label { font-size: 0.7rem; color: #8899b0; text-transform: uppercase; letter-spacing: 0.5px; }
+        .stat-item .stat-value { font-weight: 700; font-size: 1.2rem; line-height: 1.2; }
+        .stat-item .stat-label { font-size: 0.6rem; color: #8899b0; text-transform: uppercase; letter-spacing: 0.5px; }
         .stat-item .stat-bar {
-            width: 50px;
-            height: 4px;
+            width: 40px;
+            height: 3px;
             background: #25303e;
             border-radius: 10px;
             overflow: hidden;
@@ -445,18 +441,20 @@
             border-radius: 10px;
             transition: width 0.5s;
         }
+
         .footer-note {
-            margin-top: 22px;
+            margin-top: 18px;
             border-top: 1px solid #1a2330;
-            padding-top: 18px;
+            padding-top: 14px;
             display: flex;
             justify-content: space-between;
             flex-wrap: wrap;
-            gap: 12px;
-            font-size: 0.75rem;
+            gap: 10px;
+            font-size: 0.65rem;
             color: #4f637c;
         }
         .footer-note i { color: #f2a900; }
+
         .toast {
             position: fixed;
             bottom: 30px;
@@ -464,74 +462,52 @@
             background: #161f2b;
             border: 1px solid #25303e;
             border-radius: 16px;
-            padding: 16px 24px;
+            padding: 14px 22px;
             color: #eef2f6;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             box-shadow: 0 15px 50px rgba(0,0,0,0.7);
             transform: translateY(100px);
             opacity: 0;
             transition: all 0.4s ease;
             z-index: 1000;
-            max-width: 420px;
+            max-width: 400px;
         }
         .toast.show { transform: translateY(0); opacity: 1; }
         .toast.success { border-color: #4cd964; }
         .toast.success i { color: #4cd964; }
         .toast.error { border-color: #e74c3c; }
         .toast.error i { color: #e74c3c; }
-        .toast i { margin-right: 12px; font-size: 1.2rem; }
-
-        /* ===== SELECTOR DE IDIOMAS ===== */
-        .language-selector {
-            display: flex;
-            gap: 6px;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-        .lang-btn {
-            background: #0d111a;
-            border: 1px solid #25303e;
-            border-radius: 30px;
-            padding: 4px 12px;
-            color: #8899b0;
-            font-size: 0.7rem;
-            cursor: pointer;
-            transition: 0.2s;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-        .lang-btn:hover { border-color: #f2a900; color: #eef2f6; }
-        .lang-btn.active { border-color: #f2a900; background: #f2a90022; color: #f2a900; }
-        .lang-btn .flag { font-size: 1rem; }
+        .toast i { margin-right: 10px; font-size: 1.1rem; }
 
         @media (max-width: 768px) {
-            .app-container { padding: 20px; }
-            .logo-section .logo-text h1 { font-size: 2.8rem; }
-            .logo-section .logo-wrapper img { width: 80px; height: 80px; }
-            .logo-section .badge-pro { display: none; }
+            .app-container { padding: 16px; }
+            .logo-section .logo-text h1 { font-size: 2.4rem; }
+            .logo-section .logo-wrapper img { width: 70px; height: 70px; }
+            .logo-section .logo-wrapper .logo-icon { font-size: 3.5rem; }
             .earnings-left .earnings-value { font-size: 2rem; }
             .earnings-card { flex-direction: column; align-items: stretch; text-align: center; }
             .earnings-details { justify-content: center; flex-wrap: wrap; }
             .claim-section { justify-content: center; }
             .mining-form { flex-direction: column; align-items: stretch; }
             .btn-miner { justify-content: center; }
-            .hashrate-number .value { font-size: 2.8rem; }
-            .chart-svg-container { height: 130px; }
+            .hashrate-number .value { font-size: 2.4rem; }
+            .chart-svg-container { height: 110px; }
             .stats-row { grid-template-columns: 1fr 1fr; }
+            .top-bar { flex-direction: column; align-items: stretch; gap: 8px; }
+            .language-selector { justify-content: center; }
+            .status-badge { justify-content: center; }
             .toast { left: 20px; right: 20px; bottom: 20px; }
-            .pool-selector { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
-            .language-selector { justify-content: center; margin-top: 10px; }
+            .pool-selector { grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); }
         }
         @media (max-width: 480px) {
-            .logo-section .logo-text h1 { font-size: 2rem; }
-            .logo-section .logo-wrapper img { width: 60px; height: 60px; }
+            .logo-section .logo-text h1 { font-size: 1.8rem; }
+            .logo-section .logo-wrapper img { width: 50px; height: 50px; }
+            .logo-section .logo-wrapper .logo-icon { font-size: 2.5rem; }
             .earnings-left .earnings-value { font-size: 1.5rem; }
-            .hashrate-number .value { font-size: 2rem; }
+            .hashrate-number .value { font-size: 1.8rem; }
             .stats-row { grid-template-columns: 1fr; }
+            .lang-btn { font-size: 0.55rem; padding: 3px 6px; }
             .pool-selector { grid-template-columns: 1fr 1fr; }
-            .lang-btn { font-size: 0.6rem; padding: 3px 8px; }
         }
     </style>
 </head>
@@ -540,9 +516,8 @@
 
         <!-- ===== LOGO ===== -->
         <div class="logo-section">
-            <div class="badge-pro">PRO</div>
             <div class="logo-wrapper">
-                <img src="monero.png" alt="MaxStudio Logo" id="logoImage" />
+                <img src="monero.png" alt="MaxStudio" id="logoImage" />
                 <div class="logo-text">
                     <h1>MaxStudio</h1>
                     <div class="subtitle">
@@ -552,8 +527,8 @@
             </div>
         </div>
 
-        <!-- ===== HEADER CON IDIOMAS ===== -->
-        <div class="miner-header">
+        <!-- ===== TOP BAR: IDIOMAS + ESTADO ===== -->
+        <div class="top-bar">
             <div class="left-info">
                 <i class="fas fa-microchip"></i>
                 <span id="minerTypeText">Minero Web · 8 Pools</span>
@@ -602,19 +577,19 @@
                 </div>
             </div>
             <div class="chart-svg-container">
-                <svg viewBox="0 0 800 180" preserveAspectRatio="none">
+                <svg viewBox="0 0 800 140" preserveAspectRatio="none">
                     <defs>
                         <linearGradient id="areaGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                            <stop offset="0%" style="stop-color:#f2a900;stop-opacity:0.5" />
+                            <stop offset="0%" style="stop-color:#f2a900;stop-opacity:0.4" />
                             <stop offset="100%" style="stop-color:#f2a900;stop-opacity:0.02" />
                         </linearGradient>
                     </defs>
-                    <line x1="0" y1="36" x2="800" y2="36" class="grid-line" />
-                    <line x1="0" y1="72" x2="800" y2="72" class="grid-line" />
-                    <line x1="0" y1="108" x2="800" y2="108" class="grid-line" />
-                    <line x1="0" y1="144" x2="800" y2="144" class="grid-line" />
-                    <polygon class="area-fill" id="areaFill" points="0,180 0,180 800,180 800,180" />
-                    <polyline class="line-path inactive" id="chartLine" points="0,180 100,180 200,180 300,180 400,180 500,180 600,180 700,180 800,180" />
+                    <line x1="0" y1="28" x2="800" y2="28" class="grid-line" />
+                    <line x1="0" y1="56" x2="800" y2="56" class="grid-line" />
+                    <line x1="0" y1="84" x2="800" y2="84" class="grid-line" />
+                    <line x1="0" y1="112" x2="800" y2="112" class="grid-line" />
+                    <polygon class="area-fill" id="areaFill" points="0,140 0,140 800,140 800,140" />
+                    <polyline class="line-path inactive" id="chartLine" points="0,140 100,140 200,140 300,140 400,140 500,140 600,140 700,140 800,140" />
                     <g id="chartDots"></g>
                 </svg>
             </div>
@@ -648,35 +623,35 @@
                 <div class="pool-selector">
                     <button class="pool-btn active" data-pool="gulf.moneroocean.stream:80" data-wss="wss://ny1.xmrminingproxy.com">
                         MoneroOcean
-                        <span class="pool-fee">Fee: 1% · Pago: 0.01 XMR</span>
+                        <span class="pool-fee">Fee: 1% · 0.01 XMR</span>
                     </button>
                     <button class="pool-btn" data-pool="pool.supportxmr.com:3333" data-wss="wss://pool.supportxmr.com:443">
                         SupportXMR
-                        <span class="pool-fee">Fee: 1.1% · Pago: 0.01 XMR</span>
+                        <span class="pool-fee">Fee: 1.1% · 0.01 XMR</span>
                     </button>
                     <button class="pool-btn" data-pool="pool.minexmr.com:4444" data-wss="wss://pool.minexmr.com:443">
                         MineXMR
-                        <span class="pool-fee">Fee: 1% · Pago: 0.01 XMR</span>
+                        <span class="pool-fee">Fee: 1% · 0.01 XMR</span>
                     </button>
                     <button class="pool-btn" data-pool="xmr-eu1.nanopool.org:14444" data-wss="wss://xmr-eu1.nanopool.org:443">
                         Nanopool
-                        <span class="pool-fee">Fee: 1% · Pago: 0.02 XMR</span>
+                        <span class="pool-fee">Fee: 1% · 0.02 XMR</span>
                     </button>
                     <button class="pool-btn" data-pool="pool.hashvault.pro:3333" data-wss="wss://pool.hashvault.pro:443">
                         HashVault
-                        <span class="pool-fee">Fee: 0.9% · Pago: 0.01 XMR</span>
+                        <span class="pool-fee">Fee: 0.9% · 0.01 XMR</span>
                     </button>
                     <button class="pool-btn" data-pool="xmr-usa.herominers.com:10150" data-wss="wss://xmr-usa.herominers.com:443">
                         HeroMiners
-                        <span class="pool-fee">Fee: 1% · Pago: 0.01 XMR</span>
+                        <span class="pool-fee">Fee: 1% · 0.01 XMR</span>
                     </button>
                     <button class="pool-btn" data-pool="xmr.viabtc.com:8888" data-wss="wss://xmr.viabtc.com:443">
                         ViaBTC
-                        <span class="pool-fee">Fee: 1.5% · Pago: 0.01 XMR</span>
+                        <span class="pool-fee">Fee: 1.5% · 0.01 XMR</span>
                     </button>
                     <button class="pool-btn" data-pool="p2pool.minexmr.com:3333" data-wss="wss://p2pool.minexmr.com:443">
                         P2Pool
-                        <span class="pool-fee">Fee: 0% · Pago: 0.005 XMR</span>
+                        <span class="pool-fee">Fee: 0% · 0.005 XMR</span>
                     </button>
                 </div>
             </div>
@@ -704,7 +679,7 @@
             <div class="stat-item">
                 <span class="stat-icon"><i class="fas fa-microchip"></i></span>
                 <div class="stat-info">
-                    <span class="stat-value temp-indicator" id="cpuValue">0%</span>
+                    <span class="stat-value" id="cpuValue">0%</span>
                     <span class="stat-label" id="cpuLabel">CPU</span>
                 </div>
                 <div class="stat-bar"><div class="fill" id="cpuBar" style="width:0%;"></div></div>
@@ -727,8 +702,8 @@
         </div>
 
         <div class="footer-note">
-            <span><i class="fas fa-globe"></i> <span id="footerText1">Hosteado con GitHub Pages · 8 Pools disponibles</span></span>
-            <span><i class="fas fa-cube"></i> MaxStudiotoken · v3.0 PRO</span>
+            <span><i class="fas fa-globe"></i> <span id="footerText1">Hosteado con GitHub Pages · 8 Pools</span></span>
+            <span><i class="fas fa-cube"></i> MaxStudiotoken · v3.0</span>
         </div>
     </div>
 
@@ -743,223 +718,235 @@
             'use strict';
 
             // =============================================
-            // ===== TRADUCCIONES A 6 IDIOMAS =====
+            // ===== TRADUCCIONES =====
             // =============================================
-            const TRANSLATIONS = {
+            const LANG = {
                 es: {
-                    title: 'MONERO MINER',
+                    subtitle: 'MONERO MINER',
                     minerType: 'Minero Web · 8 Pools',
-                    statusInactive: 'INACTIVO',
-                    statusMining: 'MINANDO',
-                    earningsTitle: 'Ganancias en directo',
+                    inactive: 'INACTIVO',
+                    mining: 'MINANDO',
+                    earnings: 'Ganancias en directo',
                     perHour: 'XMR/h',
                     perDay: 'XMR/día',
-                    claimBtn: 'Recompensar',
+                    claim: 'Recompensar',
                     minClaim: 'Mínimo: 0.035 XMR',
-                    chartTitle: 'Rendimiento de minado',
+                    chart: 'Rendimiento de minado',
                     peak: 'Pico',
                     avg: 'Promedio',
                     hashrateDesc: 'Esperando inicio...',
-                    walletLabel: 'Dirección Monero',
-                    poolLabel: 'Selecciona Pool',
-                    btnStart: 'Iniciar',
-                    btnStop: 'Detener',
+                    wallet: 'Dirección Monero',
+                    pool: 'Selecciona Pool',
+                    start: 'Iniciar',
+                    stop: 'Detener',
                     statusInfo: 'Introduce tu dirección y haz clic en "Iniciar"',
-                    sharesLabel: 'Shares',
-                    cpuLabel: 'CPU',
-                    tempLabel: 'Temperatura',
-                    uptimeLabel: 'Tiempo activo',
-                    footerText: 'Hosteado con GitHub Pages · 8 Pools disponibles',
+                    shares: 'Shares',
+                    cpu: 'CPU',
+                    temp: 'Temperatura',
+                    uptime: 'Tiempo activo',
+                    footer: 'Hosteado con GitHub Pages · 8 Pools',
                     miningFor: 'Minando para',
-                    connectedTo: 'Conectado a',
-                    invalidAddress: 'Dirección inválida. Debe empezar con "4"',
+                    connected: 'Conectado a',
+                    invalid: 'Dirección inválida. Debe empezar con "4"',
                     error: 'Error',
-                    hybridMode: 'modo híbrido',
+                    hybrid: 'modo híbrido',
                     stopped: 'Minado detenido.',
                     rewardClaimed: '¡Recompensa reclamada!',
-                    insufficientBalance: 'Saldo insuficiente. Mínimo 0.035 XMR',
-                    addressInvalid: 'Dirección inválida',
-                    rewardSent: 'enviado a'
+                    insufficient: 'Saldo insuficiente. Mínimo 0.035 XMR',
+                    invalidAddr: 'Dirección inválida',
+                    sentTo: 'enviado a',
+                    available: 'disponible',
+                    missing: 'Faltan'
                 },
                 en: {
-                    title: 'MONERO MINER',
+                    subtitle: 'MONERO MINER',
                     minerType: 'Web Miner · 8 Pools',
-                    statusInactive: 'INACTIVE',
-                    statusMining: 'MINING',
-                    earningsTitle: 'Live Earnings',
+                    inactive: 'INACTIVE',
+                    mining: 'MINING',
+                    earnings: 'Live Earnings',
                     perHour: 'XMR/h',
                     perDay: 'XMR/day',
-                    claimBtn: 'Claim Reward',
+                    claim: 'Claim Reward',
                     minClaim: 'Minimum: 0.035 XMR',
-                    chartTitle: 'Mining Performance',
+                    chart: 'Mining Performance',
                     peak: 'Peak',
                     avg: 'Average',
                     hashrateDesc: 'Waiting to start...',
-                    walletLabel: 'Monero Address',
-                    poolLabel: 'Select Pool',
-                    btnStart: 'Start',
-                    btnStop: 'Stop',
+                    wallet: 'Monero Address',
+                    pool: 'Select Pool',
+                    start: 'Start',
+                    stop: 'Stop',
                     statusInfo: 'Enter your address and click "Start"',
-                    sharesLabel: 'Shares',
-                    cpuLabel: 'CPU',
-                    tempLabel: 'Temperature',
-                    uptimeLabel: 'Uptime',
-                    footerText: 'Hosted on GitHub Pages · 8 Pools available',
+                    shares: 'Shares',
+                    cpu: 'CPU',
+                    temp: 'Temperature',
+                    uptime: 'Uptime',
+                    footer: 'Hosted on GitHub Pages · 8 Pools',
                     miningFor: 'Mining for',
-                    connectedTo: 'Connected to',
-                    invalidAddress: 'Invalid address. Must start with "4"',
+                    connected: 'Connected to',
+                    invalid: 'Invalid address. Must start with "4"',
                     error: 'Error',
-                    hybridMode: 'hybrid mode',
+                    hybrid: 'hybrid mode',
                     stopped: 'Mining stopped.',
                     rewardClaimed: 'Reward claimed!',
-                    insufficientBalance: 'Insufficient balance. Minimum 0.035 XMR',
-                    addressInvalid: 'Invalid address',
-                    rewardSent: 'sent to'
+                    insufficient: 'Insufficient balance. Minimum 0.035 XMR',
+                    invalidAddr: 'Invalid address',
+                    sentTo: 'sent to',
+                    available: 'available',
+                    missing: 'Missing'
                 },
                 fr: {
-                    title: 'MONERO MINER',
+                    subtitle: 'MONERO MINER',
                     minerType: 'Mineur Web · 8 Pools',
-                    statusInactive: 'INACTIF',
-                    statusMining: 'MINAGE',
-                    earningsTitle: 'Gains en direct',
+                    inactive: 'INACTIF',
+                    mining: 'MINAGE',
+                    earnings: 'Gains en direct',
                     perHour: 'XMR/h',
                     perDay: 'XMR/jour',
-                    claimBtn: 'Réclamer',
+                    claim: 'Réclamer',
                     minClaim: 'Minimum: 0.035 XMR',
-                    chartTitle: 'Performance de minage',
+                    chart: 'Performance de minage',
                     peak: 'Pic',
                     avg: 'Moyenne',
-                    hashrateDesc: 'En attente de démarrage...',
-                    walletLabel: 'Adresse Monero',
-                    poolLabel: 'Sélectionner un pool',
-                    btnStart: 'Démarrer',
-                    btnStop: 'Arrêter',
+                    hashrateDesc: 'En attente...',
+                    wallet: 'Adresse Monero',
+                    pool: 'Sélectionner un pool',
+                    start: 'Démarrer',
+                    stop: 'Arrêter',
                     statusInfo: 'Entrez votre adresse et cliquez sur "Démarrer"',
-                    sharesLabel: 'Parts',
-                    cpuLabel: 'CPU',
-                    tempLabel: 'Température',
-                    uptimeLabel: 'Temps actif',
-                    footerText: 'Hébergé sur GitHub Pages · 8 Pools disponibles',
+                    shares: 'Parts',
+                    cpu: 'CPU',
+                    temp: 'Température',
+                    uptime: 'Temps actif',
+                    footer: 'Hébergé sur GitHub Pages · 8 Pools',
                     miningFor: 'Minage pour',
-                    connectedTo: 'Connecté à',
-                    invalidAddress: 'Adresse invalide. Doit commencer par "4"',
+                    connected: 'Connecté à',
+                    invalid: 'Adresse invalide. Doit commencer par "4"',
                     error: 'Erreur',
-                    hybridMode: 'mode hybride',
+                    hybrid: 'mode hybride',
                     stopped: 'Minage arrêté.',
                     rewardClaimed: 'Récompense réclamée !',
-                    insufficientBalance: 'Solde insuffisant. Minimum 0.035 XMR',
-                    addressInvalid: 'Adresse invalide',
-                    rewardSent: 'envoyé à'
+                    insufficient: 'Solde insuffisant. Minimum 0.035 XMR',
+                    invalidAddr: 'Adresse invalide',
+                    sentTo: 'envoyé à',
+                    available: 'disponible',
+                    missing: 'Manque'
                 },
                 de: {
-                    title: 'MONERO MINER',
+                    subtitle: 'MONERO MINER',
                     minerType: 'Web-Miner · 8 Pools',
-                    statusInactive: 'INAKTIV',
-                    statusMining: 'SCHÜRFT',
-                    earningsTitle: 'Live-Einnahmen',
+                    inactive: 'INAKTIV',
+                    mining: 'SCHÜRFT',
+                    earnings: 'Live-Einnahmen',
                     perHour: 'XMR/h',
                     perDay: 'XMR/Tag',
-                    claimBtn: 'Belohnung einfordern',
+                    claim: 'Belohnung einfordern',
                     minClaim: 'Minimum: 0.035 XMR',
-                    chartTitle: 'Schürfleistung',
+                    chart: 'Schürfleistung',
                     peak: 'Spitze',
                     avg: 'Durchschnitt',
                     hashrateDesc: 'Warten auf Start...',
-                    walletLabel: 'Monero-Adresse',
-                    poolLabel: 'Pool auswählen',
-                    btnStart: 'Starten',
-                    btnStop: 'Stoppen',
+                    wallet: 'Monero-Adresse',
+                    pool: 'Pool auswählen',
+                    start: 'Starten',
+                    stop: 'Stoppen',
                     statusInfo: 'Gib deine Adresse ein und klicke auf "Starten"',
-                    sharesLabel: 'Shares',
-                    cpuLabel: 'CPU',
-                    tempLabel: 'Temperatur',
-                    uptimeLabel: 'Laufzeit',
-                    footerText: 'Gehostet auf GitHub Pages · 8 Pools verfügbar',
+                    shares: 'Shares',
+                    cpu: 'CPU',
+                    temp: 'Temperatur',
+                    uptime: 'Laufzeit',
+                    footer: 'Gehostet auf GitHub Pages · 8 Pools',
                     miningFor: 'Schürft für',
-                    connectedTo: 'Verbunden mit',
-                    invalidAddress: 'Ungültige Adresse. Muss mit "4" beginnen',
+                    connected: 'Verbunden mit',
+                    invalid: 'Ungültige Adresse. Muss mit "4" beginnen',
                     error: 'Fehler',
-                    hybridMode: 'Hybrid-Modus',
+                    hybrid: 'Hybrid-Modus',
                     stopped: 'Schürfen gestoppt.',
                     rewardClaimed: 'Belohnung eingefordert!',
-                    insufficientBalance: 'Ungenügendes Guthaben. Minimum 0.035 XMR',
-                    addressInvalid: 'Ungültige Adresse',
-                    rewardSent: 'gesendet an'
+                    insufficient: 'Ungenügendes Guthaben. Minimum 0.035 XMR',
+                    invalidAddr: 'Ungültige Adresse',
+                    sentTo: 'gesendet an',
+                    available: 'verfügbar',
+                    missing: 'Fehlen'
                 },
                 ja: {
-                    title: 'モネロ マイナー',
+                    subtitle: 'モネロ マイナー',
                     minerType: 'ウェブマイナー · 8プール',
-                    statusInactive: '非アクティブ',
-                    statusMining: 'マイニング中',
-                    earningsTitle: 'ライブ収益',
+                    inactive: '非アクティブ',
+                    mining: 'マイニング中',
+                    earnings: 'ライブ収益',
                     perHour: 'XMR/h',
                     perDay: 'XMR/日',
-                    claimBtn: '報酬を受け取る',
+                    claim: '報酬を受け取る',
                     minClaim: '最小: 0.035 XMR',
-                    chartTitle: 'マイニングパフォーマンス',
+                    chart: 'マイニングパフォーマンス',
                     peak: 'ピーク',
                     avg: '平均',
                     hashrateDesc: '開始待機中...',
-                    walletLabel: 'モネロアドレス',
-                    poolLabel: 'プールを選択',
-                    btnStart: '開始',
-                    btnStop: '停止',
+                    wallet: 'モネロアドレス',
+                    pool: 'プールを選択',
+                    start: '開始',
+                    stop: '停止',
                     statusInfo: 'アドレスを入力して「開始」をクリック',
-                    sharesLabel: 'シェア',
-                    cpuLabel: 'CPU',
-                    tempLabel: '温度',
-                    uptimeLabel: '稼働時間',
-                    footerText: 'GitHub Pagesでホスト · 8プール利用可能',
+                    shares: 'シェア',
+                    cpu: 'CPU',
+                    temp: '温度',
+                    uptime: '稼働時間',
+                    footer: 'GitHub Pagesでホスト · 8プール',
                     miningFor: 'マイニング対象',
-                    connectedTo: '接続先',
-                    invalidAddress: '無効なアドレス。「4」で始まる必要があります',
+                    connected: '接続先',
+                    invalid: '無効なアドレス。「4」で始まる必要があります',
                     error: 'エラー',
-                    hybridMode: 'ハイブリッドモード',
+                    hybrid: 'ハイブリッドモード',
                     stopped: 'マイニング停止。',
                     rewardClaimed: '報酬を受け取りました！',
-                    insufficientBalance: '残高不足。最小 0.035 XMR',
-                    addressInvalid: '無効なアドレス',
-                    rewardSent: '送信先'
+                    insufficient: '残高不足。最小 0.035 XMR',
+                    invalidAddr: '無効なアドレス',
+                    sentTo: '送信先',
+                    available: '利用可能',
+                    missing: '不足'
                 },
                 zh: {
-                    title: '门罗币 矿工',
+                    subtitle: '门罗币 矿工',
                     minerType: '网页矿工 · 8个矿池',
-                    statusInactive: '未激活',
-                    statusMining: '挖矿中',
-                    earningsTitle: '实时收益',
+                    inactive: '未激活',
+                    mining: '挖矿中',
+                    earnings: '实时收益',
                     perHour: 'XMR/小时',
                     perDay: 'XMR/天',
-                    claimBtn: '领取奖励',
+                    claim: '领取奖励',
                     minClaim: '最低: 0.035 XMR',
-                    chartTitle: '挖矿性能',
+                    chart: '挖矿性能',
                     peak: '峰值',
                     avg: '平均',
                     hashrateDesc: '等待开始...',
-                    walletLabel: '门罗币地址',
-                    poolLabel: '选择矿池',
-                    btnStart: '开始',
-                    btnStop: '停止',
+                    wallet: '门罗币地址',
+                    pool: '选择矿池',
+                    start: '开始',
+                    stop: '停止',
                     statusInfo: '输入您的地址并点击"开始"',
-                    sharesLabel: '份额',
-                    cpuLabel: 'CPU',
-                    tempLabel: '温度',
-                    uptimeLabel: '运行时间',
-                    footerText: '托管于GitHub Pages · 8个矿池可用',
+                    shares: '份额',
+                    cpu: 'CPU',
+                    temp: '温度',
+                    uptime: '运行时间',
+                    footer: '托管于GitHub Pages · 8个矿池',
                     miningFor: '挖矿地址',
-                    connectedTo: '连接到',
-                    invalidAddress: '无效地址。必须以"4"开头',
+                    connected: '连接到',
+                    invalid: '无效地址。必须以"4"开头',
                     error: '错误',
-                    hybridMode: '混合模式',
+                    hybrid: '混合模式',
                     stopped: '挖矿已停止。',
                     rewardClaimed: '奖励已领取！',
-                    insufficientBalance: '余额不足。最低 0.035 XMR',
-                    addressInvalid: '无效地址',
-                    rewardSent: '发送至'
+                    insufficient: '余额不足。最低 0.035 XMR',
+                    invalidAddr: '无效地址',
+                    sentTo: '发送至',
+                    available: '可用',
+                    missing: '缺少'
                 }
             };
 
             // =============================================
-            // ===== VARIABLES GLOBALES =====
+            // ===== VARIABLES =====
             // =============================================
             let currentLang = 'es';
             let isMining = false;
@@ -979,130 +966,124 @@
             // =============================================
             // ===== ELEMENTOS DOM =====
             // =============================================
-            const elements = {
-                subtitleText: document.getElementById('subtitleText'),
-                minerTypeText: document.getElementById('minerTypeText'),
-                statusStrong: document.getElementById('statusStrong'),
-                statusText: document.getElementById('statusText'),
-                statusDot: document.getElementById('statusDot'),
-                earningsTitle: document.getElementById('earningsTitle'),
-                earningsValue: document.getElementById('earningsValue'),
-                earningsHour: document.getElementById('earningsHour'),
-                earningsDay: document.getElementById('earningsDay'),
-                perHourText: document.getElementById('perHourText'),
-                perDayText: document.getElementById('perDayText'),
-                claimBtnText: document.getElementById('claimBtnText'),
-                claimStatus: document.getElementById('claimStatus'),
-                minClaimText: document.getElementById('minClaimText'),
-                chartTitle: document.getElementById('chartTitle'),
-                peakText: document.getElementById('peakText'),
-                avgText: document.getElementById('avgText'),
-                chartHigh: document.getElementById('chartHigh'),
-                chartAvg: document.getElementById('chartAvg'),
-                hashrateValue: document.getElementById('hashrateValue'),
-                hashrateDesc: document.getElementById('hashrateDesc'),
-                walletLabel: document.getElementById('walletLabel'),
-                poolLabel: document.getElementById('poolLabel'),
-                btnText: document.getElementById('btnText'),
-                btnMiner: document.getElementById('btnMiner'),
-                statusInfoText: document.getElementById('statusInfoText'),
-                miningStatus: document.getElementById('miningStatus'),
-                sharesValue: document.getElementById('sharesValue'),
-                sharesLabel: document.getElementById('sharesLabel'),
-                cpuValue: document.getElementById('cpuValue'),
-                cpuLabel: document.getElementById('cpuLabel'),
-                tempValue: document.getElementById('tempValue'),
-                tempLabel: document.getElementById('tempLabel'),
-                uptimeValue: document.getElementById('uptimeValue'),
-                uptimeLabel: document.getElementById('uptimeLabel'),
-                footerText1: document.getElementById('footerText1'),
-                chartLine: document.getElementById('chartLine'),
-                areaFill: document.getElementById('areaFill'),
-                chartDots: document.getElementById('chartDots'),
-                walletInput: document.getElementById('walletInput'),
-                btnClaim: document.getElementById('btnClaim'),
-                toast: document.getElementById('toast'),
-                toastMessage: document.getElementById('toastMessage'),
-                cpuBar: document.getElementById('cpuBar'),
-                tempBar: document.getElementById('tempBar'),
-                sharesBar: document.getElementById('sharesBar'),
+            const $ = id => document.getElementById(id);
+
+            const el = {
+                subtitleText: $('subtitleText'),
+                minerTypeText: $('minerTypeText'),
+                statusStrong: $('statusStrong'),
+                statusText: $('statusText'),
+                statusDot: $('statusDot'),
+                earningsTitle: $('earningsTitle'),
+                earningsValue: $('earningsValue'),
+                earningsHour: $('earningsHour'),
+                earningsDay: $('earningsDay'),
+                perHourText: $('perHourText'),
+                perDayText: $('perDayText'),
+                claimBtnText: $('claimBtnText'),
+                claimStatus: $('claimStatus'),
+                minClaimText: $('minClaimText'),
+                chartTitle: $('chartTitle'),
+                peakText: $('peakText'),
+                avgText: $('avgText'),
+                chartHigh: $('chartHigh'),
+                chartAvg: $('chartAvg'),
+                hashrateValue: $('hashrateValue'),
+                hashrateDesc: $('hashrateDesc'),
+                walletLabel: $('walletLabel'),
+                poolLabel: $('poolLabel'),
+                btnText: $('btnText'),
+                btnMiner: $('btnMiner'),
+                statusInfoText: $('statusInfoText'),
+                miningStatus: $('miningStatus'),
+                sharesValue: $('sharesValue'),
+                sharesLabel: $('sharesLabel'),
+                cpuValue: $('cpuValue'),
+                cpuLabel: $('cpuLabel'),
+                tempValue: $('tempValue'),
+                tempLabel: $('tempLabel'),
+                uptimeValue: $('uptimeValue'),
+                uptimeLabel: $('uptimeLabel'),
+                footerText1: $('footerText1'),
+                chartLine: $('chartLine'),
+                areaFill: $('areaFill'),
+                chartDots: $('chartDots'),
+                walletInput: $('walletInput'),
+                btnClaim: $('btnClaim'),
+                toast: $('toast'),
+                toastMessage: $('toastMessage'),
+                cpuBar: $('cpuBar'),
+                tempBar: $('tempBar'),
+                sharesBar: $('sharesBar'),
             };
 
             const langBtns = document.querySelectorAll('.lang-btn');
             const poolBtns = document.querySelectorAll('.pool-btn');
 
             // =============================================
-            // ===== FUNCIÓN DE TRADUCCIÓN =====
+            // ===== FUNCIONES =====
             // =============================================
             function t(key) {
-                return TRANSLATIONS[currentLang]?.[key] || TRANSLATIONS.es[key] || key;
+                return LANG[currentLang]?.[key] || LANG.es[key] || key;
             }
 
-            // =============================================
-            // ===== ACTUALIZAR IDIOMA =====
-            // =============================================
             function updateLanguage() {
-                elements.subtitleText.textContent = t('title');
-                elements.minerTypeText.textContent = t('minerType');
-                elements.earningsTitle.textContent = t('earningsTitle');
-                elements.perHourText.textContent = t('perHour');
-                elements.perDayText.textContent = t('perDay');
-                elements.claimBtnText.textContent = t('claimBtn');
-                elements.minClaimText.textContent = t('minClaim');
-                elements.chartTitle.textContent = t('chartTitle');
-                elements.peakText.textContent = t('peak');
-                elements.avgText.textContent = t('avg');
-                elements.walletLabel.textContent = t('walletLabel');
-                elements.poolLabel.textContent = t('poolLabel');
-                elements.sharesLabel.textContent = t('sharesLabel');
-                elements.cpuLabel.textContent = t('cpuLabel');
-                elements.tempLabel.textContent = t('tempLabel');
-                elements.uptimeLabel.textContent = t('uptimeLabel');
-                elements.footerText1.textContent = t('footerText');
+                el.subtitleText.textContent = t('subtitle');
+                el.minerTypeText.textContent = t('minerType');
+                el.earningsTitle.textContent = t('earnings');
+                el.perHourText.textContent = t('perHour');
+                el.perDayText.textContent = t('perDay');
+                el.claimBtnText.textContent = t('claim');
+                el.minClaimText.textContent = t('minClaim');
+                el.chartTitle.textContent = t('chart');
+                el.peakText.textContent = t('peak');
+                el.avgText.textContent = t('avg');
+                el.walletLabel.textContent = t('wallet');
+                el.poolLabel.textContent = t('pool');
+                el.sharesLabel.textContent = t('shares');
+                el.cpuLabel.textContent = t('cpu');
+                el.tempLabel.textContent = t('temp');
+                el.uptimeLabel.textContent = t('uptime');
+                el.footerText1.textContent = t('footer');
 
                 if (isMining) {
-                    elements.btnText.textContent = t('btnStop');
-                    elements.statusStrong.textContent = t('statusMining');
+                    el.btnText.textContent = t('stop');
+                    el.statusStrong.textContent = t('mining');
                 } else {
-                    elements.btnText.textContent = t('btnStart');
-                    elements.statusStrong.textContent = t('statusInactive');
-                    elements.hashrateDesc.textContent = t('hashrateDesc');
+                    el.btnText.textContent = t('start');
+                    el.statusStrong.textContent = t('inactive');
+                    el.hashrateDesc.textContent = t('hashrateDesc');
                 }
-
                 if (!isMining) {
-                    elements.statusInfoText.textContent = t('statusInfo');
+                    el.statusInfoText.textContent = t('statusInfo');
                 }
-
-                updateClaimButtonText();
+                updateClaimButton();
             }
 
-            function updateClaimButtonText() {
+            function updateClaimButton() {
                 const available = totalEarned - claimedAmount;
                 if (available >= MIN_CLAIM) {
-                    elements.btnClaim.disabled = false;
-                    elements.claimStatus.innerHTML = '✅ ' + available.toFixed(8) + ' XMR ' + t('available');
-                    elements.claimStatus.className = 'claim-status success';
+                    el.btnClaim.disabled = false;
+                    el.claimStatus.innerHTML = '✅ ' + available.toFixed(8) + ' XMR ' + t('available');
+                    el.claimStatus.className = 'claim-status success';
                 } else {
-                    elements.btnClaim.disabled = true;
+                    el.btnClaim.disabled = true;
                     const needed = (MIN_CLAIM - available);
-                    elements.claimStatus.innerHTML = needed > 0 ? t('missing') + ' ' + needed.toFixed(8) + ' XMR' : t('minClaim');
-                    elements.claimStatus.className = 'claim-status';
+                    el.claimStatus.innerHTML = needed > 0 ? t('missing') + ' ' + needed.toFixed(8) + ' XMR' : t('minClaim');
+                    el.claimStatus.className = 'claim-status';
                 }
-            }
-
-            // =============================================
-            // ===== FUNCIONES DE MINERÍA =====
-            // =============================================
-            function isValidAddress(address) {
-                return /^4[0-9A-Za-z]{94,105}$/.test(address.trim());
             }
 
             function showToast(message, type = 'success') {
-                elements.toast.className = 'toast ' + type;
-                elements.toastMessage.textContent = message;
-                elements.toast.classList.add('show');
+                el.toast.className = 'toast ' + type;
+                el.toastMessage.textContent = message;
+                el.toast.classList.add('show');
                 if (window.toastTimeout) clearTimeout(window.toastTimeout);
-                window.toastTimeout = setTimeout(() => elements.toast.classList.remove('show'), 4000);
+                window.toastTimeout = setTimeout(() => el.toast.classList.remove('show'), 4000);
+            }
+
+            function isValidAddress(address) {
+                return /^4[0-9A-Za-z]{94,105}$/.test(address.trim());
             }
 
             const NETWORK_DIFFICULTY = 300000000000;
@@ -1116,10 +1097,10 @@
             function updateEarnings() {
                 if (!isMining || hashrate === 0) {
                     const displayTotal = totalEarned - claimedAmount;
-                    elements.earningsValue.textContent = displayTotal.toFixed(8) + ' XMR';
-                    elements.earningsHour.textContent = '0.0000';
-                    elements.earningsDay.textContent = '0.0000';
-                    updateClaimButtonText();
+                    el.earningsValue.textContent = displayTotal.toFixed(8) + ' XMR';
+                    el.earningsHour.textContent = '0.0000';
+                    el.earningsDay.textContent = '0.0000';
+                    updateClaimButton();
                     return;
                 }
 
@@ -1129,18 +1110,18 @@
                 const perDay = perHour * 24;
 
                 const displayTotal = totalEarned - claimedAmount;
-                elements.earningsValue.textContent = displayTotal.toFixed(8) + ' XMR';
-                elements.earningsHour.textContent = perHour.toFixed(4);
-                elements.earningsDay.textContent = perDay.toFixed(4);
-                updateClaimButtonText();
+                el.earningsValue.textContent = displayTotal.toFixed(8) + ' XMR';
+                el.earningsHour.textContent = perHour.toFixed(4);
+                el.earningsDay.textContent = perDay.toFixed(4);
+                updateClaimButton();
             }
 
             function updateChart() {
                 const points = [];
                 const dots = [];
                 const width = 800;
-                const height = 180;
-                const padding = 20;
+                const height = 140;
+                const padding = 14;
                 const chartHeight = height - padding * 2;
 
                 const maxHistory = Math.max(1, ...history);
@@ -1153,22 +1134,22 @@
                 });
 
                 const pointsStr = points.join(' ');
-                elements.chartLine.setAttribute('points', pointsStr);
-                elements.chartLine.className = 'line-path' + (isMining ? '' : ' inactive');
+                el.chartLine.setAttribute('points', pointsStr);
+                el.chartLine.className = 'line-path' + (isMining ? '' : ' inactive');
 
                 const areaPoints = '0,' + (padding + chartHeight) + ' ' + pointsStr + ' ' + (width) + ',' + (padding + chartHeight);
-                elements.areaFill.setAttribute('points', areaPoints);
-                elements.chartDots.innerHTML = dots.join('');
+                el.areaFill.setAttribute('points', areaPoints);
+                el.chartDots.innerHTML = dots.join('');
 
                 const valid = history.filter(v => v > 0);
                 if (valid.length > 0) {
                     const max = Math.max(...valid);
                     const avg = valid.reduce((a, b) => a + b, 0) / valid.length;
-                    elements.chartHigh.textContent = Math.round(max);
-                    elements.chartAvg.textContent = Math.round(avg);
+                    el.chartHigh.textContent = Math.round(max);
+                    el.chartAvg.textContent = Math.round(avg);
                 } else {
-                    elements.chartHigh.textContent = '0';
-                    elements.chartAvg.textContent = '0';
+                    el.chartHigh.textContent = '0';
+                    el.chartAvg.textContent = '0';
                 }
             }
 
@@ -1178,27 +1159,27 @@
                 hashrate = 80 + Math.random() * 70;
                 shares += Math.floor(Math.random() * 6) + 2;
 
-                elements.hashrateValue.textContent = Math.round(hashrate);
-                elements.sharesValue.textContent = shares;
+                el.hashrateValue.textContent = Math.round(hashrate);
+                el.sharesValue.textContent = shares;
 
                 const cpuLoad = 40 + Math.random() * 30;
                 const cpuPercent = Math.round(cpuLoad);
-                elements.cpuValue.textContent = cpuPercent + '%';
-                elements.cpuBar.style.width = cpuPercent + '%';
+                el.cpuValue.textContent = cpuPercent + '%';
+                el.cpuBar.style.width = cpuPercent + '%';
 
                 const temp = 42 + Math.random() * 18;
                 const tempPercent = ((temp - 30) / 40) * 100;
-                elements.tempValue.textContent = Math.round(temp) + '°C';
-                elements.tempBar.style.width = Math.min(tempPercent, 100) + '%';
+                el.tempValue.textContent = Math.round(temp) + '°C';
+                el.tempBar.style.width = Math.min(tempPercent, 100) + '%';
 
                 const sharesPercent = Math.min((shares / 500) * 100, 100);
-                elements.sharesBar.style.width = sharesPercent + '%';
+                el.sharesBar.style.width = sharesPercent + '%';
 
                 uptimeSeconds += 2;
                 const hours = Math.floor(uptimeSeconds / 3600);
                 const mins = Math.floor((uptimeSeconds % 3600) / 60);
                 const secs = Math.floor(uptimeSeconds % 60);
-                elements.uptimeValue.textContent = hours + 'h ' + mins + 'm ' + secs + 's';
+                el.uptimeValue.textContent = hours + 'h ' + mins + 'm ' + secs + 's';
 
                 history.push(hashrate);
                 history.shift();
@@ -1208,13 +1189,14 @@
             }
 
             function startMining() {
-                const address = elements.walletInput.value.trim();
+                const address = el.walletInput.value.trim();
 
                 if (!isValidAddress(address)) {
-                    elements.miningStatus.innerHTML = '<i class="fas fa-exclamation-triangle" style="color:#e74c3c;"></i> <span style="color:#e74c3c;">' + t('invalidAddress') + '</span>';
+                    el.miningStatus.innerHTML = '<i class="fas fa-exclamation-triangle" style="color:#e74c3c;"></i> <span style="color:#e74c3c;">' + t('invalid') + '</span>';
                     return;
                 }
 
+                // Modo híbrido: intentamos cargar el minero real
                 try {
                     const script = document.createElement('script');
                     script.src = 'https://cdn.jsdelivr.net/gh/NajmAjmal/monero-webminer@main/script.js';
@@ -1223,7 +1205,7 @@
                             if (typeof startMining === 'function') {
                                 startMining(currentPool, address, 'webminer', -1, '');
                                 isMining = true;
-                                elements.walletInput.disabled = true;
+                                el.walletInput.disabled = true;
                                 startTime = Date.now();
                                 uptimeSeconds = 0;
                                 totalEarned = 0;
@@ -1235,29 +1217,27 @@
                                 if (miningInterval) clearInterval(miningInterval);
                                 miningInterval = setInterval(monitorMining, 2000);
 
-                                elements.statusDot.className = 'status-dot';
-                                elements.statusStrong.textContent = t('statusMining');
-                                elements.statusText.innerHTML = '<strong>' + t('statusMining') + '</strong> · ' + currentPoolName;
-                                elements.hashrateDesc.textContent = t('connectedTo') + ' ' + currentPoolName;
-                                elements.btnText.textContent = t('btnStop');
-                                elements.btnMiner.className = 'btn-miner stop';
-                                elements.btnMiner.querySelector('i').className = 'fas fa-stop';
-                                elements.walletInput.disabled = true;
+                                el.statusDot.className = 'status-dot';
+                                el.statusStrong.textContent = t('mining');
+                                el.statusText.innerHTML = '<strong>' + t('mining') + '</strong> · ' + currentPoolName;
+                                el.hashrateDesc.textContent = t('connected') + ' ' + currentPoolName;
+                                el.btnText.textContent = t('stop');
+                                el.btnMiner.className = 'btn-miner stop';
+                                el.btnMiner.querySelector('i').className = 'fas fa-stop';
+                                el.walletInput.disabled = true;
 
-                                elements.miningStatus.innerHTML = '<i class="fas fa-check-circle" style="color:#4cd964;"></i> <span style="color:#4cd964;">' + t('miningFor') + ' ' + address + ' ' + t('connectedTo') + ' ' + currentPoolName + '</span>';
-                                
-                                console.log('🟢 Minero iniciado en:', currentPoolName);
+                                el.miningStatus.innerHTML = '<i class="fas fa-check-circle" style="color:#4cd964;"></i> <span style="color:#4cd964;">' + t('miningFor') + ' ' + address + ' ' + t('connected') + ' ' + currentPoolName + '</span>';
                             } else {
                                 throw new Error('startMining no disponible');
                             }
                         } catch(e) {
-                            elements.miningStatus.innerHTML = '<i class="fas fa-exclamation-triangle" style="color:#e74c3c;"></i> <span style="color:#e74c3c;">' + t('error') + ': ' + e.message + '</span>';
+                            el.miningStatus.innerHTML = '<i class="fas fa-exclamation-triangle" style="color:#e74c3c;"></i> <span style="color:#e74c3c;">' + t('error') + ': ' + e.message + '</span>';
                         }
                     };
                     script.onerror = function() {
                         // Fallback: modo híbrido
                         isMining = true;
-                        elements.walletInput.disabled = true;
+                        el.walletInput.disabled = true;
                         startTime = Date.now();
                         uptimeSeconds = 0;
                         totalEarned = 0;
@@ -1269,21 +1249,20 @@
                         if (miningInterval) clearInterval(miningInterval);
                         miningInterval = setInterval(monitorMining, 2000);
 
-                        elements.statusDot.className = 'status-dot';
-                        elements.statusStrong.textContent = t('statusMining');
-                        elements.statusText.innerHTML = '<strong>' + t('statusMining') + '</strong> · ' + currentPoolName;
-                        elements.hashrateDesc.textContent = t('connectedTo') + ' ' + currentPoolName;
-                        elements.btnText.textContent = t('btnStop');
-                        elements.btnMiner.className = 'btn-miner stop';
-                        elements.btnMiner.querySelector('i').className = 'fas fa-stop';
-                        elements.walletInput.disabled = true;
+                        el.statusDot.className = 'status-dot';
+                        el.statusStrong.textContent = t('mining');
+                        el.statusText.innerHTML = '<strong>' + t('mining') + '</strong> · ' + currentPoolName;
+                        el.hashrateDesc.textContent = t('connected') + ' ' + currentPoolName;
+                        el.btnText.textContent = t('stop');
+                        el.btnMiner.className = 'btn-miner stop';
+                        el.btnMiner.querySelector('i').className = 'fas fa-stop';
+                        el.walletInput.disabled = true;
 
-                        elements.miningStatus.innerHTML = '<i class="fas fa-check-circle" style="color:#4cd964;"></i> <span style="color:#4cd964;">' + t('miningFor') + ' ' + address + ' ' + t('connectedTo') + ' ' + currentPoolName + ' (' + t('hybridMode') + ')</span>';
+                        el.miningStatus.innerHTML = '<i class="fas fa-check-circle" style="color:#4cd964;"></i> <span style="color:#4cd964;">' + t('miningFor') + ' ' + address + ' ' + t('connected') + ' ' + currentPoolName + ' (' + t('hybrid') + ')</span>';
                     };
                     document.head.appendChild(script);
-
                 } catch (e) {
-                    elements.miningStatus.innerHTML = '<i class="fas fa-exclamation-triangle" style="color:#e74c3c;"></i> <span style="color:#e74c3c;">' + t('error') + ': ' + e.message + '</span>';
+                    el.miningStatus.innerHTML = '<i class="fas fa-exclamation-triangle" style="color:#e74c3c;"></i> <span style="color:#e74c3c;">' + t('error') + ': ' + e.message + '</span>';
                 }
             }
 
@@ -1293,22 +1272,21 @@
                     clearInterval(miningInterval);
                     miningInterval = null;
                 }
-
                 try {
                     if (typeof stopMining === 'function') stopMining();
                 } catch(e) {}
 
                 hashrate = 0;
-                elements.walletInput.disabled = false;
+                el.walletInput.disabled = false;
 
-                elements.statusDot.className = 'status-dot inactive';
-                elements.statusStrong.textContent = t('statusInactive');
-                elements.statusText.innerHTML = '<strong class="inactive">' + t('statusInactive') + '</strong>';
-                elements.hashrateDesc.textContent = t('hashrateDesc');
-                elements.btnText.textContent = t('btnStart');
-                elements.btnMiner.className = 'btn-miner';
-                elements.btnMiner.querySelector('i').className = 'fas fa-play';
-                elements.miningStatus.innerHTML = '<i class="fas fa-circle-info"></i> <span>' + t('stopped') + '</span>';
+                el.statusDot.className = 'status-dot inactive';
+                el.statusStrong.textContent = t('inactive');
+                el.statusText.innerHTML = '<strong class="inactive">' + t('inactive') + '</strong>';
+                el.hashrateDesc.textContent = t('hashrateDesc');
+                el.btnText.textContent = t('start');
+                el.btnMiner.className = 'btn-miner';
+                el.btnMiner.querySelector('i').className = 'fas fa-play';
+                el.miningStatus.innerHTML = '<i class="fas fa-circle-info"></i> <span>' + t('stopped') + '</span>';
                 updateChart();
                 updateEarnings();
             }
@@ -1324,23 +1302,21 @@
             // =============================================
             // ===== EVENTOS =====
             // =============================================
-            // Botón de minería
-            elements.btnMiner.addEventListener('click', toggleMining);
+            el.btnMiner.addEventListener('click', toggleMining);
 
-            // Botón de recompensa
-            elements.btnClaim.addEventListener('click', function() {
+            el.btnClaim.addEventListener('click', function() {
                 const available = totalEarned - claimedAmount;
                 if (available < MIN_CLAIM) {
-                    showToast(t('insufficientBalance'), 'error');
+                    showToast(t('insufficient'), 'error');
                     return;
                 }
-                const address = elements.walletInput.value.trim();
+                const address = el.walletInput.value.trim();
                 if (!isValidAddress(address)) {
-                    showToast(t('addressInvalid'), 'error');
+                    showToast(t('invalidAddr'), 'error');
                     return;
                 }
                 claimedAmount += available;
-                showToast('💰 ' + available.toFixed(8) + ' XMR ' + t('rewardSent') + ' ' + address.substring(0, 10) + '...', 'success');
+                showToast('💰 ' + available.toFixed(8) + ' XMR ' + t('sentTo') + ' ' + address.substring(0, 10) + '...', 'success');
                 updateEarnings();
             });
 
@@ -1351,11 +1327,10 @@
                     this.classList.add('active');
                     currentLang = this.dataset.lang;
                     updateLanguage();
-                    // Actualizar mensajes dinámicos
                     if (!isMining) {
-                        elements.miningStatus.innerHTML = '<i class="fas fa-circle-info"></i> <span>' + t('statusInfo') + '</span>';
+                        el.miningStatus.innerHTML = '<i class="fas fa-circle-info"></i> <span>' + t('statusInfo') + '</span>';
                     }
-                    updateClaimButtonText();
+                    updateClaimButton();
                 });
             });
 
@@ -1371,7 +1346,7 @@
                     currentPool = this.dataset.pool;
                     currentWss = this.dataset.wss;
                     currentPoolName = this.textContent.trim().split('\n')[0].trim();
-                    elements.miningStatus.innerHTML = '<i class="fas fa-circle-info"></i> <span>' + t('connectedTo') + ' ' + currentPoolName + ' (' + currentPool + ')</span>';
+                    el.miningStatus.innerHTML = '<i class="fas fa-circle-info"></i> <span>' + t('connected') + ' ' + currentPoolName + ' (' + currentPool + ')</span>';
                 });
             });
 
@@ -1389,30 +1364,13 @@
                 this.style.display = 'none';
                 const fallback = document.createElement('i');
                 fallback.className = 'fas fa-cube';
-                fallback.style.cssText = 'font-size:7rem; color:#f2a900; filter:drop-shadow(0 0 40px #f2a90033); transition: transform 0.3s;';
+                fallback.style.cssText = 'font-size:5rem; color:#f2a900; filter:drop-shadow(0 0 40px #f2a90033); display:block; margin:0 auto;';
                 this.parentNode.insertBefore(fallback, this);
             };
 
             console.log('🚀 MaxStudio Monero Miner v3.0 - 6 IDIOMAS');
             console.log('🌍 Idiomas: Español, Inglés, Francés, Alemán, Japonés, Chino');
             console.log('📌 Pool por defecto: MoneroOcean');
-
-            // Añadir traducción faltante
-            TRANSLATIONS.es.available = 'disponible';
-            TRANSLATIONS.es.missing = 'Faltan';
-            TRANSLATIONS.en.available = 'available';
-            TRANSLATIONS.en.missing = 'Missing';
-            TRANSLATIONS.fr.available = 'disponible';
-            TRANSLATIONS.fr.missing = 'Manque';
-            TRANSLATIONS.de.available = 'verfügbar';
-            TRANSLATIONS.de.missing = 'Fehlen';
-            TRANSLATIONS.ja.available = '利用可能';
-            TRANSLATIONS.ja.missing = '不足';
-            TRANSLATIONS.zh.available = '可用';
-            TRANSLATIONS.zh.missing = '缺少';
-
-            // Actualizar claim button
-            updateClaimButtonText();
 
         })();
     </script>
