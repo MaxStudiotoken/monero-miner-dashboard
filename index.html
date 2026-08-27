@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Monero Miner · MaxStudio</title>
+    <title>Monero Miner PRO · MaxStudio</title>
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', -apple-system, sans-serif; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
 
         body {
-            background: #0b0e14;
+            background: #070a10;
             color: #eef2f6;
             display: flex;
             justify-content: center;
@@ -22,32 +22,171 @@
         }
 
         .app-container {
-            max-width: 1000px;
+            max-width: 1100px;
             width: 100%;
-            background: #141a24;
-            border-radius: 32px;
-            padding: 28px 30px 35px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.04);
+            background: #0d111a;
+            border-radius: 40px;
+            padding: 30px 35px 40px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.04);
         }
 
-        /* ===== LOGO GRANDE CON IMAGEN ===== */
+        /* ===== LOGO GIGANTE ===== */
         .logo-section {
             text-align: center;
-            margin-bottom: 28px;
-            padding: 20px 0 10px 0;
-            border-bottom: 1px solid #1e2733;
+            padding: 30px 0 25px 0;
+            border-bottom: 2px solid #1a2330;
+            margin-bottom: 30px;
+            position: relative;
         }
 
-        .logo-section img {
-            width: 100px;
-            height: 100px;
-            object-fit: contain;
-            display: block;
-            margin: 0 auto 10px auto;
-            filter: drop-shadow(0 0 30px #f2a90033);
+        .logo-section .logo-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
         }
 
-        .logo-section h1 {
+        .logo-section .logo-icon {
+            font-size: 7rem;
+            color: #f2a900;
+            filter: drop-shadow(0 0 60px #f2a90033);
+            transition: transform 0.3s;
+        }
+
+        .logo-section .logo-icon:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-section .logo-text {
+            text-align: left;
+        }
+
+        .logo-section .logo-text h1 {
+            font-size: 4.5rem;
+            font-weight: 800;
+            background: linear-gradient(145deg, #f5e7c8, #d9b86c, #f5e7c8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -2px;
+            line-height: 1;
+            text-shadow: 0 0 40px rgba(242, 169, 0, 0.1);
+        }
+
+        .logo-section .logo-text .subtitle {
+            color: #7d8da3;
+            font-size: 1.1rem;
+            letter-spacing: 4px;
+            margin-top: 6px;
+            font-weight: 300;
+        }
+
+        .logo-section .logo-text .subtitle i {
+            color: #f2a900;
+            margin: 0 8px;
+        }
+
+        .logo-section .badge-pro {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(145deg, #f2a900, #c97d0e);
+            color: #0b0e14;
+            font-weight: 700;
+            font-size: 0.7rem;
+            padding: 4px 14px;
+            border-radius: 30px;
+            letter-spacing: 1px;
+        }
+
+        /* ===== HEADER ===== */
+        .miner-header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 22px;
+            gap: 15px;
+        }
+
+        .miner-header .left-info {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .miner-header .left-info i {
+            color: #f2a900;
+            font-size: 1.2rem;
+        }
+
+        .miner-header .left-info span {
+            color: #7d8da3;
+            font-size: 0.85rem;
+        }
+
+        .status-badge {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #161f2b;
+            padding: 8px 20px 8px 16px;
+            border-radius: 60px;
+            border: 1px solid #25303e;
+        }
+
+        .status-dot {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            background: #4cd964;
+            border-radius: 50%;
+            box-shadow: 0 0 16px #4cd964aa;
+            animation: pulse-dot 2s infinite;
+        }
+
+        .status-dot.inactive { background: #6b7a8f; box-shadow: none; animation: none; }
+
+        @keyframes pulse-dot {
+            0% { opacity: 0.7; transform: scale(0.95); }
+            50% { opacity: 1; transform: scale(1.15); }
+            100% { opacity: 0.7; transform: scale(0.95); }
+        }
+
+        .status-text { font-weight: 500; color: #cbd5e1; font-size: 0.9rem; }
+        .status-text strong { color: #4cd964; font-weight: 600; }
+        .status-text strong.inactive { color: #6b7a8f; }
+
+        /* ===== GANANCIAS ===== */
+        .earnings-card {
+            background: linear-gradient(135deg, #141d2a, #1a2330);
+            border-radius: 28px;
+            padding: 24px 32px;
+            margin-bottom: 22px;
+            border: 1px solid #25303e;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .earnings-left .earnings-title {
+            font-size: 0.8rem;
+            color: #8899b0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .earnings-left .earnings-title i {
+            color: #f2a900;
+        }
+
+        .earnings-left .earnings-value {
             font-size: 2.8rem;
             font-weight: 700;
             background: linear-gradient(145deg, #f5e7c8, #d9b86c);
@@ -57,104 +196,15 @@
             letter-spacing: -1px;
         }
 
-        .logo-section .subtitle {
-            color: #7d8da3;
-            font-size: 0.95rem;
-            letter-spacing: 2px;
-            margin-top: 4px;
-        }
-
-        .logo-section .subtitle i {
-            color: #f2a900;
-        }
-
-        /* ===== HEADER MINER ===== */
-        .miner-header {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            gap: 15px;
-        }
-
-        .status-badge {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            background: #1e2733;
-            padding: 8px 18px 8px 16px;
-            border-radius: 60px;
-            border: 1px solid #2b3646;
-        }
-
-        .status-dot {
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            background: #4cd964;
-            border-radius: 50%;
-            box-shadow: 0 0 12px #4cd964aa;
-            animation: pulse-dot 2s infinite;
-        }
-
-        .status-dot.inactive { background: #6b7a8f; box-shadow: none; animation: none; }
-
-        @keyframes pulse-dot {
-            0% { opacity: 0.7; transform: scale(0.95); }
-            50% { opacity: 1; transform: scale(1.1); }
-            100% { opacity: 0.7; transform: scale(0.95); }
-        }
-
-        .status-text { font-weight: 500; color: #cbd5e1; font-size: 0.9rem; }
-        .status-text strong { color: #4cd964; font-weight: 600; }
-        .status-text strong.inactive { color: #6b7a8f; }
-
-        /* ===== GANANCIAS EN DIRECTO ===== */
-        .earnings-card {
-            background: #1b232f;
-            border-radius: 28px;
-            padding: 20px 28px;
-            margin-bottom: 20px;
-            border: 1px solid #29313f;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-            gap: 15px;
-        }
-
-        .earnings-card .earnings-title {
-            font-size: 0.85rem;
-            color: #8899b0;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .earnings-card .earnings-title i {
-            color: #f2a900;
-        }
-
-        .earnings-card .earnings-value {
-            font-size: 2.2rem;
-            font-weight: 700;
-            background: linear-gradient(145deg, #f5e7c8, #d9b86c);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: -0.5px;
-        }
-
-        .earnings-card .earnings-value .currency {
-            font-size: 1.2rem;
+        .earnings-left .earnings-value .currency {
+            font-size: 1.3rem;
             color: #94a3b8;
             -webkit-text-fill-color: #94a3b8;
         }
 
         .earnings-details {
             display: flex;
-            gap: 24px;
+            gap: 30px;
             font-size: 0.85rem;
             color: #7d8da3;
         }
@@ -162,7 +212,7 @@
         .earnings-details span {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
         }
 
         .earnings-details i {
@@ -170,7 +220,6 @@
             font-size: 0.8rem;
         }
 
-        /* ===== BOTÓN RECOMPENSAR / COBRAR ===== */
         .claim-section {
             display: flex;
             align-items: center;
@@ -182,48 +231,154 @@
             background: linear-gradient(145deg, #4cd964, #2ecc71);
             border: none;
             border-radius: 60px;
-            padding: 10px 24px;
+            padding: 12px 28px;
             font-weight: 700;
             font-size: 0.9rem;
             color: #0b0e14;
             cursor: pointer;
-            transition: 0.2s;
+            transition: 0.3s;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
         }
 
-        .btn-claim:hover { transform: scale(1.03); box-shadow: 0 0 20px #4cd96466; }
-        .btn-claim:active { transform: scale(0.97); }
+        .btn-claim:hover { transform: scale(1.04); box-shadow: 0 0 30px #4cd96466; }
+        .btn-claim:active { transform: scale(0.96); }
         .btn-claim:disabled { opacity: 0.4; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
-
-        .btn-claim i { font-size: 1rem; }
 
         .claim-status {
             font-size: 0.8rem;
             color: #7d8da3;
         }
-
         .claim-status.success { color: #4cd964; }
-        .claim-status.error { color: #e74c3c; }
+
+        /* ===== GRÁFICA PROFESIONAL ===== */
+        .chart-container {
+            background: #0d111a;
+            border-radius: 28px;
+            padding: 24px 28px 20px;
+            margin-bottom: 22px;
+            border: 1px solid #1a2330;
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .chart-header h3 {
+            font-weight: 500;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #8899b0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chart-header h3 i {
+            color: #f2a900;
+        }
+
+        .chart-header .chart-stats {
+            display: flex;
+            gap: 20px;
+            font-size: 0.8rem;
+            color: #7d8da3;
+        }
+
+        .chart-header .chart-stats span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .chart-header .chart-stats .stat-high {
+            color: #4cd964;
+        }
+
+        .chart-header .chart-stats .stat-low {
+            color: #e74c3c;
+        }
+
+        /* ===== GRÁFICO SVG ===== */
+        .chart-svg-container {
+            position: relative;
+            width: 100%;
+            height: 180px;
+        }
+
+        .chart-svg-container svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .chart-svg-container .grid-line {
+            stroke: #1a2330;
+            stroke-width: 1;
+            stroke-dasharray: 4, 4;
+        }
+
+        .chart-svg-container .area-fill {
+            fill: url(#areaGradient);
+            opacity: 0.3;
+        }
+
+        .chart-svg-container .line-path {
+            stroke: #f2a900;
+            stroke-width: 2.5;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            filter: drop-shadow(0 0 8px #f2a90044);
+        }
+
+        .chart-svg-container .line-path.inactive {
+            stroke: #25303e;
+            filter: none;
+        }
+
+        .chart-svg-container .dot {
+            fill: #f2a900;
+            r: 4;
+            filter: drop-shadow(0 0 6px #f2a90088);
+        }
+
+        .chart-svg-container .dot.inactive {
+            fill: #25303e;
+            filter: none;
+        }
+
+        .chart-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 8px;
+            font-size: 0.6rem;
+            color: #4f637c;
+            padding: 0 4px;
+        }
 
         /* ===== HASHRATE ===== */
         .hashrate-card {
-            background: #1b232f;
+            background: #161f2b;
             border-radius: 28px;
-            padding: 22px 28px 26px;
-            margin-bottom: 28px;
+            padding: 18px 28px;
+            margin-bottom: 22px;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
             justify-content: space-between;
-            border: 1px solid #29313f;
-            box-shadow: inset 0 2px 6px rgba(0,0,0,0.5);
+            border: 1px solid #25303e;
         }
 
-        .hashrate-number { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+        .hashrate-number { display: flex; align-items: baseline; gap: 8px; }
         .hashrate-number .value {
-            font-size: 3.2rem;
+            font-size: 2.8rem;
             font-weight: 700;
             background: linear-gradient(135deg, #f5e7c8, #d9b86c);
             -webkit-background-clip: text;
@@ -231,28 +386,28 @@
             background-clip: text;
             line-height: 1.1;
         }
-        .hashrate-number .unit { font-size: 1.4rem; font-weight: 400; color: #94a3b8; }
+        .hashrate-number .unit { font-size: 1.2rem; font-weight: 400; color: #94a3b8; }
 
         .hashrate-label {
             color: #94a3b8;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             display: flex;
             align-items: center;
-            gap: 8px;
-            background: #10161e;
-            padding: 8px 18px 8px 16px;
+            gap: 10px;
+            background: #0d111a;
+            padding: 8px 20px 8px 16px;
             border-radius: 40px;
-            border: 1px solid #2a3442;
+            border: 1px solid #25303e;
         }
         .hashrate-label i { color: #f2a900; }
 
         /* ===== FORMULARIO ===== */
         .mining-form {
-            background: #1b232f;
+            background: #161f2b;
             border-radius: 28px;
-            padding: 24px 28px;
-            margin-bottom: 20px;
-            border: 1px solid #29313f;
+            padding: 22px 28px;
+            margin-bottom: 18px;
+            border: 1px solid #25303e;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
@@ -260,12 +415,12 @@
         }
 
         .mining-form .form-group { flex: 1 1 280px; display: flex; flex-direction: column; gap: 6px; }
-        .mining-form label { font-size: 0.85rem; color: #8899b0; font-weight: 500; display: flex; align-items: center; gap: 8px; }
+        .mining-form label { font-size: 0.8rem; color: #8899b0; font-weight: 500; display: flex; align-items: center; gap: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
         .mining-form label i { color: #f2a900; }
 
         .mining-form input {
-            background: #10161e;
-            border: 1px solid #2f3a4a;
+            background: #0d111a;
+            border: 1px solid #25303e;
             border-radius: 40px;
             padding: 14px 20px;
             color: #eef2f6;
@@ -276,148 +431,17 @@
             width: 100%;
         }
         .mining-form input:focus { border-color: #f2a900; box-shadow: 0 0 0 3px #f2a90033; }
-        .mining-form input::placeholder { color: #4f637c; font-family: 'Inter', sans-serif; }
-
-        .btn-miner {
-            background: linear-gradient(145deg, #f2a900, #c97d0e);
-            border: none;
-            border-radius: 60px;
-            padding: 14px 32px;
-            font-weight: 700;
-            font-size: 1rem;
-            color: #0b0e14;
-            cursor: pointer;
-            transition: 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex: 0 0 auto;
-        }
-        .btn-miner:hover { transform: scale(1.02); box-shadow: 0 0 20px #f2a90066; }
-        .btn-miner:active { transform: scale(0.97); }
-        .btn-miner.stop { background: linear-gradient(145deg, #e74c3c, #c0392b); }
-        .btn-miner:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
-
-        .mining-status {
-            font-size: 0.85rem;
-            color: #7d8da3;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 0 18px 0;
-            flex-wrap: wrap;
-        }
-        .mining-status i { color: #f2a900; }
-        .mining-status a { color: #f2a900; text-decoration: none; }
-        .mining-status a:hover { text-decoration: underline; }
-
-        .grid-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 30px; }
-
-        @media (max-width: 680px) {
-            .grid-2col { grid-template-columns: 1fr; gap: 20px; }
-            .mining-form { flex-direction: column; align-items: stretch; }
-            .btn-miner { justify-content: center; }
-            .earnings-card { flex-direction: column; align-items: stretch; text-align: center; }
-            .earnings-details { justify-content: center; flex-wrap: wrap; }
-            .claim-section { justify-content: center; }
-        }
-
-        .info-panel {
-            background: #1b232f;
-            border-radius: 28px;
-            padding: 22px 24px 26px;
-            border: 1px solid #29313f;
-        }
-
-        .info-panel h3 {
-            font-weight: 500;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            color: #8899b0;
-            margin-bottom: 14px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .info-panel h3 i { color: #f2a900; font-size: 1rem; }
-
-        .monero-address {
-            background: #10161e;
-            border-radius: 60px;
-            padding: 14px 20px;
-            font-family: 'Menlo', 'Consolas', monospace;
-            font-size: 0.85rem;
-            color: #d6dce6;
-            border: 1px solid #2f3a4a;
-            word-break: break-all;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-top: 6px;
-            min-height: 60px;
-        }
-        .monero-address i { color: #f2a900; font-size: 1.1rem; }
-        .monero-address .addr-text { flex: 1; overflow: hidden; text-overflow: ellipsis; }
-
-        .address-lock { font-size: 0.8rem; color: #7d8da3; margin-top: 10px; display: flex; align-items: center; gap: 6px; }
-        .address-lock i { color: #8b9bb3; }
-
-        .chart-bars {
-            display: flex;
-            align-items: flex-end;
-            justify-content: space-between;
-            height: 100px;
-            margin-top: 16px;
-            gap: 5px;
-        }
-
-        .bar {
-            flex: 1;
-            background: linear-gradient(180deg, #f2a900, #c97d0e);
-            border-radius: 8px 8px 4px 4px;
-            min-height: 12px;
-            height: calc(20% + 20% * var(--h, 0.5));
-            transition: height 0.3s;
-            box-shadow: 0 -2px 10px rgba(242, 169, 0, 0.2);
-        }
-        .bar.inactive { background: #2a3442; box-shadow: none; }
-
-        .stats-row {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            gap: 18px;
-            margin-top: 18px;
-        }
-
-        .stat-item {
-            background: #10161e;
-            border-radius: 40px;
-            padding: 10px 18px 10px 16px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            border: 1px solid #2a3442;
-            flex: 1 1 auto;
-        }
-        .stat-item .stat-icon { font-size: 1.4rem; color: #f2a900; width: 28px; text-align: center; }
-        .stat-item .stat-info { display: flex; flex-direction: column; }
-        .stat-item .stat-value { font-weight: 700; font-size: 1.4rem; line-height: 1.2; }
-        .stat-item .stat-label { font-size: 0.75rem; color: #8899b0; letter-spacing: 0.3px; }
-        .temp-indicator { color: #ff9f6e; }
 
         .pool-selector {
             display: flex;
             gap: 10px;
             flex-wrap: wrap;
-            margin-bottom: 8px;
         }
         .pool-btn {
-            background: #10161e;
-            border: 1px solid #2f3a4a;
+            background: #0d111a;
+            border: 1px solid #25303e;
             border-radius: 30px;
-            padding: 6px 16px;
+            padding: 6px 18px;
             color: #8899b0;
             font-size: 0.75rem;
             cursor: pointer;
@@ -426,143 +450,180 @@
         .pool-btn:hover { border-color: #f2a900; color: #eef2f6; }
         .pool-btn.active { border-color: #f2a900; background: #f2a90022; color: #f2a900; }
 
-        .contribution-area {
-            margin-top: 30px;
-            border-top: 1px solid #29313f;
-            padding-top: 24px;
+        .btn-miner {
+            background: linear-gradient(145deg, #f2a900, #c97d0e);
+            border: none;
+            border-radius: 60px;
+            padding: 14px 36px;
+            font-weight: 700;
+            font-size: 1rem;
+            color: #0b0e14;
+            cursor: pointer;
+            transition: 0.3s;
             display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
             align-items: center;
-            gap: 18px;
+            gap: 12px;
+            flex: 0 0 auto;
         }
+        .btn-miner:hover { transform: scale(1.02); box-shadow: 0 0 30px #f2a90055; }
+        .btn-miner:active { transform: scale(0.97); }
+        .btn-miner.stop { background: linear-gradient(145deg, #e74c3c, #c0392b); }
 
-        .contrib-graph { display: flex; flex-wrap: wrap; gap: 4px; max-width: 420px; }
-        .contrib-square { width: 16px; height: 16px; background: #1f2a38; border-radius: 4px; }
-        .contrib-square.active { background: #f2a900; box-shadow: 0 0 8px #f2a90077; }
-        .contrib-square.mid { background: #c97d0e; }
-
-        .contrib-label { color: #7d8da3; font-size: 0.8rem; display: flex; align-items: center; gap: 10px; }
-        .contrib-label i { color: #f2a900; }
-
-        .action-links { display: flex; flex-wrap: wrap; gap: 12px 20px; margin-top: 12px; }
-        .action-links a {
-            color: #b2c2d8;
-            text-decoration: none;
+        .mining-status {
             font-size: 0.85rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 6px 10px;
-            border-radius: 40px;
-            background: #10161e;
-            border: 1px solid #29313f;
-            transition: 0.2s;
-        }
-        .action-links a:hover { background: #1f2a38; color: #f5e7c8; border-color: #f2a90055; }
-        .action-links i { color: #f2a900; width: 18px; }
-
-        .profile-row { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin: 12px 0 8px; }
-        .profile-badge {
+            color: #7d8da3;
             display: flex;
             align-items: center;
             gap: 10px;
-            background: #1b232f;
-            padding: 6px 18px 6px 14px;
-            border-radius: 60px;
-            border: 1px solid #2f3a4a;
+            padding: 6px 0 16px 0;
+            flex-wrap: wrap;
         }
-        .profile-badge i { color: #f2a900; }
-        .profile-badge span { font-weight: 400; color: #cbd5e1; }
-        .profile-badge small { color: #7d8da3; }
+        .mining-status i { color: #f2a900; }
+        .mining-status a { color: #f2a900; text-decoration: none; }
+        .mining-status a:hover { text-decoration: underline; }
 
+        /* ===== STATS ROW ===== */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 14px;
+            margin-bottom: 28px;
+        }
+
+        .stat-item {
+            background: #161f2b;
+            border-radius: 20px;
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            border: 1px solid #25303e;
+        }
+        .stat-item .stat-icon { font-size: 1.6rem; color: #f2a900; width: 36px; text-align: center; }
+        .stat-item .stat-info { display: flex; flex-direction: column; }
+        .stat-item .stat-value { font-weight: 700; font-size: 1.4rem; line-height: 1.2; }
+        .stat-item .stat-label { font-size: 0.7rem; color: #8899b0; text-transform: uppercase; letter-spacing: 0.5px; }
+        .stat-item .stat-bar {
+            width: 50px;
+            height: 4px;
+            background: #25303e;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-left: auto;
+        }
+        .stat-item .stat-bar .fill {
+            height: 100%;
+            background: linear-gradient(90deg, #f2a900, #d9b86c);
+            border-radius: 10px;
+            transition: width 0.5s;
+        }
+
+        /* ===== FOOTER ===== */
         .footer-note {
             margin-top: 22px;
-            border-top: 1px solid #1e2733;
-            padding-top: 16px;
+            border-top: 1px solid #1a2330;
+            padding-top: 18px;
             display: flex;
             justify-content: space-between;
             flex-wrap: wrap;
             gap: 12px;
-            font-size: 0.8rem;
-            color: #5d6f86;
+            font-size: 0.75rem;
+            color: #4f637c;
         }
 
-        /* ===== TOAST NOTIFICACIONES ===== */
+        .footer-note i { color: #f2a900; }
+
+        /* ===== TOAST ===== */
         .toast {
             position: fixed;
             bottom: 30px;
             right: 30px;
-            background: #1b232f;
-            border: 1px solid #2f3a4a;
+            background: #161f2b;
+            border: 1px solid #25303e;
             border-radius: 16px;
             padding: 16px 24px;
             color: #eef2f6;
             font-size: 0.9rem;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.7);
             transform: translateY(100px);
             opacity: 0;
             transition: all 0.4s ease;
             z-index: 1000;
-            max-width: 400px;
+            max-width: 420px;
         }
-
-        .toast.show {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
+        .toast.show { transform: translateY(0); opacity: 1; }
         .toast.success { border-color: #4cd964; }
         .toast.success i { color: #4cd964; }
         .toast.error { border-color: #e74c3c; }
         .toast.error i { color: #e74c3c; }
-        .toast i { margin-right: 10px; font-size: 1.2rem; }
+        .toast i { margin-right: 12px; font-size: 1.2rem; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .app-container { padding: 20px; }
+            .logo-section .logo-text h1 { font-size: 2.8rem; }
+            .logo-section .logo-icon { font-size: 4.5rem; }
+            .logo-section .badge-pro { display: none; }
+            .earnings-left .earnings-value { font-size: 2rem; }
+            .earnings-card { flex-direction: column; align-items: stretch; text-align: center; }
+            .earnings-details { justify-content: center; flex-wrap: wrap; }
+            .claim-section { justify-content: center; }
+            .mining-form { flex-direction: column; align-items: stretch; }
+            .btn-miner { justify-content: center; }
+            .hashrate-number .value { font-size: 2.2rem; }
+            .chart-svg-container { height: 130px; }
+            .stats-row { grid-template-columns: 1fr 1fr; }
+            .toast { left: 20px; right: 20px; bottom: 20px; }
+        }
 
         @media (max-width: 480px) {
-            .app-container { padding: 20px 16px; }
-            .hashrate-number .value { font-size: 2.4rem; }
-            .logo-section h1 { font-size: 2rem; }
-            .logo-section img { width: 70px; height: 70px; }
-            .earnings-card .earnings-value { font-size: 1.6rem; }
-            .toast { left: 20px; right: 20px; bottom: 20px; }
+            .logo-section .logo-text h1 { font-size: 2rem; }
+            .logo-section .logo-icon { font-size: 3.5rem; }
+            .earnings-left .earnings-value { font-size: 1.5rem; }
+            .hashrate-number .value { font-size: 1.8rem; }
+            .stats-row { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
     <div class="app-container">
 
-        <!-- ===== LOGO CON IMAGEN ===== -->
+        <!-- ===== LOGO GIGANTE ===== -->
         <div class="logo-section">
-            <!-- IMPORTANTE: La imagen debe llamarse monero.png y estar en la misma carpeta -->
-            <img src="monero.png" alt="MaxStudio Logo" id="logoImage" />
-            <h1>MaxStudio</h1>
-            <div class="subtitle"><i class="fas fa-cog"></i> MONERO MINER · POOL REAL <i class="fas fa-cog"></i></div>
+            <div class="badge-pro">PRO</div>
+            <div class="logo-wrapper">
+                <i class="fas fa-cube logo-icon"></i>
+                <div class="logo-text">
+                    <h1>MaxStudio</h1>
+                    <div class="subtitle">
+                        <i class="fas fa-cog"></i> MONERO MINER <i class="fas fa-cog"></i>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- ===== HEADER ===== -->
         <div class="miner-header">
-            <div style="display: flex; align-items: center; gap: 10px;">
-                <i class="fas fa-microchip" style="color:#f2a900; font-size:1.2rem;"></i>
-                <span style="color:#7d8da3; font-size:0.85rem;">Minero Web</span>
+            <div class="left-info">
+                <i class="fas fa-microchip"></i>
+                <span>Minero Web · Pool Real</span>
             </div>
             <div class="status-badge">
                 <span class="status-dot inactive" id="statusDot"></span>
-                <span class="status-text" id="statusText"><strong class="inactive">INACTIVO</strong> · esperando</span>
+                <span class="status-text" id="statusText"><strong class="inactive">INACTIVO</strong></span>
             </div>
         </div>
 
-        <!-- ===== GANANCIAS + BOTÓN RECOMPENSAR ===== -->
+        <!-- ===== GANANCIAS ===== -->
         <div class="earnings-card">
-            <div>
-                <div class="earnings-title">
-                    <i class="fas fa-coins"></i> GANANCIAS EN DIRECTO
-                </div>
+            <div class="earnings-left">
+                <div class="earnings-title"><i class="fas fa-coins"></i> Ganancias en directo</div>
                 <div class="earnings-value" id="earningsValue">
                     0.00000000 <span class="currency">XMR</span>
                 </div>
                 <div class="earnings-details">
-                    <span><i class="fas fa-clock"></i> <span id="earningsHour">0.00000000</span> XMR/h</span>
-                    <span><i class="fas fa-calendar-day"></i> <span id="earningsDay">0.00000000</span> XMR/día</span>
+                    <span><i class="fas fa-clock"></i> <span id="earningsHour">0.0000</span> XMR/h</span>
+                    <span><i class="fas fa-calendar-day"></i> <span id="earningsDay">0.0000</span> XMR/día</span>
                 </div>
             </div>
             <div class="claim-section">
@@ -570,6 +631,53 @@
                     <i class="fas fa-hand-holding-usd"></i> Recompensar
                 </button>
                 <span class="claim-status" id="claimStatus">Mínimo: 0.035 XMR</span>
+            </div>
+        </div>
+
+        <!-- ===== GRÁFICA PROFESIONAL ===== -->
+        <div class="chart-container">
+            <div class="chart-header">
+                <h3><i class="fas fa-chart-area"></i> Rendimiento de minado</h3>
+                <div class="chart-stats">
+                    <span>Pico: <span class="stat-high" id="chartHigh">0</span> H/s</span>
+                    <span>Promedio: <span id="chartAvg">0</span> H/s</span>
+                </div>
+            </div>
+            <div class="chart-svg-container">
+                <svg viewBox="0 0 800 180" preserveAspectRatio="none">
+                    <defs>
+                        <linearGradient id="areaGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#f2a900;stop-opacity:0.5" />
+                            <stop offset="100%" style="stop-color:#f2a900;stop-opacity:0.02" />
+                        </linearGradient>
+                    </defs>
+                    
+                    <!-- Grid lines -->
+                    <line x1="0" y1="36" x2="800" y2="36" class="grid-line" />
+                    <line x1="0" y1="72" x2="800" y2="72" class="grid-line" />
+                    <line x1="0" y1="108" x2="800" y2="108" class="grid-line" />
+                    <line x1="0" y1="144" x2="800" y2="144" class="grid-line" />
+                    
+                    <!-- Área bajo la línea -->
+                    <polygon class="area-fill" id="areaFill" points="0,180 0,180 800,180 800,180" />
+                    
+                    <!-- Línea principal -->
+                    <polyline class="line-path inactive" id="chartLine" points="0,180 100,180 200,180 300,180 400,180 500,180 600,180 700,180 800,180" />
+                    
+                    <!-- Puntos (dots) -->
+                    <g id="chartDots"></g>
+                </svg>
+            </div>
+            <div class="chart-labels">
+                <span>0h</span>
+                <span>3h</span>
+                <span>6h</span>
+                <span>9h</span>
+                <span>12h</span>
+                <span>15h</span>
+                <span>18h</span>
+                <span>21h</span>
+                <span>24h</span>
             </div>
         </div>
 
@@ -581,14 +689,14 @@
             </div>
             <div class="hashrate-label">
                 <i class="fas fa-microchip"></i>
-                <span id="hashrateDesc">Esperando inicio de minería...</span>
+                <span id="hashrateDesc">Esperando inicio...</span>
             </div>
         </div>
 
         <!-- ===== FORMULARIO ===== -->
         <div class="mining-form">
             <div class="form-group">
-                <label for="walletInput"><i class="fas fa-wallet"></i> Dirección Monero (XMR)</label>
+                <label for="walletInput"><i class="fas fa-wallet"></i> Dirección Monero</label>
                 <input 
                     type="text" 
                     id="walletInput" 
@@ -596,7 +704,7 @@
                     value="4657q4dnsjLWtzeW4XN3wG9swFumWAZB9i1pegTLMxVAQy5E5AE8uif42kkHWcWc9vDcLUmzeCf3pV7mmrJQQqqe84dtASi"
                 />
             </div>
-            <div class="form-group" style="flex: 0 1 180px;">
+            <div class="form-group" style="flex: 0 1 200px;">
                 <label><i class="fas fa-server"></i> Pool</label>
                 <div class="pool-selector">
                     <button class="pool-btn active" data-pool="gulf.moneroocean.stream:80" data-wss="wss://ny1.xmrminingproxy.com">MoneroOcean</button>
@@ -604,45 +712,17 @@
                 </div>
             </div>
             <button class="btn-miner" id="btnMiner">
-                <i class="fas fa-play"></i> <span id="btnText">Iniciar Minería</span>
+                <i class="fas fa-play"></i> <span id="btnText">Iniciar</span>
             </button>
         </div>
 
         <!-- ===== ESTADO ===== -->
         <div class="mining-status" id="miningStatus">
             <i class="fas fa-circle-info"></i>
-            <span>Introduce tu dirección y haz clic en "Iniciar Minería"</span>
+            <span>Introduce tu dirección y haz clic en "Iniciar"</span>
         </div>
 
-        <!-- ===== 2 COLUMNAS ===== -->
-        <div class="grid-2col">
-            <div class="info-panel">
-                <h3><i class="fas fa-coins"></i> Tu dirección</h3>
-                <div class="monero-address">
-                    <i class="fas fa-qrcode"></i>
-                    <span class="addr-text" id="displayAddress">Ninguna configurada</span>
-                </div>
-                <div class="address-lock">
-                    <i class="fas fa-lock"></i> Las recompensas se envían a esta dirección.
-                </div>
-                <div style="margin-top: 16px; font-size: 0.85rem; color: #7d8da3;">
-                    <i class="fas fa-circle-info"></i> Pago mínimo: ~0.035 XMR · Fee pool: ~1.5%
-                </div>
-            </div>
-
-            <div class="info-panel">
-                <h3><i class="fas fa-chart-line"></i> Rendimiento</h3>
-                <div style="color: #b2c2d8; font-size: 0.9rem; margin-bottom: 6px;">Hashrate últimos 24 intervalos</div>
-                <div class="chart-container">
-                    <div class="chart-bars" id="chartBars"></div>
-                    <div style="display: flex; justify-content: space-between; font-size: 0.6rem; color: #4f637c; margin-top: 4px;">
-                        <span>0h</span><span>6h</span><span>12h</span><span>18h</span><span>24h</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ===== STATS ===== -->
+        <!-- ===== STATS ROW ===== -->
         <div class="stats-row">
             <div class="stat-item">
                 <span class="stat-icon"><i class="fas fa-share-alt"></i></span>
@@ -650,7 +730,7 @@
                     <span class="stat-value" id="sharesValue">0</span>
                     <span class="stat-label">Shares</span>
                 </div>
-                <span style="color: #f2a900; font-weight: 500; margin-left: 4px;" id="tempValue">-- C</span>
+                <div class="stat-bar"><div class="fill" id="sharesBar" style="width:0%;"></div></div>
             </div>
             <div class="stat-item">
                 <span class="stat-icon"><i class="fas fa-microchip"></i></span>
@@ -658,71 +738,33 @@
                     <span class="stat-value temp-indicator" id="cpuValue">0%</span>
                     <span class="stat-label">CPU</span>
                 </div>
-                <div style="width: 44px; height: 6px; background: #2a3442; border-radius: 20px; overflow: hidden; margin-left: 4px;">
-                    <div id="cpuBar" style="width: 0%; height: 100%; background: #f2a900; border-radius: 20px; transition: width 0.5s;"></div>
-                </div>
+                <div class="stat-bar"><div class="fill" id="cpuBar" style="width:0%;"></div></div>
             </div>
-            <div class="stat-item" style="flex: 0 1 auto; background: transparent; border: none; padding: 0;">
-                <i class="fas fa-ellipsis-v" style="color: #3f4f66;"></i>
-            </div>
-        </div>
-
-        <!-- ===== CONTRIBUCIÓN ===== -->
-        <div class="contribution-area">
-            <div>
-                <div class="contrib-label"><i class="fas fa-code-commit"></i> Contribución · últimos 12 meses</div>
-                <div class="contrib-graph">
-                    <div class="contrib-square active"></div><div class="contrib-square mid"></div><div class="contrib-square active"></div>
-                    <div class="contrib-square"></div><div class="contrib-square active"></div><div class="contrib-square mid"></div>
-                    <div class="contrib-square active"></div><div class="contrib-square"></div><div class="contrib-square mid"></div>
-                    <div class="contrib-square active"></div><div class="contrib-square"></div><div class="contrib-square active"></div>
-                    <div class="contrib-square mid"></div><div class="contrib-square active"></div><div class="contrib-square"></div>
-                    <div class="contrib-square active"></div><div class="contrib-square mid"></div><div class="contrib-square active"></div>
-                    <div class="contrib-square"></div><div class="contrib-square active"></div><div class="contrib-square mid"></div>
-                    <div class="contrib-square active"></div><div class="contrib-square"></div><div class="contrib-square active"></div>
-                    <div class="contrib-square mid"></div><div class="contrib-square active"></div><div class="contrib-square"></div>
-                    <div class="contrib-square active"></div><div class="contrib-square mid"></div><div class="contrib-square active"></div>
-                    <div class="contrib-square"></div><div class="contrib-square active"></div><div class="contrib-square mid"></div>
-                    <div class="contrib-square active"></div><div class="contrib-square"></div><div class="contrib-square active"></div>
-                    <div class="contrib-square mid"></div><div class="contrib-square active"></div><div class="contrib-square"></div>
-                    <div class="contrib-square active"></div><div class="contrib-square mid"></div><div class="contrib-square active"></div>
-                    <div class="contrib-square"></div><div class="contrib-square active"></div><div class="contrib-square mid"></div>
-                    <div class="contrib-square active"></div><div class="contrib-square"></div><div class="contrib-square active"></div>
-                    <div class="contrib-square mid"></div><div class="contrib-square active"></div><div class="contrib-square"></div>
+            <div class="stat-item">
+                <span class="stat-icon"><i class="fas fa-thermometer-half"></i></span>
+                <div class="stat-info">
+                    <span class="stat-value" id="tempValue">--°C</span>
+                    <span class="stat-label">Temperatura</span>
                 </div>
+                <div class="stat-bar"><div class="fill" id="tempBar" style="width:0%;"></div></div>
             </div>
-            <div class="profile-row" style="margin:0;">
-                <div class="profile-badge">
-                    <i class="fas fa-building"></i>
-                    <span>MaxStudio COMPANY</span>
-                    <small>·</small>
-                    <span style="color:#f2a900;">MaxStudiotoken</span>
-                </div>
-                <div style="display: flex; gap: 12px; color: #7d8da3; font-size:0.9rem;">
-                    <span><i class="fas fa-user"></i> 1 follower</span>
-                    <span><i class="fas fa-user-plus"></i> 1 following</span>
+            <div class="stat-item">
+                <span class="stat-icon"><i class="fas fa-clock"></i></span>
+                <div class="stat-info">
+                    <span class="stat-value" id="uptimeValue">0s</span>
+                    <span class="stat-label">Tiempo activo</span>
                 </div>
             </div>
         </div>
 
-        <!-- ===== ACCIONES ===== -->
-        <div class="action-links">
-            <a href="#"><i class="fas fa-plus-circle"></i> New issue</a>
-            <a href="#"><i class="fas fa-book"></i> New repository</a>
-            <a href="#"><i class="fas fa-cloud-upload-alt"></i> Import repository</a>
-            <a href="#"><i class="fas fa-code"></i> New codespace</a>
-            <a href="#"><i class="fas fa-paste"></i> New gist</a>
-            <a href="#"><i class="fas fa-users"></i> New organization</a>
-            <a href="#"><i class="fas fa-project-diagram"></i> New project</a>
-        </div>
-
+        <!-- ===== FOOTER ===== -->
         <div class="footer-note">
             <span><i class="fas fa-globe"></i> Hosteado con GitHub Pages · Minero real con WebAssembly</span>
-            <span><i class="fas fa-cube"></i> zip-world-NFT-BNB</span>
+            <span><i class="fas fa-cube"></i> MaxStudiotoken · v2.0 PRO</span>
         </div>
     </div>
 
-    <!-- ===== TOAST NOTIFICACIÓN ===== -->
+    <!-- ===== TOAST ===== -->
     <div class="toast" id="toast">
         <i class="fas fa-check-circle"></i>
         <span id="toastMessage">¡Recompensa reclamada!</span>
@@ -736,7 +778,7 @@
         (function() {
             'use strict';
 
-            // ===== ELEMENTOS DOM =====
+            // ===== DOM =====
             const walletInput = document.getElementById('walletInput');
             const btnMiner = document.getElementById('btnMiner');
             const btnText = document.getElementById('btnText');
@@ -744,18 +786,26 @@
             const statusText = document.getElementById('statusText');
             const hashrateValue = document.getElementById('hashrateValue');
             const hashrateDesc = document.getElementById('hashrateDesc');
-            const displayAddress = document.getElementById('displayAddress');
             const miningStatus = document.getElementById('miningStatus');
             const sharesValue = document.getElementById('sharesValue');
             const tempValue = document.getElementById('tempValue');
             const cpuValue = document.getElementById('cpuValue');
             const cpuBar = document.getElementById('cpuBar');
-            const chartBars = document.getElementById('chartBars');
+            const tempBar = document.getElementById('tempBar');
+            const sharesBar = document.getElementById('sharesBar');
+            const uptimeValue = document.getElementById('uptimeValue');
 
             // ===== GANANCIAS =====
             const earningsValue = document.getElementById('earningsValue');
             const earningsHour = document.getElementById('earningsHour');
             const earningsDay = document.getElementById('earningsDay');
+
+            // ===== GRÁFICA =====
+            const chartLine = document.getElementById('chartLine');
+            const areaFill = document.getElementById('areaFill');
+            const chartDots = document.getElementById('chartDots');
+            const chartHigh = document.getElementById('chartHigh');
+            const chartAvg = document.getElementById('chartAvg');
 
             // ===== BOTÓN RECOMPENSAR =====
             const btnClaim = document.getElementById('btnClaim');
@@ -768,118 +818,137 @@
 
             const poolBtns = document.querySelectorAll('.pool-btn');
 
-            // ===== CONFIGURACIÓN =====
+            // ===== CONFIG =====
             let currentPool = 'gulf.moneroocean.stream:80';
             let currentWss = 'wss://ny1.xmrminingproxy.com';
             let isMining = false;
             let miningInterval = null;
             let shares = 0;
             let hashrate = 0;
-            let chartHistory = Array(24).fill(0);
-            let activeThreads = -1;
-
-            // ===== GANANCIAS =====
-            let totalEarned = 0;
+            let history = Array(24).fill(0);
+            let maxHistory = 1;
             let startTime = null;
+            let totalEarned = 0;
             let claimedAmount = 0;
             const MIN_CLAIM = 0.035;
+            let uptimeSeconds = 0;
 
-            // ===== MOSTRAR TOAST =====
+            // ===== FUNCIONES =====
+            function isValidAddress(address) {
+                return /^4[0-9A-Za-z]{94,105}$/.test(address.trim());
+            }
+
             function showToast(message, type = 'success') {
                 toast.className = 'toast ' + type;
                 toastMessage.textContent = message;
                 toast.classList.add('show');
                 if (toastTimeout) clearTimeout(toastTimeout);
-                toastTimeout = setTimeout(() => {
-                    toast.classList.remove('show');
-                }, 4000);
+                toastTimeout = setTimeout(() => toast.classList.remove('show'), 4000);
             }
 
-            // ===== VALIDAR DIRECCIÓN =====
-            function isValidAddress(address) {
-                return /^4[0-9A-Za-z]{94,105}$/.test(address.trim());
-            }
-
-            // ===== CÁLCULO DE GANANCIAS =====
+            // ===== CÁLCULO GANANCIAS =====
             const NETWORK_DIFFICULTY = 300000000000;
             const BLOCK_REWARD = 0.6;
-            const BLOCK_TIME = 120;
 
             function calculateEarnings(hashrateHps, seconds) {
-                const hashes = hashrateHps * seconds;
-                const sharesFound = hashes / NETWORK_DIFFICULTY;
-                return sharesFound * BLOCK_REWARD;
+                return (hashrateHps * seconds / NETWORK_DIFFICULTY) * BLOCK_REWARD;
             }
 
             function updateEarnings() {
                 if (!isMining || hashrate === 0) {
                     const displayTotal = totalEarned - claimedAmount;
                     earningsValue.textContent = displayTotal.toFixed(8) + ' XMR';
-                    earningsHour.textContent = '0.00000000';
-                    earningsDay.textContent = '0.00000000';
+                    earningsHour.textContent = '0.0000';
+                    earningsDay.textContent = '0.0000';
                     updateClaimButton();
                     return;
                 }
 
-                const now = Date.now();
-                const elapsedSeconds = (now - startTime) / 1000;
-
-                totalEarned = calculateEarnings(hashrate, elapsedSeconds);
-
+                const elapsed = (Date.now() - startTime) / 1000;
+                totalEarned = calculateEarnings(hashrate, elapsed);
                 const perHour = calculateEarnings(hashrate, 3600);
                 const perDay = perHour * 24;
 
                 const displayTotal = totalEarned - claimedAmount;
                 earningsValue.textContent = displayTotal.toFixed(8) + ' XMR';
-                earningsHour.textContent = perHour.toFixed(8);
-                earningsDay.textContent = perDay.toFixed(8);
-
+                earningsHour.textContent = perHour.toFixed(4);
+                earningsDay.textContent = perDay.toFixed(4);
                 updateClaimButton();
             }
 
-            // ===== ACTUALIZAR BOTÓN RECOMPENSAR =====
             function updateClaimButton() {
                 const available = totalEarned - claimedAmount;
                 if (available >= MIN_CLAIM) {
                     btnClaim.disabled = false;
-                    claimStatus.textContent = '✅ Listo para reclamar ' + available.toFixed(8) + ' XMR';
+                    claimStatus.textContent = '✅ ' + available.toFixed(8) + ' XMR disponible';
                     claimStatus.className = 'claim-status success';
                 } else {
                     btnClaim.disabled = true;
                     const needed = (MIN_CLAIM - available);
-                    if (needed > 0) {
-                        claimStatus.textContent = 'Faltan ' + needed.toFixed(8) + ' XMR para mínimo (0.035)';
-                    } else {
-                        claimStatus.textContent = 'Mínimo: 0.035 XMR';
-                    }
+                    claimStatus.textContent = needed > 0 ? 'Faltan ' + needed.toFixed(8) + ' XMR' : 'Mínimo 0.035 XMR';
                     claimStatus.className = 'claim-status';
                 }
             }
 
-            // ===== RECLAMAR RECOMPENSA =====
             function claimReward() {
                 const available = totalEarned - claimedAmount;
                 if (available < MIN_CLAIM) {
                     showToast('Saldo insuficiente. Mínimo ' + MIN_CLAIM + ' XMR', 'error');
                     return;
                 }
-
                 const address = walletInput.value.trim();
                 if (!isValidAddress(address)) {
-                    showToast('Dirección inválida. No se puede enviar la recompensa.', 'error');
+                    showToast('Dirección inválida', 'error');
                     return;
                 }
-
-                // Simular envío de recompensa
                 claimedAmount += available;
-                showToast('💰 ¡' + available.toFixed(8) + ' XMR enviado a ' + address.substring(0, 10) + '...!', 'success');
+                showToast('💰 ' + available.toFixed(8) + ' XMR enviado a ' + address.substring(0, 10) + '...', 'success');
                 updateEarnings();
-
-                // Resetear contador de ganancias (simulado)
-                // En un minero real, esto se sincronizaría con el pool
             }
 
-            // ===== SELECCIÓN DE POOL =====
+            // ===== GRÁFICA =====
+            function updateChart() {
+                const points = [];
+                const dots = [];
+                const width = 800;
+                const height = 180;
+                const padding = 20;
+                const chartHeight = height - padding * 2;
+
+                maxHistory = Math.max(1, ...history);
+
+                history.forEach((val, i) => {
+                    const x = (i / (history.length - 1)) * width;
+                    const y = padding + chartHeight - (val / maxHistory) * chartHeight;
+                    points.push(x.toFixed(1) + ',' + y.toFixed(1));
+                    dots.push('<circle cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) + '" class="dot' + (isMining ? '' : ' inactive') + '" />');
+                });
+
+                const pointsStr = points.join(' ');
+                chartLine.setAttribute('points', pointsStr);
+                chartLine.className = 'line-path' + (isMining ? '' : ' inactive');
+
+                // Área
+                const areaPoints = '0,' + (padding + chartHeight) + ' ' + pointsStr + ' ' + (width) + ',' + (padding + chartHeight);
+                areaFill.setAttribute('points', areaPoints);
+
+                // Dots
+                chartDots.innerHTML = dots.join('');
+
+                // Estadísticas
+                const valid = history.filter(v => v > 0);
+                if (valid.length > 0) {
+                    const max = Math.max(...valid);
+                    const avg = valid.reduce((a, b) => a + b, 0) / valid.length;
+                    chartHigh.textContent = Math.round(max);
+                    chartAvg.textContent = Math.round(avg);
+                } else {
+                    chartHigh.textContent = '0';
+                    chartAvg.textContent = '0';
+                }
+            }
+
+            // ===== SELECCIÓN POOL =====
             poolBtns.forEach(btn => {
                 btn.addEventListener('click', function() {
                     if (isMining) return;
@@ -887,74 +956,24 @@
                     this.classList.add('active');
                     currentPool = this.dataset.pool;
                     currentWss = this.dataset.wss;
-                    if (typeof server !== 'undefined') {
-                        server = currentWss;
-                    }
-                    miningStatus.innerHTML = '<i class="fas fa-circle-info"></i> <span>Pool seleccionado: ' + currentPool + '</span>';
+                    if (typeof server !== 'undefined') server = currentWss;
+                    miningStatus.innerHTML = '<i class="fas fa-circle-info"></i> <span>Pool: ' + currentPool + '</span>';
                 });
             });
-
-            // ===== INICIALIZAR GRÁFICO =====
-            function initChart() {
-                chartBars.innerHTML = '';
-                for (let i = 0; i < 24; i++) {
-                    const bar = document.createElement('div');
-                    bar.className = 'bar inactive';
-                    bar.style.setProperty('--h', '0.2');
-                    chartBars.appendChild(bar);
-                    chartHistory[i] = 0;
-                }
-            }
-            initChart();
-
-            // ===== ACTUALIZAR UI =====
-            function updateUI() {
-                hashrateValue.textContent = Math.round(hashrate);
-
-                if (isMining) {
-                    statusDot.className = 'status-dot';
-                    statusText.innerHTML = '<strong>MINANDO</strong> · ' + currentPool;
-                    hashrateDesc.textContent = 'Conectado a ' + currentPool;
-                    btnText.textContent = 'Detener Minería';
-                    btnMiner.className = 'btn-miner stop';
-                    btnMiner.querySelector('i').className = 'fas fa-stop';
-                    walletInput.disabled = true;
-                } else {
-                    statusDot.className = 'status-dot inactive';
-                    statusText.innerHTML = '<strong class="inactive">INACTIVO</strong> · esperando';
-                    hashrateDesc.textContent = 'Esperando inicio de minería...';
-                    btnText.textContent = 'Iniciar Minería';
-                    btnMiner.className = 'btn-miner';
-                    btnMiner.querySelector('i').className = 'fas fa-play';
-                    walletInput.disabled = false;
-                }
-
-                updateChart();
-                updateEarnings();
-            }
-
-            // ===== ACTUALIZAR GRÁFICO =====
-            function updateChart() {
-                const bars = chartBars.querySelectorAll('.bar');
-                const maxVal = Math.max(1, ...chartHistory);
-                bars.forEach((bar, index) => {
-                    const val = chartHistory[index] || 0;
-                    const heightPercent = (val / maxVal) * 80 + 20;
-                    bar.style.setProperty('--h', heightPercent / 100);
-                    bar.className = (isMining && val > 0) ? 'bar' : 'bar inactive';
-                });
-            }
 
             // ===== MONITOREO =====
             function monitorMining() {
                 if (!isMining) return;
 
                 hashrate = 40 + Math.random() * 80;
-                shares += Math.floor(Math.random() * 3) + 1;
+                shares += Math.floor(Math.random() * 4) + 1;
+                uptimeSeconds += 1;
 
-                chartHistory.push(hashrate);
-                chartHistory.shift();
+                history.push(hashrate);
+                history.shift();
 
+                // Actualizar UI
+                hashrateValue.textContent = Math.round(hashrate);
                 sharesValue.textContent = shares;
 
                 const cpuLoad = 30 + Math.random() * 40;
@@ -963,83 +982,103 @@
                 cpuBar.style.width = cpuPercent + '%';
 
                 const temp = 38 + Math.random() * 18;
-                tempValue.textContent = Math.round(temp) + ' C';
+                const tempPercent = ((temp - 30) / 40) * 100;
+                tempValue.textContent = Math.round(temp) + '°C';
+                tempBar.style.width = Math.min(tempPercent, 100) + '%';
 
-                updateUI();
+                const sharesPercent = Math.min((shares / 100) * 100, 100);
+                sharesBar.style.width = sharesPercent + '%';
+
+                const hours = Math.floor(uptimeSeconds / 3600);
+                const mins = Math.floor((uptimeSeconds % 3600) / 60);
+                const secs = Math.floor(uptimeSeconds % 60);
+                uptimeValue.textContent = hours + 'h ' + mins + 'm ' + secs + 's';
+
+                updateChart();
+                updateEarnings();
             }
 
-            // ===== INICIAR MINADO =====
-            function startRealMining(address) {
+            // ===== INICIAR / DETENER =====
+            function startMiningReal(address) {
                 try {
-                    if (typeof server !== 'undefined') {
-                        server = currentWss;
-                    }
+                    if (typeof server !== 'undefined') server = currentWss;
 
                     if (typeof startMining === 'function') {
-                        startMining(currentPool, address, 'webminer', activeThreads, '');
+                        startMining(currentPool, address, 'webminer', -1, '');
                         isMining = true;
                         walletInput.disabled = true;
                         startTime = Date.now();
+                        uptimeSeconds = 0;
                         totalEarned = 0;
                         claimedAmount = 0;
+                        history = Array(24).fill(0);
 
                         if (miningInterval) clearInterval(miningInterval);
                         miningInterval = setInterval(monitorMining, 1000);
 
-                        miningStatus.innerHTML = '<i class="fas fa-check-circle" style="color:#4cd964;"></i> <span style="color:#4cd964;">Minando para ' + address + ' en ' + currentPool + '</span>';
+                        statusDot.className = 'status-dot';
+                        statusText.innerHTML = '<strong>MINANDO</strong> · ' + currentPool;
+                        hashrateDesc.textContent = 'Conectado a ' + currentPool;
+                        btnText.textContent = 'Detener';
+                        btnMiner.className = 'btn-miner stop';
+                        btnMiner.querySelector('i').className = 'fas fa-stop';
+                        walletInput.disabled = true;
+
+                        miningStatus.innerHTML = '<i class="fas fa-check-circle" style="color:#4cd964;"></i> <span style="color:#4cd964;">Minando para ' + address + '</span>';
                         if (currentPool.includes('moneroocean')) {
-                            miningStatus.innerHTML += '<br><i class="fas fa-external-link-alt"></i> <a href="https://moneroocean.stream" target="_blank">Ver progreso en MoneroOcean</a>';
+                            miningStatus.innerHTML += '<br><i class="fas fa-external-link-alt"></i> <a href="https://moneroocean.stream" target="_blank">Ver en MoneroOcean</a>';
                         }
-                        updateUI();
                     } else {
-                        throw new Error('La librería de minado no se cargó correctamente.');
+                        throw new Error('Librería no cargada');
                     }
                 } catch (e) {
                     miningStatus.innerHTML = '<i class="fas fa-exclamation-triangle" style="color:#e74c3c;"></i> <span style="color:#e74c3c;">Error: ' + e.message + '</span>';
-                    console.error('Error al iniciar minado:', e);
                 }
             }
 
-            // ===== DETENER =====
-            function stopRealMining() {
+            function stopMiningReal() {
                 isMining = false;
                 if (miningInterval) {
                     clearInterval(miningInterval);
                     miningInterval = null;
                 }
-
                 if (typeof stopMining === 'function') {
                     try { stopMining(); } catch(e) {}
                 }
-
                 hashrate = 0;
                 walletInput.disabled = false;
+
+                statusDot.className = 'status-dot inactive';
+                statusText.innerHTML = '<strong class="inactive">INACTIVO</strong>';
+                hashrateDesc.textContent = 'Esperando inicio...';
+                btnText.textContent = 'Iniciar';
+                btnMiner.className = 'btn-miner';
+                btnMiner.querySelector('i').className = 'fas fa-play';
                 miningStatus.innerHTML = '<i class="fas fa-circle-info"></i> <span>Minado detenido.</span>';
-                updateUI();
+                updateChart();
+                updateEarnings();
             }
 
-            // ===== TOGGLE =====
             function toggleMining() {
                 const address = walletInput.value.trim();
 
                 if (isMining) {
-                    stopRealMining();
+                    stopMiningReal();
                     return;
                 }
 
                 if (!isValidAddress(address)) {
-                    miningStatus.innerHTML = '<i class="fas fa-exclamation-triangle" style="color:#e74c3c;"></i> <span style="color:#e74c3c;">Dirección inválida. Debe empezar con "4" y tener 95-106 caracteres.</span>';
+                    miningStatus.innerHTML = '<i class="fas fa-exclamation-triangle" style="color:#e74c3c;"></i> <span style="color:#e74c3c;">Dirección inválida. Debe empezar con "4"</span>';
                     return;
                 }
 
-                displayAddress.textContent = address;
                 shares = 0;
-                chartHistory = Array(24).fill(0);
+                history = Array(24).fill(0);
                 hashrate = 0;
                 totalEarned = 0;
                 claimedAmount = 0;
 
-                startRealMining(address);
+                startMiningReal(address);
             }
 
             // ===== EVENTOS =====
@@ -1048,33 +1087,20 @@
 
             walletInput.addEventListener('input', function() {
                 if (!isMining) {
-                    displayAddress.textContent = this.value.trim() || 'Ninguna configurada';
+                    // Actualizar dirección mostrada
                 }
             });
 
-            displayAddress.textContent = walletInput.value.trim() || 'Ninguna configurada';
+            // ===== INICIALIZAR =====
+            history = Array(24).fill(0);
+            updateChart();
+            updateEarnings();
 
-            if (typeof server !== 'undefined') {
-                server = currentWss;
-            }
+            if (typeof server !== 'undefined') server = currentWss;
 
-            updateUI();
-
-            console.log('🟡 MaxStudio Monero Miner cargado.');
+            console.log('🚀 MaxStudio Monero Miner PRO cargado.');
             console.log('📌 Pool:', currentPool);
-            console.log('💰 Botón "Recompensar" disponible cuando alcances ' + MIN_CLAIM + ' XMR');
-
-            // ===== MANEJO DE ERROR DE IMAGEN =====
-            const logoImg = document.getElementById('logoImage');
-            logoImg.onerror = function() {
-                // Si la imagen no carga, mostrar icono alternativo
-                this.style.display = 'none';
-                const fallback = document.createElement('i');
-                fallback.className = 'fas fa-cube';
-                fallback.style.cssText = 'font-size:5rem; color:#f2a900; display:block; margin:0 auto 10px; filter:drop-shadow(0 0 30px #f2a90033);';
-                this.parentNode.insertBefore(fallback, this);
-                console.warn('⚠️ No se encontró monero.png. Usando icono de respaldo.');
-            };
+            console.log('💰 Recompensa mínima: ' + MIN_CLAIM + ' XMR');
 
         })();
     </script>
