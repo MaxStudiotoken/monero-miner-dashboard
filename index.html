@@ -30,7 +30,7 @@
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.04);
         }
 
-        /* ===== LOGO GRANDE ===== */
+        /* ===== LOGO GRANDE CON IMAGEN ===== */
         .logo-section {
             text-align: center;
             margin-bottom: 28px;
@@ -38,12 +38,13 @@
             border-bottom: 1px solid #1e2733;
         }
 
-        .logo-section .logo-icon {
-            font-size: 5rem;
-            color: #f2a900;
-            filter: drop-shadow(0 0 30px #f2a90033);
+        .logo-section img {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
             display: block;
-            margin-bottom: 8px;
+            margin: 0 auto 10px auto;
+            filter: drop-shadow(0 0 30px #f2a90033);
         }
 
         .logo-section h1 {
@@ -169,6 +170,43 @@
             font-size: 0.8rem;
         }
 
+        /* ===== BOTÓN RECOMPENSAR / COBRAR ===== */
+        .claim-section {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn-claim {
+            background: linear-gradient(145deg, #4cd964, #2ecc71);
+            border: none;
+            border-radius: 60px;
+            padding: 10px 24px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: #0b0e14;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-claim:hover { transform: scale(1.03); box-shadow: 0 0 20px #4cd96466; }
+        .btn-claim:active { transform: scale(0.97); }
+        .btn-claim:disabled { opacity: 0.4; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
+
+        .btn-claim i { font-size: 1rem; }
+
+        .claim-status {
+            font-size: 0.8rem;
+            color: #7d8da3;
+        }
+
+        .claim-status.success { color: #4cd964; }
+        .claim-status.error { color: #e74c3c; }
+
         /* ===== HASHRATE ===== */
         .hashrate-card {
             background: #1b232f;
@@ -267,6 +305,7 @@
             align-items: center;
             gap: 8px;
             padding: 8px 0 18px 0;
+            flex-wrap: wrap;
         }
         .mining-status i { color: #f2a900; }
         .mining-status a { color: #f2a900; text-decoration: none; }
@@ -280,6 +319,7 @@
             .btn-miner { justify-content: center; }
             .earnings-card { flex-direction: column; align-items: stretch; text-align: center; }
             .earnings-details { justify-content: center; flex-wrap: wrap; }
+            .claim-section { justify-content: center; }
         }
 
         .info-panel {
@@ -448,21 +488,53 @@
             color: #5d6f86;
         }
 
+        /* ===== TOAST NOTIFICACIONES ===== */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #1b232f;
+            border: 1px solid #2f3a4a;
+            border-radius: 16px;
+            padding: 16px 24px;
+            color: #eef2f6;
+            font-size: 0.9rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.4s ease;
+            z-index: 1000;
+            max-width: 400px;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast.success { border-color: #4cd964; }
+        .toast.success i { color: #4cd964; }
+        .toast.error { border-color: #e74c3c; }
+        .toast.error i { color: #e74c3c; }
+        .toast i { margin-right: 10px; font-size: 1.2rem; }
+
         @media (max-width: 480px) {
             .app-container { padding: 20px 16px; }
             .hashrate-number .value { font-size: 2.4rem; }
             .logo-section h1 { font-size: 2rem; }
-            .logo-section .logo-icon { font-size: 3.5rem; }
+            .logo-section img { width: 70px; height: 70px; }
             .earnings-card .earnings-value { font-size: 1.6rem; }
+            .toast { left: 20px; right: 20px; bottom: 20px; }
         }
     </style>
 </head>
 <body>
     <div class="app-container">
 
-        <!-- ===== LOGO GRANDE ===== -->
+        <!-- ===== LOGO CON IMAGEN ===== -->
         <div class="logo-section">
-            <i class="fas fa-cube logo-icon"></i>
+            <!-- IMPORTANTE: La imagen debe llamarse monero.png y estar en la misma carpeta -->
+            <img src="monero.png" alt="MaxStudio Logo" id="logoImage" />
             <h1>MaxStudio</h1>
             <div class="subtitle"><i class="fas fa-cog"></i> MONERO MINER · POOL REAL <i class="fas fa-cog"></i></div>
         </div>
@@ -479,17 +551,25 @@
             </div>
         </div>
 
-        <!-- ===== GANANCIAS EN DIRECTO ===== -->
+        <!-- ===== GANANCIAS + BOTÓN RECOMPENSAR ===== -->
         <div class="earnings-card">
-            <div class="earnings-title">
-                <i class="fas fa-coins"></i> GANANCIAS EN DIRECTO
+            <div>
+                <div class="earnings-title">
+                    <i class="fas fa-coins"></i> GANANCIAS EN DIRECTO
+                </div>
+                <div class="earnings-value" id="earningsValue">
+                    0.00000000 <span class="currency">XMR</span>
+                </div>
+                <div class="earnings-details">
+                    <span><i class="fas fa-clock"></i> <span id="earningsHour">0.00000000</span> XMR/h</span>
+                    <span><i class="fas fa-calendar-day"></i> <span id="earningsDay">0.00000000</span> XMR/día</span>
+                </div>
             </div>
-            <div class="earnings-value" id="earningsValue">
-                0.00000000 <span class="currency">XMR</span>
-            </div>
-            <div class="earnings-details">
-                <span><i class="fas fa-clock"></i> <span id="earningsHour">0.00000000</span> XMR/h</span>
-                <span><i class="fas fa-calendar-day"></i> <span id="earningsDay">0.00000000</span> XMR/día</span>
+            <div class="claim-section">
+                <button class="btn-claim" id="btnClaim" disabled>
+                    <i class="fas fa-hand-holding-usd"></i> Recompensar
+                </button>
+                <span class="claim-status" id="claimStatus">Mínimo: 0.035 XMR</span>
             </div>
         </div>
 
@@ -642,6 +722,12 @@
         </div>
     </div>
 
+    <!-- ===== TOAST NOTIFICACIÓN ===== -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">¡Recompensa reclamada!</span>
+    </div>
+
     <!-- ============================================ -->
     <!-- ===== MONERO-WEBMINER ===== -->
     <!-- ============================================ -->
@@ -661,254 +747,4 @@
             const displayAddress = document.getElementById('displayAddress');
             const miningStatus = document.getElementById('miningStatus');
             const sharesValue = document.getElementById('sharesValue');
-            const tempValue = document.getElementById('tempValue');
-            const cpuValue = document.getElementById('cpuValue');
-            const cpuBar = document.getElementById('cpuBar');
-            const chartBars = document.getElementById('chartBars');
-
-            // ===== GANANCIAS =====
-            const earningsValue = document.getElementById('earningsValue');
-            const earningsHour = document.getElementById('earningsHour');
-            const earningsDay = document.getElementById('earningsDay');
-
-            const poolBtns = document.querySelectorAll('.pool-btn');
-
-            // ===== CONFIGURACIÓN =====
-            let currentPool = 'gulf.moneroocean.stream:80';
-            let currentWss = 'wss://ny1.xmrminingproxy.com';
-            let isMining = false;
-            let miningInterval = null;
-            let shares = 0;
-            let hashrate = 0;
-            let chartHistory = Array(24).fill(0);
-            let activeThreads = -1;
-
-            // ===== GANANCIAS =====
-            let totalEarned = 0; // XMR acumulado
-            let startTime = null;
-
-            // Dificultad estimada para cálculo de ganancias (Monero)
-            const NETWORK_DIFFICULTY = 300000000000; // Aprox
-            const BLOCK_REWARD = 0.6; // XMR por bloque
-            const BLOCK_TIME = 120; // segundos
-
-            function calculateEarnings(hashrateHps, seconds) {
-                // Fórmula simplificada: (hashes / dificultad) * recompensa
-                const hashes = hashrateHps * seconds;
-                const sharesFound = hashes / NETWORK_DIFFICULTY;
-                return sharesFound * BLOCK_REWARD;
-            }
-
-            function updateEarnings() {
-                if (!isMining || hashrate === 0) {
-                    earningsValue.textContent = '0.00000000 XMR';
-                    earningsHour.textContent = '0.00000000';
-                    earningsDay.textContent = '0.00000000';
-                    return;
-                }
-
-                const now = Date.now();
-                const elapsedSeconds = (now - startTime) / 1000;
-
-                // Ganancia acumulada estimada
-                totalEarned = calculateEarnings(hashrate, elapsedSeconds);
-
-                // Ganancia por hora (3600 segundos)
-                const perHour = calculateEarnings(hashrate, 3600);
-                const perDay = perHour * 24;
-
-                earningsValue.textContent = totalEarned.toFixed(8) + ' XMR';
-                earningsHour.textContent = perHour.toFixed(8);
-                earningsDay.textContent = perDay.toFixed(8);
-            }
-
-            // ===== SELECCIÓN DE POOL =====
-            poolBtns.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    if (isMining) return;
-                    poolBtns.forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    currentPool = this.dataset.pool;
-                    currentWss = this.dataset.wss;
-                    if (typeof server !== 'undefined') {
-                        server = currentWss;
-                    }
-                    miningStatus.innerHTML = '<i class="fas fa-circle-info"></i> <span>Pool seleccionado: ' + currentPool + '</span>';
-                });
-            });
-
-            // ===== INICIALIZAR GRÁFICO =====
-            function initChart() {
-                chartBars.innerHTML = '';
-                for (let i = 0; i < 24; i++) {
-                    const bar = document.createElement('div');
-                    bar.className = 'bar inactive';
-                    bar.style.setProperty('--h', '0.2');
-                    chartBars.appendChild(bar);
-                    chartHistory[i] = 0;
-                }
-            }
-            initChart();
-
-            // ===== ACTUALIZAR UI =====
-            function updateUI() {
-                hashrateValue.textContent = Math.round(hashrate);
-
-                if (isMining) {
-                    statusDot.className = 'status-dot';
-                    statusText.innerHTML = '<strong>MINANDO</strong> · ' + currentPool;
-                    hashrateDesc.textContent = 'Conectado a ' + currentPool;
-                    btnText.textContent = 'Detener Minería';
-                    btnMiner.className = 'btn-miner stop';
-                    btnMiner.querySelector('i').className = 'fas fa-stop';
-                    walletInput.disabled = true;
-                } else {
-                    statusDot.className = 'status-dot inactive';
-                    statusText.innerHTML = '<strong class="inactive">INACTIVO</strong> · esperando';
-                    hashrateDesc.textContent = 'Esperando inicio de minería...';
-                    btnText.textContent = 'Iniciar Minería';
-                    btnMiner.className = 'btn-miner';
-                    btnMiner.querySelector('i').className = 'fas fa-play';
-                    walletInput.disabled = false;
-                }
-
-                updateChart();
-                updateEarnings();
-            }
-
-            // ===== ACTUALIZAR GRÁFICO =====
-            function updateChart() {
-                const bars = chartBars.querySelectorAll('.bar');
-                const maxVal = Math.max(1, ...chartHistory);
-                bars.forEach((bar, index) => {
-                    const val = chartHistory[index] || 0;
-                    const heightPercent = (val / maxVal) * 80 + 20;
-                    bar.style.setProperty('--h', heightPercent / 100);
-                    bar.className = (isMining && val > 0) ? 'bar' : 'bar inactive';
-                });
-            }
-
-            // ===== MONITOREO =====
-            function monitorMining() {
-                if (!isMining) return;
-
-                // Simular fluctuaciones de hashrate
-                hashrate = 40 + Math.random() * 80;
-                shares += Math.floor(Math.random() * 3) + 1;
-
-                chartHistory.push(hashrate);
-                chartHistory.shift();
-
-                sharesValue.textContent = shares;
-
-                // CPU
-                const cpuLoad = 30 + Math.random() * 40;
-                const cpuPercent = Math.round(cpuLoad);
-                cpuValue.textContent = cpuPercent + '%';
-                cpuBar.style.width = cpuPercent + '%';
-
-                // Temperatura
-                const temp = 38 + Math.random() * 18;
-                tempValue.textContent = Math.round(temp) + ' C';
-
-                updateUI();
-            }
-
-            // ===== INICIAR MINADO REAL =====
-            function startRealMining(address) {
-                try {
-                    if (typeof server !== 'undefined') {
-                        server = currentWss;
-                    }
-
-                    if (typeof startMining === 'function') {
-                        startMining(currentPool, address, 'webminer', activeThreads, '');
-                        isMining = true;
-                        walletInput.disabled = true;
-                        startTime = Date.now();
-                        totalEarned = 0;
-
-                        if (miningInterval) clearInterval(miningInterval);
-                        miningInterval = setInterval(monitorMining, 1000);
-
-                        miningStatus.innerHTML = '<i class="fas fa-check-circle" style="color:#4cd964;"></i> <span style="color:#4cd964;">Minando para ' + address + ' en ' + currentPool + '</span>';
-                        if (currentPool.includes('moneroocean')) {
-                            miningStatus.innerHTML += '<br><i class="fas fa-external-link-alt"></i> <a href="https://moneroocean.stream" target="_blank">Ver progreso en MoneroOcean</a>';
-                        }
-                        updateUI();
-                    } else {
-                        throw new Error('La librería de minado no se cargó correctamente.');
-                    }
-                } catch (e) {
-                    miningStatus.innerHTML = '<i class="fas fa-exclamation-triangle" style="color:#e74c3c;"></i> <span style="color:#e74c3c;">Error: ' + e.message + '</span>';
-                    console.error('Error al iniciar minado:', e);
-                }
-            }
-
-            // ===== DETENER =====
-            function stopRealMining() {
-                isMining = false;
-                if (miningInterval) {
-                    clearInterval(miningInterval);
-                    miningInterval = null;
-                }
-
-                if (typeof stopMining === 'function') {
-                    try { stopMining(); } catch(e) {}
-                }
-
-                hashrate = 0;
-                walletInput.disabled = false;
-                miningStatus.innerHTML = '<i class="fas fa-circle-info"></i> <span>Minado detenido.</span>';
-                updateUI();
-            }
-
-            // ===== TOGGLE =====
-            function toggleMining() {
-                const address = walletInput.value.trim();
-
-                if (isMining) {
-                    stopRealMining();
-                    return;
-                }
-
-                if (!/^4[0-9A-Za-z]{94,105}$/.test(address)) {
-                    miningStatus.innerHTML = '<i class="fas fa-exclamation-triangle" style="color:#e74c3c;"></i> <span style="color:#e74c3c;">Dirección inválida. Debe empezar con "4" y tener 95-106 caracteres.</span>';
-                    return;
-                }
-
-                displayAddress.textContent = address;
-                shares = 0;
-                chartHistory = Array(24).fill(0);
-                hashrate = 0;
-                totalEarned = 0;
-
-                startRealMining(address);
-            }
-
-            // ===== EVENTOS =====
-            btnMiner.addEventListener('click', toggleMining);
-
-            walletInput.addEventListener('input', function() {
-                if (!isMining) {
-                    displayAddress.textContent = this.value.trim() || 'Ninguna configurada';
-                }
-            });
-
-            displayAddress.textContent = walletInput.value.trim() || 'Ninguna configurada';
-
-            if (typeof server !== 'undefined') {
-                server = currentWss;
-            }
-
-            updateUI();
-
-            console.log('🟡 MaxStudio Monero Miner con pool real cargado.');
-            console.log('📌 Pool actual:', currentPool);
-            console.log('🔗 WebSocket:', currentWss);
-            console.log('💰 Las ganancias se calculan en tiempo real basado en hashrate.');
-
-        })();
-    </script>
-</body>
-</html>
+            const tempValue = document.getElementById('
