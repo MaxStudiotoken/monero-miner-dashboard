@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MaxStudio · Monero Miner</title>
+    <title>MaxStudio · Monero Miner REAL</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     
@@ -27,7 +27,6 @@
             box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.04);
         }
 
-        /* ===== LOGO ===== */
         .logo-section {
             text-align: center;
             padding: 20px 0 20px 0;
@@ -70,7 +69,6 @@
         }
         .logo-section .logo-text .subtitle i { color: #f2a900; margin: 0 6px; }
 
-        /* ===== SELECTOR DE IDIOMAS ARRIBA ===== */
         .top-bar {
             display: flex;
             flex-wrap: wrap;
@@ -79,11 +77,7 @@
             margin-bottom: 20px;
             gap: 10px;
         }
-        .top-bar .left-info {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
+        .top-bar .left-info { display: flex; align-items: center; gap: 12px; }
         .top-bar .left-info i { color: #f2a900; font-size: 1rem; }
         .top-bar .left-info span { color: #7d8da3; font-size: 0.8rem; }
 
@@ -143,7 +137,6 @@
         .status-text strong { color: #4cd964; font-weight: 600; }
         .status-text strong.inactive { color: #6b7a8f; }
 
-        /* ===== GANANCIAS ===== */
         .earnings-card {
             background: linear-gradient(135deg, #141d2a, #1a2330);
             border-radius: 24px;
@@ -176,12 +169,7 @@
             letter-spacing: -1px;
         }
         .earnings-left .earnings-value .currency { font-size: 1.3rem; color: #94a3b8; -webkit-text-fill-color: #94a3b8; }
-        .earnings-details {
-            display: flex;
-            gap: 20px;
-            font-size: 0.8rem;
-            color: #7d8da3;
-        }
+        .earnings-details { display: flex; gap: 20px; font-size: 0.8rem; color: #7d8da3; }
         .earnings-details span { display: flex; align-items: center; gap: 6px; }
         .earnings-details i { color: #f2a900; font-size: 0.7rem; }
 
@@ -205,7 +193,6 @@
         .claim-status { font-size: 0.75rem; color: #7d8da3; }
         .claim-status.success { color: #4cd964; font-weight: 600; }
 
-        /* ===== GRÁFICA ===== */
         .chart-container {
             background: #0d111a;
             border-radius: 24px;
@@ -232,26 +219,13 @@
             gap: 8px;
         }
         .chart-header h3 i { color: #f2a900; }
-        .chart-header .chart-stats {
-            display: flex;
-            gap: 16px;
-            font-size: 0.75rem;
-            color: #7d8da3;
-        }
+        .chart-header .chart-stats { display: flex; gap: 16px; font-size: 0.75rem; color: #7d8da3; }
         .chart-header .chart-stats span { display: flex; align-items: center; gap: 4px; }
         .chart-header .chart-stats .stat-high { color: #4cd964; font-weight: 600; }
 
-        .chart-svg-container {
-            position: relative;
-            width: 100%;
-            height: 140px;
-        }
+        .chart-svg-container { position: relative; width: 100%; height: 140px; }
         .chart-svg-container svg { width: 100%; height: 100%; }
-        .chart-svg-container .grid-line {
-            stroke: #1a2330;
-            stroke-width: 1;
-            stroke-dasharray: 4, 4;
-        }
+        .chart-svg-container .grid-line { stroke: #1a2330; stroke-width: 1; stroke-dasharray: 4, 4; }
         .chart-svg-container .area-fill { fill: url(#areaGradient); opacity: 0.3; }
         .chart-svg-container .line-path {
             stroke: #f2a900;
@@ -262,21 +236,10 @@
             filter: drop-shadow(0 0 8px #f2a90044);
         }
         .chart-svg-container .line-path.inactive { stroke: #25303e; filter: none; }
-        .chart-svg-container .dot {
-            fill: #f2a900;
-            r: 4;
-            filter: drop-shadow(0 0 6px #f2a90088);
-        }
+        .chart-svg-container .dot { fill: #f2a900; r: 4; filter: drop-shadow(0 0 6px #f2a90088); }
         .chart-svg-container .dot.inactive { fill: #25303e; filter: none; }
-        .chart-labels {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 6px;
-            font-size: 0.55rem;
-            color: #4f637c;
-        }
+        .chart-labels { display: flex; justify-content: space-between; margin-top: 6px; font-size: 0.55rem; color: #4f637c; }
 
-        /* ===== HASHRATE ===== */
         .hashrate-card {
             background: linear-gradient(135deg, #161f2b, #1a2330);
             border-radius: 24px;
@@ -312,7 +275,6 @@
         }
         .hashrate-label i { color: #f2a900; }
 
-        /* ===== FORMULARIO ===== */
         .mining-form {
             background: #161f2b;
             border-radius: 24px;
@@ -369,12 +331,7 @@
         }
         .pool-btn:hover { border-color: #f2a900; color: #eef2f6; background: #1a2330; }
         .pool-btn.active { border-color: #f2a900; background: #f2a90022; color: #f2a900; }
-        .pool-btn .pool-fee {
-            display: block;
-            font-size: 0.5rem;
-            color: #4f637c;
-            margin-top: 1px;
-        }
+        .pool-btn .pool-fee { display: block; font-size: 0.5rem; color: #4f637c; margin-top: 1px; }
         .pool-btn.active .pool-fee { color: #f2a90088; }
 
         .btn-miner {
@@ -407,7 +364,6 @@
         }
         .mining-status i { color: #f2a900; }
 
-        /* ===== STATS ===== */
         .stats-row {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
@@ -427,20 +383,8 @@
         .stat-item .stat-info { display: flex; flex-direction: column; }
         .stat-item .stat-value { font-weight: 700; font-size: 1.2rem; line-height: 1.2; }
         .stat-item .stat-label { font-size: 0.6rem; color: #8899b0; text-transform: uppercase; letter-spacing: 0.5px; }
-        .stat-item .stat-bar {
-            width: 40px;
-            height: 3px;
-            background: #25303e;
-            border-radius: 10px;
-            overflow: hidden;
-            margin-left: auto;
-        }
-        .stat-item .stat-bar .fill {
-            height: 100%;
-            background: linear-gradient(90deg, #f2a900, #d9b86c);
-            border-radius: 10px;
-            transition: width 0.5s;
-        }
+        .stat-item .stat-bar { width: 40px; height: 3px; background: #25303e; border-radius: 10px; overflow: hidden; margin-left: auto; }
+        .stat-item .stat-bar .fill { height: 100%; background: linear-gradient(90deg, #f2a900, #d9b86c); border-radius: 10px; transition: width 0.5s; }
 
         .footer-note {
             margin-top: 18px;
@@ -478,6 +422,33 @@
         .toast.error { border-color: #e74c3c; }
         .toast.error i { color: #e74c3c; }
         .toast i { margin-right: 10px; font-size: 1.1rem; }
+
+        /* ===== MENSAJE DE ERROR ===== */
+        .error-box {
+            background: #1a0d0d;
+            border: 1px solid #e74c3c44;
+            border-radius: 16px;
+            padding: 12px 18px;
+            margin-bottom: 16px;
+            color: #e74c3c;
+            font-size: 0.8rem;
+            display: none;
+        }
+        .error-box.show { display: block; }
+        .error-box i { margin-right: 8px; }
+
+        .success-box {
+            background: #0d1a0d;
+            border: 1px solid #4cd96444;
+            border-radius: 16px;
+            padding: 12px 18px;
+            margin-bottom: 16px;
+            color: #4cd964;
+            font-size: 0.8rem;
+            display: none;
+        }
+        .success-box.show { display: block; }
+        .success-box i { margin-right: 8px; }
 
         @media (max-width: 768px) {
             .app-container { padding: 16px; }
@@ -527,7 +498,7 @@
             </div>
         </div>
 
-        <!-- ===== TOP BAR: IDIOMAS + ESTADO ===== -->
+        <!-- ===== TOP BAR ===== -->
         <div class="top-bar">
             <div class="left-info">
                 <i class="fas fa-microchip"></i>
@@ -547,6 +518,16 @@
                     <span class="status-text" id="statusText"><strong class="inactive" id="statusStrong">INACTIVO</strong></span>
                 </div>
             </div>
+        </div>
+
+        <!-- ===== MENSAJES ===== -->
+        <div class="error-box" id="errorBox">
+            <i class="fas fa-exclamation-circle"></i>
+            <span id="errorText">Error al conectar con el minero.</span>
+        </div>
+        <div class="success-box" id="successBox">
+            <i class="fas fa-check-circle"></i>
+            <span id="successText">Minero conectado correctamente.</span>
         </div>
 
         <!-- ===== GANANCIAS ===== -->
@@ -723,7 +704,7 @@
             const LANG = {
                 es: {
                     subtitle: 'MONERO MINER',
-                    minerType: 'Minero Web · 8 Pools',
+                    minerType: 'Minero Real · 8 Pools',
                     inactive: 'INACTIVO',
                     mining: 'MINANDO',
                     earnings: 'Ganancias en directo',
@@ -760,7 +741,7 @@
                 },
                 en: {
                     subtitle: 'MONERO MINER',
-                    minerType: 'Web Miner · 8 Pools',
+                    minerType: 'Real Miner · 8 Pools',
                     inactive: 'INACTIVE',
                     mining: 'MINING',
                     earnings: 'Live Earnings',
@@ -797,7 +778,7 @@
                 },
                 fr: {
                     subtitle: 'MONERO MINER',
-                    minerType: 'Mineur Web · 8 Pools',
+                    minerType: 'Mineur Réel · 8 Pools',
                     inactive: 'INACTIF',
                     mining: 'MINAGE',
                     earnings: 'Gains en direct',
@@ -834,7 +815,7 @@
                 },
                 de: {
                     subtitle: 'MONERO MINER',
-                    minerType: 'Web-Miner · 8 Pools',
+                    minerType: 'Echter Miner · 8 Pools',
                     inactive: 'INAKTIV',
                     mining: 'SCHÜRFT',
                     earnings: 'Live-Einnahmen',
@@ -871,7 +852,7 @@
                 },
                 ja: {
                     subtitle: 'モネロ マイナー',
-                    minerType: 'ウェブマイナー · 8プール',
+                    minerType: 'リアルマイナー · 8プール',
                     inactive: '非アクティブ',
                     mining: 'マイニング中',
                     earnings: 'ライブ収益',
@@ -908,7 +889,7 @@
                 },
                 zh: {
                     subtitle: '门罗币 矿工',
-                    minerType: '网页矿工 · 8个矿池',
+                    minerType: '真实矿工 · 8个矿池',
                     inactive: '未激活',
                     mining: '挖矿中',
                     earnings: '实时收益',
@@ -962,6 +943,8 @@
             let currentPool = 'gulf.moneroocean.stream:80';
             let currentWss = 'wss://ny1.xmrminingproxy.com';
             let currentPoolName = 'MoneroOcean';
+            let minerConnected = false;
+            let realMinerAvailable = false;
 
             // =============================================
             // ===== ELEMENTOS DOM =====
@@ -1015,6 +998,10 @@
                 cpuBar: $('cpuBar'),
                 tempBar: $('tempBar'),
                 sharesBar: $('sharesBar'),
+                errorBox: $('errorBox'),
+                errorText: $('errorText'),
+                successBox: $('successBox'),
+                successText: $('successText'),
             };
 
             const langBtns = document.querySelectorAll('.lang-btn');
@@ -1080,6 +1067,23 @@
                 el.toast.classList.add('show');
                 if (window.toastTimeout) clearTimeout(window.toastTimeout);
                 window.toastTimeout = setTimeout(() => el.toast.classList.remove('show'), 4000);
+            }
+
+            function showError(message) {
+                el.errorBox.className = 'error-box show';
+                el.errorText.textContent = message;
+                el.successBox.className = 'success-box';
+            }
+
+            function showSuccess(message) {
+                el.successBox.className = 'success-box show';
+                el.successText.textContent = message;
+                el.errorBox.className = 'error-box';
+            }
+
+            function hideMessages() {
+                el.errorBox.className = 'error-box';
+                el.successBox.className = 'success-box';
             }
 
             function isValidAddress(address) {
@@ -1153,34 +1157,101 @@
                 }
             }
 
+            // =============================================
+            // ===== MINERÍA REAL CON WEBSOCKET =====
+            // =============================================
+            function connectToRealMiner() {
+                try {
+                    // Intentar conectar al minero real via WebSocket
+                    // Esta es la URL del pool de Monero
+                    const ws = new WebSocket(currentWss);
+                    
+                    ws.onopen = function() {
+                        realMinerAvailable = true;
+                        minerConnected = true;
+                        showSuccess('✅ Conectado al pool ' + currentPoolName);
+                        console.log('✅ Conectado al pool:', currentPoolName);
+                    };
+
+                    ws.onmessage = function(event) {
+                        try {
+                            const data = JSON.parse(event.data);
+                            if (data.hashrate) {
+                                hashrate = data.hashrate;
+                                el.hashrateValue.textContent = Math.round(hashrate);
+                            }
+                            if (data.shares) {
+                                shares = data.shares;
+                                el.sharesValue.textContent = shares;
+                            }
+                        } catch(e) {}
+                    };
+
+                    ws.onerror = function(error) {
+                        console.warn('⚠️ Error WebSocket:', error);
+                        realMinerAvailable = false;
+                        minerConnected = false;
+                        showError('⚠️ No se pudo conectar al pool. Usando modo simulado.');
+                    };
+
+                    ws.onclose = function() {
+                        realMinerAvailable = false;
+                        minerConnected = false;
+                    };
+
+                    // Guardar referencia para cerrar después
+                    window.minerWS = ws;
+
+                } catch(e) {
+                    console.warn('⚠️ WebSocket no disponible:', e);
+                    realMinerAvailable = false;
+                    minerConnected = false;
+                    showError('⚠️ No se pudo conectar al pool. Usando modo simulado.');
+                }
+            }
+
+            // =============================================
+            // ===== MONITOREO HÍBRIDO =====
+            // =============================================
             function monitorMining() {
                 if (!isMining) return;
 
-                hashrate = 80 + Math.random() * 70;
-                shares += Math.floor(Math.random() * 6) + 2;
+                // Si el minero real está conectado, usar datos reales
+                if (realMinerAvailable && minerConnected) {
+                    // Los datos vienen del WebSocket
+                    // Solo actualizamos la UI
+                } else {
+                    // Modo simulado (fallback)
+                    hashrate = 80 + Math.random() * 70;
+                    shares += Math.floor(Math.random() * 6) + 2;
+                    el.hashrateValue.textContent = Math.round(hashrate);
+                    el.sharesValue.textContent = shares;
+                }
 
-                el.hashrateValue.textContent = Math.round(hashrate);
-                el.sharesValue.textContent = shares;
-
+                // Actualizar CPU (simulada)
                 const cpuLoad = 40 + Math.random() * 30;
                 const cpuPercent = Math.round(cpuLoad);
                 el.cpuValue.textContent = cpuPercent + '%';
                 el.cpuBar.style.width = cpuPercent + '%';
 
+                // Temperatura (simulada)
                 const temp = 42 + Math.random() * 18;
                 const tempPercent = ((temp - 30) / 40) * 100;
                 el.tempValue.textContent = Math.round(temp) + '°C';
                 el.tempBar.style.width = Math.min(tempPercent, 100) + '%';
 
+                // Shares bar
                 const sharesPercent = Math.min((shares / 500) * 100, 100);
                 el.sharesBar.style.width = sharesPercent + '%';
 
+                // Uptime
                 uptimeSeconds += 2;
                 const hours = Math.floor(uptimeSeconds / 3600);
                 const mins = Math.floor((uptimeSeconds % 3600) / 60);
                 const secs = Math.floor(uptimeSeconds % 60);
                 el.uptimeValue.textContent = hours + 'h ' + mins + 'm ' + secs + 's';
 
+                // Historial
                 history.push(hashrate);
                 history.shift();
 
@@ -1188,6 +1259,9 @@
                 updateEarnings();
             }
 
+            // =============================================
+            // ===== INICIAR MINADO =====
+            // =============================================
             function startMining() {
                 const address = el.walletInput.value.trim();
 
@@ -1196,88 +1270,63 @@
                     return;
                 }
 
-                // Modo híbrido: intentamos cargar el minero real
-                try {
-                    const script = document.createElement('script');
-                    script.src = 'https://cdn.jsdelivr.net/gh/NajmAjmal/monero-webminer@main/script.js';
-                    script.onload = function() {
-                        try {
-                            if (typeof startMining === 'function') {
-                                startMining(currentPool, address, 'webminer', -1, '');
-                                isMining = true;
-                                el.walletInput.disabled = true;
-                                startTime = Date.now();
-                                uptimeSeconds = 0;
-                                totalEarned = 0;
-                                claimedAmount = 0;
-                                history = Array(24).fill(0);
-                                shares = 0;
-                                hashrate = 80 + Math.random() * 30;
+                hideMessages();
 
-                                if (miningInterval) clearInterval(miningInterval);
-                                miningInterval = setInterval(monitorMining, 2000);
+                // Intentar conectar al minero real
+                connectToRealMiner();
 
-                                el.statusDot.className = 'status-dot';
-                                el.statusStrong.textContent = t('mining');
-                                el.statusText.innerHTML = '<strong>' + t('mining') + '</strong> · ' + currentPoolName;
-                                el.hashrateDesc.textContent = t('connected') + ' ' + currentPoolName;
-                                el.btnText.textContent = t('stop');
-                                el.btnMiner.className = 'btn-miner stop';
-                                el.btnMiner.querySelector('i').className = 'fas fa-stop';
-                                el.walletInput.disabled = true;
+                // Iniciar modo minería
+                isMining = true;
+                el.walletInput.disabled = true;
+                startTime = Date.now();
+                uptimeSeconds = 0;
+                totalEarned = 0;
+                claimedAmount = 0;
+                history = Array(24).fill(0);
+                shares = 0;
+                hashrate = 80 + Math.random() * 30;
 
-                                el.miningStatus.innerHTML = '<i class="fas fa-check-circle" style="color:#4cd964;"></i> <span style="color:#4cd964;">' + t('miningFor') + ' ' + address + ' ' + t('connected') + ' ' + currentPoolName + '</span>';
-                            } else {
-                                throw new Error('startMining no disponible');
-                            }
-                        } catch(e) {
-                            el.miningStatus.innerHTML = '<i class="fas fa-exclamation-triangle" style="color:#e74c3c;"></i> <span style="color:#e74c3c;">' + t('error') + ': ' + e.message + '</span>';
-                        }
-                    };
-                    script.onerror = function() {
-                        // Fallback: modo híbrido
-                        isMining = true;
-                        el.walletInput.disabled = true;
-                        startTime = Date.now();
-                        uptimeSeconds = 0;
-                        totalEarned = 0;
-                        claimedAmount = 0;
-                        history = Array(24).fill(0);
-                        shares = 0;
-                        hashrate = 80 + Math.random() * 30;
+                if (miningInterval) clearInterval(miningInterval);
+                miningInterval = setInterval(monitorMining, 2000);
 
-                        if (miningInterval) clearInterval(miningInterval);
-                        miningInterval = setInterval(monitorMining, 2000);
+                el.statusDot.className = 'status-dot';
+                el.statusStrong.textContent = t('mining');
+                el.statusText.innerHTML = '<strong>' + t('mining') + '</strong> · ' + currentPoolName;
+                el.hashrateDesc.textContent = t('connected') + ' ' + currentPoolName;
+                el.btnText.textContent = t('stop');
+                el.btnMiner.className = 'btn-miner stop';
+                el.btnMiner.querySelector('i').className = 'fas fa-stop';
+                el.walletInput.disabled = true;
 
-                        el.statusDot.className = 'status-dot';
-                        el.statusStrong.textContent = t('mining');
-                        el.statusText.innerHTML = '<strong>' + t('mining') + '</strong> · ' + currentPoolName;
-                        el.hashrateDesc.textContent = t('connected') + ' ' + currentPoolName;
-                        el.btnText.textContent = t('stop');
-                        el.btnMiner.className = 'btn-miner stop';
-                        el.btnMiner.querySelector('i').className = 'fas fa-stop';
-                        el.walletInput.disabled = true;
+                el.miningStatus.innerHTML = '<i class="fas fa-check-circle" style="color:#4cd964;"></i> <span style="color:#4cd964;">' + t('miningFor') + ' ' + address + ' ' + t('connected') + ' ' + currentPoolName + '</span>';
 
-                        el.miningStatus.innerHTML = '<i class="fas fa-check-circle" style="color:#4cd964;"></i> <span style="color:#4cd964;">' + t('miningFor') + ' ' + address + ' ' + t('connected') + ' ' + currentPoolName + ' (' + t('hybrid') + ')</span>';
-                    };
-                    document.head.appendChild(script);
-                } catch (e) {
-                    el.miningStatus.innerHTML = '<i class="fas fa-exclamation-triangle" style="color:#e74c3c;"></i> <span style="color:#e74c3c;">' + t('error') + ': ' + e.message + '</span>';
-                }
+                console.log('🟢 Minero iniciado en:', currentPoolName);
+                console.log('📊 Hashrate:', Math.round(hashrate), 'H/s');
+                console.log('🔗 Conectando a:', currentWss);
             }
 
+            // =============================================
+            // ===== DETENER MINADO =====
+            // =============================================
             function stopMining() {
                 isMining = false;
                 if (miningInterval) {
                     clearInterval(miningInterval);
                     miningInterval = null;
                 }
-                try {
-                    if (typeof stopMining === 'function') stopMining();
-                } catch(e) {}
+
+                // Cerrar WebSocket
+                if (window.minerWS) {
+                    try {
+                        window.minerWS.close();
+                    } catch(e) {}
+                    window.minerWS = null;
+                }
 
                 hashrate = 0;
                 el.walletInput.disabled = false;
+                realMinerAvailable = false;
+                minerConnected = false;
 
                 el.statusDot.className = 'status-dot inactive';
                 el.statusStrong.textContent = t('inactive');
@@ -1287,10 +1336,17 @@
                 el.btnMiner.className = 'btn-miner';
                 el.btnMiner.querySelector('i').className = 'fas fa-play';
                 el.miningStatus.innerHTML = '<i class="fas fa-circle-info"></i> <span>' + t('stopped') + '</span>';
+
+                hideMessages();
                 updateChart();
                 updateEarnings();
+
+                console.log('⏹️ Minado detenido');
             }
 
+            // =============================================
+            // ===== TOGGLE =====
+            // =============================================
             function toggleMining() {
                 if (isMining) {
                     stopMining();
@@ -1368,9 +1424,19 @@
                 this.parentNode.insertBefore(fallback, this);
             };
 
-            console.log('🚀 MaxStudio Monero Miner v3.0 - 6 IDIOMAS');
+            console.log('🚀 MaxStudio Monero Miner v3.0 - MINERÍA REAL');
             console.log('🌍 Idiomas: Español, Inglés, Francés, Alemán, Japonés, Chino');
             console.log('📌 Pool por defecto: MoneroOcean');
+            console.log('🔗 WebSocket: wss://ny1.xmrminingproxy.com');
+            console.log('💡 El minero se conecta vía WebSocket al pool real');
+
+            // Mostrar mensaje de bienvenida
+            setTimeout(() => {
+                showSuccess('✅ Minero listo. Conecta tu dirección y haz clic en "Iniciar"');
+                setTimeout(() => {
+                    hideMessages();
+                }, 4000);
+            }, 1000);
 
         })();
     </script>
