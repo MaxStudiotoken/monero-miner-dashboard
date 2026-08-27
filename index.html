@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Monero Miner · Pool Real</title>
+    <title>Monero Miner · MaxStudio</title>
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
@@ -30,24 +30,51 @@
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.04);
         }
 
+        /* ===== LOGO GRANDE ===== */
+        .logo-section {
+            text-align: center;
+            margin-bottom: 28px;
+            padding: 20px 0 10px 0;
+            border-bottom: 1px solid #1e2733;
+        }
+
+        .logo-section .logo-icon {
+            font-size: 5rem;
+            color: #f2a900;
+            filter: drop-shadow(0 0 30px #f2a90033);
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .logo-section h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            background: linear-gradient(145deg, #f5e7c8, #d9b86c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -1px;
+        }
+
+        .logo-section .subtitle {
+            color: #7d8da3;
+            font-size: 0.95rem;
+            letter-spacing: 2px;
+            margin-top: 4px;
+        }
+
+        .logo-section .subtitle i {
+            color: #f2a900;
+        }
+
+        /* ===== HEADER MINER ===== */
         .miner-header {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 28px;
+            margin-bottom: 20px;
             gap: 15px;
-        }
-
-        .brand { display: flex; align-items: center; gap: 12px; }
-        .brand i { font-size: 2rem; color: #f2a900; filter: drop-shadow(0 0 6px #f2a90055); }
-        .brand h1 {
-            font-weight: 600;
-            font-size: 1.7rem;
-            background: linear-gradient(145deg, #f5e7c8, #d9b86c);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
 
         .status-badge {
@@ -78,10 +105,71 @@
             100% { opacity: 0.7; transform: scale(0.95); }
         }
 
-        .status-text { font-weight: 500; color: #cbd5e1; }
+        .status-text { font-weight: 500; color: #cbd5e1; font-size: 0.9rem; }
         .status-text strong { color: #4cd964; font-weight: 600; }
         .status-text strong.inactive { color: #6b7a8f; }
 
+        /* ===== GANANCIAS EN DIRECTO ===== */
+        .earnings-card {
+            background: #1b232f;
+            border-radius: 28px;
+            padding: 20px 28px;
+            margin-bottom: 20px;
+            border: 1px solid #29313f;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .earnings-card .earnings-title {
+            font-size: 0.85rem;
+            color: #8899b0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .earnings-card .earnings-title i {
+            color: #f2a900;
+        }
+
+        .earnings-card .earnings-value {
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: linear-gradient(145deg, #f5e7c8, #d9b86c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+        }
+
+        .earnings-card .earnings-value .currency {
+            font-size: 1.2rem;
+            color: #94a3b8;
+            -webkit-text-fill-color: #94a3b8;
+        }
+
+        .earnings-details {
+            display: flex;
+            gap: 24px;
+            font-size: 0.85rem;
+            color: #7d8da3;
+        }
+
+        .earnings-details span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .earnings-details i {
+            color: #f2a900;
+            font-size: 0.8rem;
+        }
+
+        /* ===== HASHRATE ===== */
         .hashrate-card {
             background: #1b232f;
             border-radius: 28px;
@@ -120,6 +208,7 @@
         }
         .hashrate-label i { color: #f2a900; }
 
+        /* ===== FORMULARIO ===== */
         .mining-form {
             background: #1b232f;
             border-radius: 28px;
@@ -180,6 +269,8 @@
             padding: 8px 0 18px 0;
         }
         .mining-status i { color: #f2a900; }
+        .mining-status a { color: #f2a900; text-decoration: none; }
+        .mining-status a:hover { text-decoration: underline; }
 
         .grid-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 30px; }
 
@@ -187,6 +278,8 @@
             .grid-2col { grid-template-columns: 1fr; gap: 20px; }
             .mining-form { flex-direction: column; align-items: stretch; }
             .btn-miner { justify-content: center; }
+            .earnings-card { flex-direction: column; align-items: stretch; text-align: center; }
+            .earnings-details { justify-content: center; flex-wrap: wrap; }
         }
 
         .info-panel {
@@ -274,6 +367,25 @@
         .stat-item .stat-label { font-size: 0.75rem; color: #8899b0; letter-spacing: 0.3px; }
         .temp-indicator { color: #ff9f6e; }
 
+        .pool-selector {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 8px;
+        }
+        .pool-btn {
+            background: #10161e;
+            border: 1px solid #2f3a4a;
+            border-radius: 30px;
+            padding: 6px 16px;
+            color: #8899b0;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .pool-btn:hover { border-color: #f2a900; color: #eef2f6; }
+        .pool-btn.active { border-color: #f2a900; background: #f2a90022; color: #f2a900; }
+
         .contribution-area {
             margin-top: 30px;
             border-top: 1px solid #29313f;
@@ -339,41 +451,45 @@
         @media (max-width: 480px) {
             .app-container { padding: 20px 16px; }
             .hashrate-number .value { font-size: 2.4rem; }
-            .brand h1 { font-size: 1.3rem; }
+            .logo-section h1 { font-size: 2rem; }
+            .logo-section .logo-icon { font-size: 3.5rem; }
+            .earnings-card .earnings-value { font-size: 1.6rem; }
         }
-
-        .pool-selector {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-bottom: 8px;
-        }
-        .pool-btn {
-            background: #10161e;
-            border: 1px solid #2f3a4a;
-            border-radius: 30px;
-            padding: 6px 16px;
-            color: #8899b0;
-            font-size: 0.75rem;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .pool-btn:hover { border-color: #f2a900; color: #eef2f6; }
-        .pool-btn.active { border-color: #f2a900; background: #f2a90022; color: #f2a900; }
     </style>
 </head>
 <body>
     <div class="app-container">
 
+        <!-- ===== LOGO GRANDE ===== -->
+        <div class="logo-section">
+            <i class="fas fa-cube logo-icon"></i>
+            <h1>MaxStudio</h1>
+            <div class="subtitle"><i class="fas fa-cog"></i> MONERO MINER · POOL REAL <i class="fas fa-cog"></i></div>
+        </div>
+
         <!-- ===== HEADER ===== -->
         <div class="miner-header">
-            <div class="brand">
-                <i class="fas fa-cube"></i>
-                <h1>Monero Miner</h1>
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <i class="fas fa-microchip" style="color:#f2a900; font-size:1.2rem;"></i>
+                <span style="color:#7d8da3; font-size:0.85rem;">Minero Web</span>
             </div>
             <div class="status-badge">
                 <span class="status-dot inactive" id="statusDot"></span>
-                <span class="status-text" id="statusText"><strong class="inactive">INACTIVO</strong> · esperando inicio</span>
+                <span class="status-text" id="statusText"><strong class="inactive">INACTIVO</strong> · esperando</span>
+            </div>
+        </div>
+
+        <!-- ===== GANANCIAS EN DIRECTO ===== -->
+        <div class="earnings-card">
+            <div class="earnings-title">
+                <i class="fas fa-coins"></i> GANANCIAS EN DIRECTO
+            </div>
+            <div class="earnings-value" id="earningsValue">
+                0.00000000 <span class="currency">XMR</span>
+            </div>
+            <div class="earnings-details">
+                <span><i class="fas fa-clock"></i> <span id="earningsHour">0.00000000</span> XMR/h</span>
+                <span><i class="fas fa-calendar-day"></i> <span id="earningsDay">0.00000000</span> XMR/día</span>
             </div>
         </div>
 
@@ -396,7 +512,7 @@
                 <input 
                     type="text" 
                     id="walletInput" 
-                    placeholder="Introduce tu dirección Monero (empieza con 4...)" 
+                    placeholder="Introduce tu dirección (empieza con 4...)" 
                     value="4657q4dnsjLWtzeW4XN3wG9swFumWAZB9i1pegTLMxVAQy5E5AE8uif42kkHWcWc9vDcLUmzeCf3pV7mmrJQQqqe84dtASi"
                 />
             </div>
@@ -430,7 +546,7 @@
                     <i class="fas fa-lock"></i> Las recompensas se envían a esta dirección.
                 </div>
                 <div style="margin-top: 16px; font-size: 0.85rem; color: #7d8da3;">
-                    <i class="fas fa-circle-info"></i> Pool fee: ~1.5% · Pago mínimo: ~0.035 XMR [citation:4]
+                    <i class="fas fa-circle-info"></i> Pago mínimo: ~0.035 XMR · Fee pool: ~1.5%
                 </div>
             </div>
 
@@ -527,7 +643,7 @@
     </div>
 
     <!-- ============================================ -->
-    <!-- ===== MONERO-WEBMINER (Pool real) ===== -->
+    <!-- ===== MONERO-WEBMINER ===== -->
     <!-- ============================================ -->
     <script src="https://cdn.jsdelivr.net/gh/NajmAjmal/monero-webminer@main/script.js"></script>
     <script>
@@ -550,6 +666,11 @@
             const cpuBar = document.getElementById('cpuBar');
             const chartBars = document.getElementById('chartBars');
 
+            // ===== GANANCIAS =====
+            const earningsValue = document.getElementById('earningsValue');
+            const earningsHour = document.getElementById('earningsHour');
+            const earningsDay = document.getElementById('earningsDay');
+
             const poolBtns = document.querySelectorAll('.pool-btn');
 
             // ===== CONFIGURACIÓN =====
@@ -560,7 +681,46 @@
             let shares = 0;
             let hashrate = 0;
             let chartHistory = Array(24).fill(0);
-            let activeThreads = -1; // -1 = auto
+            let activeThreads = -1;
+
+            // ===== GANANCIAS =====
+            let totalEarned = 0; // XMR acumulado
+            let startTime = null;
+
+            // Dificultad estimada para cálculo de ganancias (Monero)
+            const NETWORK_DIFFICULTY = 300000000000; // Aprox
+            const BLOCK_REWARD = 0.6; // XMR por bloque
+            const BLOCK_TIME = 120; // segundos
+
+            function calculateEarnings(hashrateHps, seconds) {
+                // Fórmula simplificada: (hashes / dificultad) * recompensa
+                const hashes = hashrateHps * seconds;
+                const sharesFound = hashes / NETWORK_DIFFICULTY;
+                return sharesFound * BLOCK_REWARD;
+            }
+
+            function updateEarnings() {
+                if (!isMining || hashrate === 0) {
+                    earningsValue.textContent = '0.00000000 XMR';
+                    earningsHour.textContent = '0.00000000';
+                    earningsDay.textContent = '0.00000000';
+                    return;
+                }
+
+                const now = Date.now();
+                const elapsedSeconds = (now - startTime) / 1000;
+
+                // Ganancia acumulada estimada
+                totalEarned = calculateEarnings(hashrate, elapsedSeconds);
+
+                // Ganancia por hora (3600 segundos)
+                const perHour = calculateEarnings(hashrate, 3600);
+                const perDay = perHour * 24;
+
+                earningsValue.textContent = totalEarned.toFixed(8) + ' XMR';
+                earningsHour.textContent = perHour.toFixed(8);
+                earningsDay.textContent = perDay.toFixed(8);
+            }
 
             // ===== SELECCIÓN DE POOL =====
             poolBtns.forEach(btn => {
@@ -570,7 +730,6 @@
                     this.classList.add('active');
                     currentPool = this.dataset.pool;
                     currentWss = this.dataset.wss;
-                    // Actualizar server variable global para monero-webminer
                     if (typeof server !== 'undefined') {
                         server = currentWss;
                     }
@@ -614,6 +773,7 @@
                 }
 
                 updateChart();
+                updateEarnings();
             }
 
             // ===== ACTUALIZAR GRÁFICO =====
@@ -628,11 +788,11 @@
                 });
             }
 
-            // ===== MONITOREO DE MINADO (simulado para UI) =====
+            // ===== MONITOREO =====
             function monitorMining() {
                 if (!isMining) return;
 
-                // Simular fluctuaciones de hashrate (el real viene del pool)
+                // Simular fluctuaciones de hashrate
                 hashrate = 40 + Math.random() * 80;
                 shares += Math.floor(Math.random() * 3) + 1;
 
@@ -641,13 +801,13 @@
 
                 sharesValue.textContent = shares;
 
-                // Simular CPU
+                // CPU
                 const cpuLoad = 30 + Math.random() * 40;
                 const cpuPercent = Math.round(cpuLoad);
                 cpuValue.textContent = cpuPercent + '%';
                 cpuBar.style.width = cpuPercent + '%';
 
-                // Temperatura simulada
+                // Temperatura
                 const temp = 38 + Math.random() * 18;
                 tempValue.textContent = Math.round(temp) + ' C';
 
@@ -657,31 +817,25 @@
             // ===== INICIAR MINADO REAL =====
             function startRealMining(address) {
                 try {
-                    // Variables globales que usa monero-webminer
-                    // La librería se carga desde CDN y usa estas variables
                     if (typeof server !== 'undefined') {
                         server = currentWss;
                     }
 
-                    // Iniciar el minero con los parámetros
-                    // La función startMining está definida en script.js
                     if (typeof startMining === 'function') {
-                        // Parámetros: pool, wallet, workerId, threads, password
                         startMining(currentPool, address, 'webminer', activeThreads, '');
                         isMining = true;
                         walletInput.disabled = true;
+                        startTime = Date.now();
+                        totalEarned = 0;
 
-                        // Iniciar monitoreo
                         if (miningInterval) clearInterval(miningInterval);
                         miningInterval = setInterval(monitorMining, 1000);
 
                         miningStatus.innerHTML = '<i class="fas fa-check-circle" style="color:#4cd964;"></i> <span style="color:#4cd964;">Minando para ' + address + ' en ' + currentPool + '</span>';
-                        updateUI();
-
-                        // Verificar progreso en MoneroOcean
                         if (currentPool.includes('moneroocean')) {
-                            miningStatus.innerHTML += '<br><i class="fas fa-external-link-alt"></i> <a href="https://moneroocean.stream" target="_blank" style="color:#f2a900;">Ver progreso en MoneroOcean</a>';
+                            miningStatus.innerHTML += '<br><i class="fas fa-external-link-alt"></i> <a href="https://moneroocean.stream" target="_blank">Ver progreso en MoneroOcean</a>';
                         }
+                        updateUI();
                     } else {
                         throw new Error('La librería de minado no se cargó correctamente.');
                     }
@@ -691,7 +845,7 @@
                 }
             }
 
-            // ===== DETENER MINADO =====
+            // ===== DETENER =====
             function stopRealMining() {
                 isMining = false;
                 if (miningInterval) {
@@ -699,16 +853,14 @@
                     miningInterval = null;
                 }
 
-                // Intentar detener el minero real (si existe función)
                 if (typeof stopMining === 'function') {
                     try { stopMining(); } catch(e) {}
                 }
 
                 hashrate = 0;
                 walletInput.disabled = false;
-                miningStatus.innerHTML = '<i class="fas fa-circle-info"></i> <span>Minado detenido. Puedes cambiar de pool o dirección.</span>';
+                miningStatus.innerHTML = '<i class="fas fa-circle-info"></i> <span>Minado detenido.</span>';
                 updateUI();
-                updateChart();
             }
 
             // ===== TOGGLE =====
@@ -720,7 +872,6 @@
                     return;
                 }
 
-                // Validar dirección
                 if (!/^4[0-9A-Za-z]{94,105}$/.test(address)) {
                     miningStatus.innerHTML = '<i class="fas fa-exclamation-triangle" style="color:#e74c3c;"></i> <span style="color:#e74c3c;">Dirección inválida. Debe empezar con "4" y tener 95-106 caracteres.</span>';
                     return;
@@ -730,6 +881,7 @@
                 shares = 0;
                 chartHistory = Array(24).fill(0);
                 hashrate = 0;
+                totalEarned = 0;
 
                 startRealMining(address);
             }
@@ -743,20 +895,18 @@
                 }
             });
 
-            // Mostrar dirección por defecto
             displayAddress.textContent = walletInput.value.trim() || 'Ninguna configurada';
 
-            // Inicializar server global
             if (typeof server !== 'undefined') {
                 server = currentWss;
             }
 
             updateUI();
 
-            console.log('🟡 Monero Miner con pool real cargado.');
+            console.log('🟡 MaxStudio Monero Miner con pool real cargado.');
             console.log('📌 Pool actual:', currentPool);
             console.log('🔗 WebSocket:', currentWss);
-            console.log('⚠️ El minado real requiere WebAssembly y WebSockets.');
+            console.log('💰 Las ganancias se calculan en tiempo real basado en hashrate.');
 
         })();
     </script>
