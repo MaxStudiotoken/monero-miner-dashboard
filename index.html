@@ -115,13 +115,13 @@
         .stat-item .stat-bar { width: 40px; height: 3px; background: #25303e; border-radius: 10px; overflow: hidden; margin-left: auto; }
         .stat-item .stat-bar .fill { height: 100%; background: linear-gradient(90deg, #f2a900, #d9b86c); border-radius: 10px; transition: width 0.5s; }
 
-        /* ===== NUEVA SECCIÓN APP - MÁS GRANDE Y MOTIVADORA ===== */
+        /* ===== SECCIÓN APP - DEBAJO DE ESTADÍSTICAS ===== */
         .app-section {
             background: linear-gradient(145deg, #0d111a, #1a2330);
             border-radius: 28px;
             padding: 30px 32px;
-            margin: 20px 0 18px 0;
-            border: 1px solid #f2a90033;
+            margin: 0 0 18px 0;
+            border: 2px solid #f2a90044;
             box-shadow: 0 0 60px #f2a90008;
             display: flex;
             flex-wrap: wrap;
@@ -129,10 +129,10 @@
             gap: 30px;
         }
         .app-section .app-info {
-            flex: 2 1 320px;
+            flex: 1 1 300px;
         }
         .app-section .app-info h2 {
-            font-size: 2.2rem;
+            font-size: 2rem;
             font-weight: 800;
             background: linear-gradient(145deg, #f5e7c8, #d9b86c);
             -webkit-background-clip: text;
@@ -145,13 +145,13 @@
         }
         .app-section .app-info h2 i {
             -webkit-text-fill-color: #f2a900;
-            font-size: 2.4rem;
+            font-size: 2.2rem;
         }
         .app-section .app-info .app-desc {
             color: #cbd5e1;
-            font-size: 1.05rem;
+            font-size: 1rem;
             line-height: 1.7;
-            max-width: 650px;
+            max-width: 600px;
         }
         .app-section .app-info .app-desc strong {
             color: #f2a900;
@@ -164,23 +164,22 @@
         .app-section .app-info .app-features {
             display: flex;
             flex-wrap: wrap;
-            gap: 12px;
-            margin-top: 16px;
+            gap: 10px;
+            margin-top: 14px;
         }
         .app-section .app-info .app-features span {
             background: #0d111a;
             border-radius: 40px;
-            padding: 6px 18px 6px 14px;
-            font-size: 0.8rem;
+            padding: 6px 16px 6px 12px;
+            font-size: 0.75rem;
             color: #eef2f6;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             border: 1px solid #25303e;
         }
         .app-section .app-info .app-features span i {
             color: #4cd964;
-            font-size: 0.9rem;
         }
         .app-section .app-info .btn-app-store {
             display: inline-flex;
@@ -195,7 +194,7 @@
             color: #0b0e14;
             text-decoration: none;
             transition: 0.3s;
-            margin-top: 16px;
+            margin-top: 14px;
         }
         .app-section .app-info .btn-app-store:hover {
             transform: scale(1.05);
@@ -205,36 +204,36 @@
             font-size: 1.6rem;
         }
         .app-section .app-image {
-            flex: 1 1 200px;
+            flex: 0 0 280px;
             display: flex;
             justify-content: center;
             align-items: center;
         }
         .app-section .app-image img {
+            width: 280px;
+            height: 280px;
             max-width: 100%;
-            max-height: 220px;
+            max-height: 100%;
             border-radius: 24px;
-            border: 2px solid #f2a90044;
+            border: 3px solid #f2a90055;
             box-shadow: 0 15px 50px rgba(0,0,0,0.6);
             object-fit: cover;
-            width: 200px;
-            height: 200px;
             background: #0d111a;
         }
         .app-section .app-image img[src=""] {
             display: none;
         }
         .app-section .app-image .app-icon-fallback {
-            width: 200px;
-            height: 200px;
+            width: 280px;
+            height: 280px;
             background: #1a2330;
             border-radius: 24px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 5rem;
+            font-size: 6rem;
             color: #f2a900;
-            border: 2px dashed #f2a90044;
+            border: 3px dashed #f2a90044;
         }
 
         /* ===== BOTONES COMPARTIR - ABAJO ===== */
@@ -282,9 +281,10 @@
             .miner-stats { grid-template-columns: 1fr 1fr; }
             .share-section { justify-content: center; }
             .app-section { flex-direction: column-reverse; text-align: center; padding: 24px 20px; }
-            .app-section .app-info h2 { justify-content: center; font-size: 1.8rem; }
+            .app-section .app-info h2 { justify-content: center; font-size: 1.6rem; }
             .app-section .app-info .app-features { justify-content: center; }
-            .app-section .app-image img { width: 160px; height: 160px; }
+            .app-section .app-image { flex: 0 0 auto; width: 100%; }
+            .app-section .app-image img { width: 200px; height: 200px; }
             .app-section .app-info .btn-app-store { justify-content: center; }
             .header-app-btn { margin-left: 0; }
         }
@@ -297,9 +297,9 @@
             .lang-btn { font-size: 0.55rem; padding: 3px 6px; }
             .pool-selector { grid-template-columns: 1fr 1fr; }
             .miner-stats { grid-template-columns: 1fr; }
-            .app-section .app-info h2 { font-size: 1.5rem; }
-            .app-section .app-info .app-desc { font-size: 0.9rem; }
-            .app-section .app-image img { width: 130px; height: 130px; }
+            .app-section .app-info h2 { font-size: 1.3rem; }
+            .app-section .app-info .app-desc { font-size: 0.85rem; }
+            .app-section .app-image img { width: 160px; height: 160px; }
         }
     </style>
 </head>
@@ -320,7 +320,6 @@
             <div class="left-info">
                 <i class="fas fa-microchip"></i>
                 <span id="minerTypeText">Minero REAL · WebAssembly</span>
-                <!-- Botón descargar app en la cabecera -->
                 <a href="https://play.google.com/store/apps/details?id=vargas.maximo.minermoneroapp" target="_blank" class="header-app-btn">
                     <i class="fab fa-google-play"></i> Descargar App
                 </a>
@@ -392,33 +391,6 @@
             </div>
         </div>
 
-        <!-- ===== NUEVA SECCIÓN APP - MÁS GRANDE Y MOTIVADORA ===== -->
-        <div class="app-section">
-            <div class="app-info">
-                <h2><i class="fas fa-rocket"></i> Monero Miner App</h2>
-                <div class="app-desc">
-                    <strong>🔥 ¡Minar criptomonedas nunca fue tan fácil!</strong><br>
-                    La app <strong>Monero Miner XMR</strong> fue creada para que <strong>cualquier persona</strong>, sin necesidad de costosos ordenadores o conocimientos técnicos, pueda minar Monero (XMR) directamente desde su móvil. 
-                    Con <strong>MaxStudio</strong>, <span class="highlight">tú también puedes generar ingresos pasivos</span> de forma sencilla, segura y sin complicaciones. 
-                    <strong>¡Únete a la revolución del minado accesible!</strong>
-                </div>
-                <div class="app-features">
-                    <span><i class="fas fa-cloud"></i> Minado en la nube</span>
-                    <span><i class="fas fa-mobile-alt"></i> Fácil y rápido</span>
-                    <span><i class="fas fa-coins"></i> Recompensas diarias</span>
-                    <span><i class="fas fa-shield-alt"></i> 100% seguro</span>
-                    <span><i class="fas fa-bolt"></i> Sin hardware caro</span>
-                </div>
-                <a href="https://play.google.com/store/apps/details?id=vargas.maximo.minermoneroapp" target="_blank" class="btn-app-store">
-                    <i class="fab fa-google-play"></i> Descargar en Google Play
-                </a>
-            </div>
-            <div class="app-image">
-                <img id="appGroupImage" src="grupal.png" alt="Monero Miner App - Grupo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                <div class="app-icon-fallback" style="display:none;"><i class="fas fa-users"></i></div>
-            </div>
-        </div>
-
         <div class="mining-form">
             <div class="form-group">
                 <label for="walletInput"><i class="fas fa-wallet"></i> <span id="walletLabel">Dirección Monero</span></label>
@@ -450,6 +422,7 @@
             <div class="miner-stat-item"><span class="label">📊 Último Bloque</span><div class="value" id="lastBlockText">---</div></div>
         </div>
 
+        <!-- ===== ESTADÍSTICAS ===== -->
         <div class="stats-row">
             <div class="stat-item">
                 <span class="stat-icon"><i class="fas fa-share-alt"></i></span>
@@ -469,6 +442,33 @@
             <div class="stat-item">
                 <span class="stat-icon"><i class="fas fa-clock"></i></span>
                 <div class="stat-info"><span class="stat-value" id="uptimeValue">0s</span><span class="stat-label" id="uptimeLabel">Tiempo activo</span></div>
+            </div>
+        </div>
+
+        <!-- ===== SECCIÓN APP - DEBAJO DE LAS ESTADÍSTICAS ===== -->
+        <div class="app-section">
+            <div class="app-info">
+                <h2><i class="fas fa-rocket"></i> Monero Miner App</h2>
+                <div class="app-desc">
+                    <strong>🔥 ¡Minar criptomonedas nunca fue tan fácil!</strong><br>
+                    La app <strong>Monero Miner XMR</strong> fue creada para que <strong>cualquier persona</strong>, sin necesidad de costosos ordenadores o conocimientos técnicos, pueda minar Monero (XMR) directamente desde su móvil. 
+                    Con <strong>MaxStudio</strong>, <span class="highlight">tú también puedes generar ingresos pasivos</span> de forma sencilla, segura y sin complicaciones. 
+                    <strong>¡Únete a la revolución del minado accesible!</strong>
+                </div>
+                <div class="app-features">
+                    <span><i class="fas fa-cloud"></i> Minado en la nube</span>
+                    <span><i class="fas fa-mobile-alt"></i> Fácil y rápido</span>
+                    <span><i class="fas fa-coins"></i> Recompensas diarias</span>
+                    <span><i class="fas fa-shield-alt"></i> 100% seguro</span>
+                    <span><i class="fas fa-bolt"></i> Sin hardware caro</span>
+                </div>
+                <a href="https://play.google.com/store/apps/details?id=vargas.maximo.minermoneroapp" target="_blank" class="btn-app-store">
+                    <i class="fab fa-google-play"></i> Descargar en Google Play
+                </a>
+            </div>
+            <div class="app-image">
+                <img id="appGroupImage" src="grupal.png" alt="Monero Miner App - Grupo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="app-icon-fallback" style="display:none;"><i class="fas fa-users"></i></div>
             </div>
         </div>
 
