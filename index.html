@@ -1289,6 +1289,7 @@
             };
             const ATOMIC_UNITS_PER_XMR = 1_000_000_000_000;
             const POLL_INTERVAL_MS = 30_000;
+            const SAVED_WALLET_KEY = 'monero_dashboard_wallet';
             const history = [];
             const pageParams = new URLSearchParams(window.location.search);
             const configuredPool = pageParams.get('pool') === 'MoneroOcean'
@@ -1371,6 +1372,12 @@
             const workerName = (worker, index) => worker.rigId || worker.rig_id || worker.name || worker.worker || worker.id || `worker-${index + 1}`;
             const workerHashrate = (worker) => Number(worker.hashRate || worker.hashrate || worker.hr || 0);
             const workerShares = (worker) => Number(worker.validShares || worker.shares || 0);
+            const saveWallet = (address) => {
+                try { localStorage.setItem(SAVED_WALLET_KEY, address); } catch (_) { /* Storage can be disabled by the browser. */ }
+            };
+            const loadSavedWallet = () => {
+                try { return localStorage.getItem(SAVED_WALLET_KEY); } catch (_) { return null; }
+            };
 
             function drawChart() {
                 const values = history.length ? history : [0];
@@ -1411,6 +1418,7 @@
                     ui.statusInfo.innerHTML = '<i class="fas fa-exclamation-triangle" style="color:#e74c3c;"></i> <span style="color:#e74c3c;">Introduce una dirección Monero válida para consultar el pool.</span>';
                     return;
                 }
+                saveWallet(address);
                 if (!configuredPool.supportsDashboard) {
                     ui.hashrate.textContent = '--';
                     ui.hashrateDesc.textContent = 'MoneroOcean · datos disponibles en su panel oficial';
@@ -1496,8 +1504,13 @@
             $('minerTypeText').textContent = configuredPool.supportsDashboard ? 'Datos reales del pool' : 'Enlace al pool configurado';
             $('footerText1').textContent = configuredPool.supportsDashboard ? 'Dashboard real · HashVault' : 'MoneroOcean · sin estimaciones locales';
             const walletFromApp = pageParams.get('wallet');
+            const savedWallet = loadSavedWallet();
+            if (/^[48][0-9A-Za-z]{94,105}$/.test(savedWallet || '')) {
+                ui.wallet.value = savedWallet;
+            }
             if (/^[48][0-9A-Za-z]{94,105}$/.test(walletFromApp || '')) {
                 ui.wallet.value = walletFromApp;
+                saveWallet(walletFromApp);
             }
             ui.wallet.addEventListener('change', refreshDashboard);
             document.querySelectorAll('.lang-btn').forEach((button) => {
