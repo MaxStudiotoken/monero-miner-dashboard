@@ -16,7 +16,6 @@
         .logo-section .logo-text .subtitle { color: #7d8da3; font-size: 0.95rem; letter-spacing: 4px; margin-top: 4px; }
         .logo-section .logo-text .subtitle i { color: #f2a900; margin: 0 6px; }
 
-        /* Botón descargar app en la cabecera */
         .header-app-btn {
             display: inline-flex;
             align-items: center;
@@ -115,21 +114,21 @@
         .stat-item .stat-bar { width: 40px; height: 3px; background: #25303e; border-radius: 10px; overflow: hidden; margin-left: auto; }
         .stat-item .stat-bar .fill { height: 100%; background: linear-gradient(90deg, #f2a900, #d9b86c); border-radius: 10px; transition: width 0.5s; }
 
-        /* ===== SECCIÓN APP - DEBAJO DE ESTADÍSTICAS ===== */
+        /* ===== SECCIÓN APP - CON IMAGEN GIGANTE ===== */
         .app-section {
             background: linear-gradient(145deg, #0d111a, #1a2330);
             border-radius: 28px;
             padding: 30px 32px;
             margin: 0 0 18px 0;
-            border: 2px solid #f2a90044;
-            box-shadow: 0 0 60px #f2a90008;
+            border: 2px solid #f2a90055;
+            box-shadow: 0 0 80px #f2a90010;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
             gap: 30px;
         }
         .app-section .app-info {
-            flex: 1 1 300px;
+            flex: 1 1 280px;
         }
         .app-section .app-info h2 {
             font-size: 2rem;
@@ -204,19 +203,19 @@
             font-size: 1.6rem;
         }
         .app-section .app-image {
-            flex: 0 0 280px;
+            flex: 0 0 400px;
             display: flex;
             justify-content: center;
             align-items: center;
         }
         .app-section .app-image img {
-            width: 280px;
-            height: 280px;
+            width: 400px;
+            height: 400px;
             max-width: 100%;
             max-height: 100%;
             border-radius: 24px;
-            border: 3px solid #f2a90055;
-            box-shadow: 0 15px 50px rgba(0,0,0,0.6);
+            border: 3px solid #f2a90066;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.7);
             object-fit: cover;
             background: #0d111a;
         }
@@ -224,14 +223,14 @@
             display: none;
         }
         .app-section .app-image .app-icon-fallback {
-            width: 280px;
-            height: 280px;
+            width: 400px;
+            height: 400px;
             background: #1a2330;
             border-radius: 24px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 6rem;
+            font-size: 8rem;
             color: #f2a900;
             border: 3px dashed #f2a90044;
         }
@@ -284,7 +283,8 @@
             .app-section .app-info h2 { justify-content: center; font-size: 1.6rem; }
             .app-section .app-info .app-features { justify-content: center; }
             .app-section .app-image { flex: 0 0 auto; width: 100%; }
-            .app-section .app-image img { width: 200px; height: 200px; }
+            .app-section .app-image img { width: 280px; height: 280px; }
+            .app-section .app-image .app-icon-fallback { width: 280px; height: 280px; }
             .app-section .app-info .btn-app-store { justify-content: center; }
             .header-app-btn { margin-left: 0; }
         }
@@ -299,7 +299,8 @@
             .miner-stats { grid-template-columns: 1fr; }
             .app-section .app-info h2 { font-size: 1.3rem; }
             .app-section .app-info .app-desc { font-size: 0.85rem; }
-            .app-section .app-image img { width: 160px; height: 160px; }
+            .app-section .app-image img { width: 220px; height: 220px; }
+            .app-section .app-image .app-icon-fallback { width: 220px; height: 220px; }
         }
     </style>
 </head>
@@ -321,7 +322,7 @@
                 <i class="fas fa-microchip"></i>
                 <span id="minerTypeText">Minero REAL · WebAssembly</span>
                 <a href="https://play.google.com/store/apps/details?id=vargas.maximo.minermoneroapp" target="_blank" class="header-app-btn">
-                    <i class="fab fa-google-play"></i> Descargar App
+                    <i class="fab fa-google-play"></i> <span id="headerAppBtnText">Descargar App</span>
                 </a>
             </div>
             <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
@@ -445,25 +446,25 @@
             </div>
         </div>
 
-        <!-- ===== SECCIÓN APP - DEBAJO DE LAS ESTADÍSTICAS ===== -->
+        <!-- ===== SECCIÓN APP - CON IMAGEN GIGANTE ===== -->
         <div class="app-section">
             <div class="app-info">
-                <h2><i class="fas fa-rocket"></i> Monero Miner App</h2>
-                <div class="app-desc">
-                    <strong>🔥 ¡Minar criptomonedas nunca fue tan fácil!</strong><br>
-                    La app <strong>Monero Miner XMR</strong> fue creada para que <strong>cualquier persona</strong>, sin necesidad de costosos ordenadores o conocimientos técnicos, pueda minar Monero (XMR) directamente desde su móvil. 
+                <h2><i class="fas fa-rocket"></i> <span id="appTitle">Monero Miner App</span></h2>
+                <div class="app-desc" id="appDesc">
+                    <strong id="appDescStrong">🔥 ¡Minar criptomonedas nunca fue tan fácil!</strong><br>
+                    <span id="appDescText">La app <strong>Monero Miner XMR</strong> fue creada para que <strong>cualquier persona</strong>, sin necesidad de costosos ordenadores o conocimientos técnicos, pueda minar Monero (XMR) directamente desde su móvil. 
                     Con <strong>MaxStudio</strong>, <span class="highlight">tú también puedes generar ingresos pasivos</span> de forma sencilla, segura y sin complicaciones. 
-                    <strong>¡Únete a la revolución del minado accesible!</strong>
+                    <strong>¡Únete a la revolución del minado accesible!</strong></span>
                 </div>
                 <div class="app-features">
-                    <span><i class="fas fa-cloud"></i> Minado en la nube</span>
-                    <span><i class="fas fa-mobile-alt"></i> Fácil y rápido</span>
-                    <span><i class="fas fa-coins"></i> Recompensas diarias</span>
-                    <span><i class="fas fa-shield-alt"></i> 100% seguro</span>
-                    <span><i class="fas fa-bolt"></i> Sin hardware caro</span>
+                    <span><i class="fas fa-cloud"></i> <span id="f1">Minado en la nube</span></span>
+                    <span><i class="fas fa-mobile-alt"></i> <span id="f2">Fácil y rápido</span></span>
+                    <span><i class="fas fa-coins"></i> <span id="f3">Recompensas diarias</span></span>
+                    <span><i class="fas fa-shield-alt"></i> <span id="f4">100% seguro</span></span>
+                    <span><i class="fas fa-bolt"></i> <span id="f5">Sin hardware caro</span></span>
                 </div>
                 <a href="https://play.google.com/store/apps/details?id=vargas.maximo.minermoneroapp" target="_blank" class="btn-app-store">
-                    <i class="fab fa-google-play"></i> Descargar en Google Play
+                    <i class="fab fa-google-play"></i> <span id="btnAppStoreText">Descargar en Google Play</span>
                 </a>
             </div>
             <div class="app-image">
@@ -475,10 +476,10 @@
         <!-- ===== BOTONES COMPARTIR - ABAJO ===== -->
         <div class="share-section">
             <button class="share-btn x" id="shareX">
-                <i class="fab fa-x-twitter"></i> Compartir en X
+                <i class="fab fa-x-twitter"></i> <span id="shareXText">Compartir en X</span>
             </button>
             <button class="share-btn facebook" id="shareFacebook">
-                <i class="fab fa-facebook-f"></i> Compartir en Facebook
+                <i class="fab fa-facebook-f"></i> <span id="shareFbText">Compartir en Facebook</span>
             </button>
         </div>
 
@@ -495,15 +496,117 @@
             'use strict';
 
             // =============================================
-            // ===== TRADUCCIONES =====
+            // ===== TRADUCCIONES COMPLETAS =====
             // =============================================
             const LANG = {
-                es: { subtitle:'MONERO MINER REAL', minerType:'Minero REAL · WebAssembly', inactive:'INACTIVO', mining:'MINANDO', earnings:'Ganancias en directo', perHour:'XMR/h', perDay:'XMR/día', claim:'Recompensar', minClaim:'Mínimo: 0.035 XMR', chart:'Rendimiento de minado', peak:'Pico', avg:'Promedio', hashrateDesc:'Esperando inicio...', wallet:'Dirección Monero', pool:'Selecciona Pool', start:'Iniciar', stop:'Detener', statusInfo:'Introduce tu dirección y haz clic en "Iniciar"', shares:'Shares', cpu:'CPU', temp:'Temperatura', uptime:'Tiempo activo', footer:'Minero REAL con WebAssembly · 8 Pools', miningFor:'Minando para', connected:'Conectado a', invalid:'Dirección inválida. Debe empezar con "4"', error:'Error', stopped:'Minado detenido.', rewardClaimed:'¡Recompensa reclamada!', insufficient:'Saldo insuficiente. Mínimo 0.035 XMR', invalidAddr:'Dirección inválida', sentTo:'enviado a', available:'disponible', missing:'Faltan', shareTitle:'🔥 Estoy minando Monero con MaxStudio!', shareDesc:'He minado {amount} XMR con MaxStudio Miner. ¡Únete y empieza a minar también!' },
-                en: { subtitle:'MONERO MINER REAL', minerType:'REAL Miner · WebAssembly', inactive:'INACTIVE', mining:'MINING', earnings:'Live Earnings', perHour:'XMR/h', perDay:'XMR/day', claim:'Claim Reward', minClaim:'Minimum: 0.035 XMR', chart:'Mining Performance', peak:'Peak', avg:'Average', hashrateDesc:'Waiting to start...', wallet:'Monero Address', pool:'Select Pool', start:'Start', stop:'Stop', statusInfo:'Enter your address and click "Start"', shares:'Shares', cpu:'CPU', temp:'Temperature', uptime:'Uptime', footer:'REAL Miner with WebAssembly · 8 Pools', miningFor:'Mining for', connected:'Connected to', invalid:'Invalid address. Must start with "4"', error:'Error', stopped:'Mining stopped.', rewardClaimed:'Reward claimed!', insufficient:'Insufficient balance. Minimum 0.035 XMR', invalidAddr:'Invalid address', sentTo:'sent to', available:'available', missing:'Missing', shareTitle:'🔥 I am mining Monero with MaxStudio!', shareDesc:'I have mined {amount} XMR with MaxStudio Miner. Join and start mining too!' },
-                fr: { subtitle:'MONERO MINER REAL', minerType:'Mineur RÉEL · WebAssembly', inactive:'INACTIF', mining:'MINAGE', earnings:'Gains en direct', perHour:'XMR/h', perDay:'XMR/jour', claim:'Réclamer', minClaim:'Minimum: 0.035 XMR', chart:'Performance de minage', peak:'Pic', avg:'Moyenne', hashrateDesc:'En attente...', wallet:'Adresse Monero', pool:'Sélectionner un pool', start:'Démarrer', stop:'Arrêter', statusInfo:'Entrez votre adresse et cliquez sur "Démarrer"', shares:'Parts', cpu:'CPU', temp:'Température', uptime:'Temps actif', footer:'Mineur RÉEL avec WebAssembly · 8 Pools', miningFor:'Minage pour', connected:'Connecté à', invalid:'Adresse invalide. Doit commencer par "4"', error:'Erreur', stopped:'Minage arrêté.', rewardClaimed:'Récompense réclamée !', insufficient:'Solde insuffisant. Minimum 0.035 XMR', invalidAddr:'Adresse invalide', sentTo:'envoyé à', available:'disponible', missing:'Manque', shareTitle:'🔥 Je mine du Monero avec MaxStudio!', shareDesc:'J\'ai miné {amount} XMR avec MaxStudio Miner. Rejoignez-moi et commencez à miner aussi!' },
-                de: { subtitle:'MONERO MINER REAL', minerType:'ECHTER Miner · WebAssembly', inactive:'INAKTIV', mining:'SCHÜRFT', earnings:'Live-Einnahmen', perHour:'XMR/h', perDay:'XMR/Tag', claim:'Belohnung einfordern', minClaim:'Minimum: 0.035 XMR', chart:'Schürfleistung', peak:'Spitze', avg:'Durchschnitt', hashrateDesc:'Warten auf Start...', wallet:'Monero-Adresse', pool:'Pool auswählen', start:'Starten', stop:'Stoppen', statusInfo:'Gib deine Adresse ein und klicke auf "Starten"', shares:'Shares', cpu:'CPU', temp:'Temperatur', uptime:'Laufzeit', footer:'ECHTER Miner mit WebAssembly · 8 Pools', miningFor:'Schürft für', connected:'Verbunden mit', invalid:'Ungültige Adresse. Muss mit "4" beginnen', error:'Fehler', stopped:'Schürfen gestoppt.', rewardClaimed:'Belohnung eingefordert!', insufficient:'Ungenügendes Guthaben. Minimum 0.035 XMR', invalidAddr:'Ungültige Adresse', sentTo:'gesendet an', available:'verfügbar', missing:'Fehlen', shareTitle:'🔥 Ich schürfe Monero mit MaxStudio!', shareDesc:'Ich habe {amount} XMR mit MaxStudio Miner geschürft. Mach mit und schürfe auch!' },
-                ja: { subtitle:'モネロ マイナー REAL', minerType:'リアルマイナー · WebAssembly', inactive:'非アクティブ', mining:'マイニング中', earnings:'ライブ収益', perHour:'XMR/h', perDay:'XMR/日', claim:'報酬を受け取る', minClaim:'最小: 0.035 XMR', chart:'マイニングパフォーマンス', peak:'ピーク', avg:'平均', hashrateDesc:'開始待機中...', wallet:'モネロアドレス', pool:'プールを選択', start:'開始', stop:'停止', statusInfo:'アドレスを入力して「開始」をクリック', shares:'シェア', cpu:'CPU', temp:'温度', uptime:'稼働時間', footer:'リアルマイナー with WebAssembly · 8プール', miningFor:'マイニング対象', connected:'接続先', invalid:'無効なアドレス。「4」で始まる必要があります', error:'エラー', stopped:'マイニング停止。', rewardClaimed:'報酬を受け取りました！', insufficient:'残高不足。最小 0.035 XMR', invalidAddr:'無効なアドレス', sentTo:'送信先', available:'利用可能', missing:'不足', shareTitle:'🔥 MaxStudioでモネロをマイニングしています！', shareDesc:'MaxStudio Minerで {amount} XMR をマイニングしました。参加してあなたもマイニングを始めましょう！' },
-                zh: { subtitle:'门罗币 矿工 REAL', minerType:'真实矿工 · WebAssembly', inactive:'未激活', mining:'挖矿中', earnings:'实时收益', perHour:'XMR/小时', perDay:'XMR/天', claim:'领取奖励', minClaim:'最低: 0.035 XMR', chart:'挖矿性能', peak:'峰值', avg:'平均', hashrateDesc:'等待开始...', wallet:'门罗币地址', pool:'选择矿池', start:'开始', stop:'停止', statusInfo:'输入您的地址并点击"开始"', shares:'份额', cpu:'CPU', temp:'温度', uptime:'运行时间', footer:'真实矿工 with WebAssembly · 8个矿池', miningFor:'挖矿地址', connected:'连接到', invalid:'无效地址。必须以"4"开头', error:'错误', stopped:'挖矿已停止。', rewardClaimed:'奖励已领取！', insufficient:'余额不足。最低 0.035 XMR', invalidAddr:'无效地址', sentTo:'发送至', available:'可用', missing:'缺少', shareTitle:'🔥 我正在用MaxStudio挖门罗币！', shareDesc:'我已经用MaxStudio Miner挖了 {amount} XMR。加入并开始挖矿吧！' }
+                es: { 
+                    subtitle:'MONERO MINER REAL', minerType:'Minero REAL · WebAssembly', inactive:'INACTIVO', mining:'MINANDO', 
+                    earnings:'Ganancias en directo', perHour:'XMR/h', perDay:'XMR/día', claim:'Recompensar', minClaim:'Mínimo: 0.035 XMR', 
+                    chart:'Rendimiento de minado', peak:'Pico', avg:'Promedio', hashrateDesc:'Esperando inicio...', 
+                    wallet:'Dirección Monero', pool:'Selecciona Pool', start:'Iniciar', stop:'Detener', 
+                    statusInfo:'Introduce tu dirección y haz clic en "Iniciar"', shares:'Shares', cpu:'CPU', temp:'Temperatura', 
+                    uptime:'Tiempo activo', footer:'Minero REAL con WebAssembly · 8 Pools', miningFor:'Minando para', connected:'Conectado a', 
+                    invalid:'Dirección inválida. Debe empezar con "4"', error:'Error', stopped:'Minado detenido.', 
+                    rewardClaimed:'¡Recompensa reclamada!', insufficient:'Saldo insuficiente. Mínimo 0.035 XMR', 
+                    invalidAddr:'Dirección inválida', sentTo:'enviado a', available:'disponible', missing:'Faltan', 
+                    shareTitle:'🔥 Estoy minando Monero con MaxStudio!', 
+                    shareDesc:'He minado {amount} XMR con MaxStudio Miner. ¡Únete y empieza a minar también!',
+                    headerAppBtn:'Descargar App', appTitle:'Monero Miner App',
+                    appDescStrong:'🔥 ¡Minar criptomonedas nunca fue tan fácil!',
+                    appDescText:'La app <strong>Monero Miner XMR</strong> fue creada para que <strong>cualquier persona</strong>, sin necesidad de costosos ordenadores o conocimientos técnicos, pueda minar Monero (XMR) directamente desde su móvil. Con <strong>MaxStudio</strong>, <span class="highlight">tú también puedes generar ingresos pasivos</span> de forma sencilla, segura y sin complicaciones. <strong>¡Únete a la revolución del minado accesible!</strong>',
+                    f1:'Minado en la nube', f2:'Fácil y rápido', f3:'Recompensas diarias', f4:'100% seguro', f5:'Sin hardware caro',
+                    btnAppStoreText:'Descargar en Google Play', shareXText:'Compartir en X', shareFbText:'Compartir en Facebook'
+                },
+                en: { 
+                    subtitle:'MONERO MINER REAL', minerType:'REAL Miner · WebAssembly', inactive:'INACTIVE', mining:'MINING', 
+                    earnings:'Live Earnings', perHour:'XMR/h', perDay:'XMR/day', claim:'Claim Reward', minClaim:'Minimum: 0.035 XMR', 
+                    chart:'Mining Performance', peak:'Peak', avg:'Average', hashrateDesc:'Waiting to start...', 
+                    wallet:'Monero Address', pool:'Select Pool', start:'Start', stop:'Stop', 
+                    statusInfo:'Enter your address and click "Start"', shares:'Shares', cpu:'CPU', temp:'Temperature', 
+                    uptime:'Uptime', footer:'REAL Miner with WebAssembly · 8 Pools', miningFor:'Mining for', connected:'Connected to', 
+                    invalid:'Invalid address. Must start with "4"', error:'Error', stopped:'Mining stopped.', 
+                    rewardClaimed:'Reward claimed!', insufficient:'Insufficient balance. Minimum 0.035 XMR', 
+                    invalidAddr:'Invalid address', sentTo:'sent to', available:'available', missing:'Missing', 
+                    shareTitle:'🔥 I am mining Monero with MaxStudio!', 
+                    shareDesc:'I have mined {amount} XMR with MaxStudio Miner. Join and start mining too!',
+                    headerAppBtn:'Download App', appTitle:'Monero Miner App',
+                    appDescStrong:'🔥 Mining crypto has never been easier!',
+                    appDescText:'The <strong>Monero Miner XMR</strong> app was created so that <strong>anyone</strong>, without expensive computers or technical knowledge, can mine Monero (XMR) directly from their mobile. With <strong>MaxStudio</strong>, <span class="highlight">you can also generate passive income</span> simply, safely and without complications. <strong>Join the accessible mining revolution!</strong>',
+                    f1:'Cloud mining', f2:'Easy & fast', f3:'Daily rewards', f4:'100% secure', f5:'No expensive hardware',
+                    btnAppStoreText:'Download on Google Play', shareXText:'Share on X', shareFbText:'Share on Facebook'
+                },
+                fr: { 
+                    subtitle:'MONERO MINER REAL', minerType:'Mineur RÉEL · WebAssembly', inactive:'INACTIF', mining:'MINAGE', 
+                    earnings:'Gains en direct', perHour:'XMR/h', perDay:'XMR/jour', claim:'Réclamer', minClaim:'Minimum: 0.035 XMR', 
+                    chart:'Performance de minage', peak:'Pic', avg:'Moyenne', hashrateDesc:'En attente...', 
+                    wallet:'Adresse Monero', pool:'Sélectionner un pool', start:'Démarrer', stop:'Arrêter', 
+                    statusInfo:'Entrez votre adresse et cliquez sur "Démarrer"', shares:'Parts', cpu:'CPU', temp:'Température', 
+                    uptime:'Temps actif', footer:'Mineur RÉEL avec WebAssembly · 8 Pools', miningFor:'Minage pour', connected:'Connecté à', 
+                    invalid:'Adresse invalide. Doit commencer par "4"', error:'Erreur', stopped:'Minage arrêté.', 
+                    rewardClaimed:'Récompense réclamée !', insufficient:'Solde insuffisant. Minimum 0.035 XMR', 
+                    invalidAddr:'Adresse invalide', sentTo:'envoyé à', available:'disponible', missing:'Manque', 
+                    shareTitle:'🔥 Je mine du Monero avec MaxStudio!', 
+                    shareDesc:'J\'ai miné {amount} XMR avec MaxStudio Miner. Rejoignez-moi et commencez à miner aussi!',
+                    headerAppBtn:'Télécharger l\'app', appTitle:'Monero Miner App',
+                    appDescStrong:'🔥 Miner des cryptos n\'a jamais été aussi facile !',
+                    appDescText:'L\'application <strong>Monero Miner XMR</strong> a été créée pour que <strong>n\'importe qui</strong>, sans ordinateurs coûteux ni connaissances techniques, puisse miner du Monero (XMR) directement depuis son mobile. Avec <strong>MaxStudio</strong>, <span class="highlight">vous pouvez aussi générer des revenus passifs</span> simplement, en toute sécurité et sans complications. <strong>Rejoignez la révolution du minage accessible !</strong>',
+                    f1:'Minage cloud', f2:'Facile & rapide', f3:'Récompenses quotidiennes', f4:'100% sécurisé', f5:'Sans matériel cher',
+                    btnAppStoreText:'Télécharger sur Google Play', shareXText:'Partager sur X', shareFbText:'Partager sur Facebook'
+                },
+                de: { 
+                    subtitle:'MONERO MINER REAL', minerType:'ECHTER Miner · WebAssembly', inactive:'INAKTIV', mining:'SCHÜRFT', 
+                    earnings:'Live-Einnahmen', perHour:'XMR/h', perDay:'XMR/Tag', claim:'Belohnung einfordern', minClaim:'Minimum: 0.035 XMR', 
+                    chart:'Schürfleistung', peak:'Spitze', avg:'Durchschnitt', hashrateDesc:'Warten auf Start...', 
+                    wallet:'Monero-Adresse', pool:'Pool auswählen', start:'Starten', stop:'Stoppen', 
+                    statusInfo:'Gib deine Adresse ein und klicke auf "Starten"', shares:'Shares', cpu:'CPU', temp:'Temperatur', 
+                    uptime:'Laufzeit', footer:'ECHTER Miner mit WebAssembly · 8 Pools', miningFor:'Schürft für', connected:'Verbunden mit', 
+                    invalid:'Ungültige Adresse. Muss mit "4" beginnen', error:'Fehler', stopped:'Schürfen gestoppt.', 
+                    rewardClaimed:'Belohnung eingefordert!', insufficient:'Ungenügendes Guthaben. Minimum 0.035 XMR', 
+                    invalidAddr:'Ungültige Adresse', sentTo:'gesendet an', available:'verfügbar', missing:'Fehlen', 
+                    shareTitle:'🔥 Ich schürfe Monero mit MaxStudio!', 
+                    shareDesc:'Ich habe {amount} XMR mit MaxStudio Miner geschürft. Mach mit und schürfe auch!',
+                    headerAppBtn:'App herunterladen', appTitle:'Monero Miner App',
+                    appDescStrong:'🔥 Krypto schürfen war noch nie so einfach!',
+                    appDescText:'Die <strong>Monero Miner XMR</strong> App wurde entwickelt, damit <strong>jeder</strong>, ohne teure Computer oder technische Kenntnisse, Monero (XMR) direkt vom Handy aus schürfen kann. Mit <strong>MaxStudio</strong> <span class="highlight">kannst auch du passives Einkommen generieren</span> – einfach, sicher und unkompliziert. <strong>Schließe dich der Revolution des zugänglichen Schürfens an!</strong>',
+                    f1:'Cloud-Mining', f2:'Einfach & schnell', f3:'Tägliche Belohnungen', f4:'100% sicher', f5:'Keine teure Hardware',
+                    btnAppStoreText:'Bei Google Play herunterladen', shareXText:'Auf X teilen', shareFbText:'Auf Facebook teilen'
+                },
+                ja: { 
+                    subtitle:'モネロ マイナー REAL', minerType:'リアルマイナー · WebAssembly', inactive:'非アクティブ', mining:'マイニング中', 
+                    earnings:'ライブ収益', perHour:'XMR/h', perDay:'XMR/日', claim:'報酬を受け取る', minClaim:'最小: 0.035 XMR', 
+                    chart:'マイニングパフォーマンス', peak:'ピーク', avg:'平均', hashrateDesc:'開始待機中...', 
+                    wallet:'モネロアドレス', pool:'プールを選択', start:'開始', stop:'停止', 
+                    statusInfo:'アドレスを入力して「開始」をクリック', shares:'シェア', cpu:'CPU', temp:'温度', 
+                    uptime:'稼働時間', footer:'リアルマイナー with WebAssembly · 8プール', miningFor:'マイニング対象', connected:'接続先', 
+                    invalid:'無効なアドレス。「4」で始まる必要があります', error:'エラー', stopped:'マイニング停止。', 
+                    rewardClaimed:'報酬を受け取りました！', insufficient:'残高不足。最小 0.035 XMR', 
+                    invalidAddr:'無効なアドレス', sentTo:'送信先', available:'利用可能', missing:'不足', 
+                    shareTitle:'🔥 MaxStudioでモネロをマイニングしています！', 
+                    shareDesc:'MaxStudio Minerで {amount} XMR をマイニングしました。参加してあなたもマイニングを始めましょう！',
+                    headerAppBtn:'アプリをダウンロード', appTitle:'Monero Miner App',
+                    appDescStrong:'🔥 暗号通貨マイニングがかつてないほど簡単に！',
+                    appDescText:'<strong>Monero Miner XMR</strong> アプリは、<strong>誰でも</strong>高価なコンピューターや技術知識がなくても、モバイルから直接Monero（XMR）をマイニングできるように作られました。<strong>MaxStudio</strong>を使えば、<span class="highlight">あなたも受動的収入を得ることができます</span> – 簡単、安全、そして複雑さゼロ。<strong>アクセシブルなマイニング革命に参加しよう！</strong>',
+                    f1:'クラウドマイニング', f2:'簡単＆高速', f3:'毎日報酬', f4:'100%安全', f5:'高価なハードウェア不要',
+                    btnAppStoreText:'Google Playでダウンロード', shareXText:'Xでシェア', shareFbText:'Facebookでシェア'
+                },
+                zh: { 
+                    subtitle:'门罗币 矿工 REAL', minerType:'真实矿工 · WebAssembly', inactive:'未激活', mining:'挖矿中', 
+                    earnings:'实时收益', perHour:'XMR/小时', perDay:'XMR/天', claim:'领取奖励', minClaim:'最低: 0.035 XMR', 
+                    chart:'挖矿性能', peak:'峰值', avg:'平均', hashrateDesc:'等待开始...', 
+                    wallet:'门罗币地址', pool:'选择矿池', start:'开始', stop:'停止', 
+                    statusInfo:'输入您的地址并点击"开始"', shares:'份额', cpu:'CPU', temp:'温度', 
+                    uptime:'运行时间', footer:'真实矿工 with WebAssembly · 8个矿池', miningFor:'挖矿地址', connected:'连接到', 
+                    invalid:'无效地址。必须以"4"开头', error:'错误', stopped:'挖矿已停止。', 
+                    rewardClaimed:'奖励已领取！', insufficient:'余额不足。最低 0.035 XMR', 
+                    invalidAddr:'无效地址', sentTo:'发送至', available:'可用', missing:'缺少', 
+                    shareTitle:'🔥 我正在用MaxStudio挖门罗币！', 
+                    shareDesc:'我已经用MaxStudio Miner挖了 {amount} XMR。加入并开始挖矿吧！',
+                    headerAppBtn:'下载应用', appTitle:'Monero Miner App',
+                    appDescStrong:'🔥 挖加密货币从未如此简单！',
+                    appDescText:'<strong>Monero Miner XMR</strong> 应用程序旨在让<strong>任何人</strong>，无需昂贵的电脑或技术知识，即可直接从手机挖掘门罗币（XMR）。使用<strong>MaxStudio</strong>，<span class="highlight">你也可以轻松、安全、无负担地产生被动收入</span>。<strong>加入可访问挖矿革命！</strong>',
+                    f1:'云挖矿', f2:'简单快捷', f3:'每日奖励', f4:'100%安全', f5:'无需昂贵硬件',
+                    btnAppStoreText:'在Google Play下载', shareXText:'分享到X', shareFbText:'分享到Facebook'
+                }
             };
 
             // =============================================
@@ -590,6 +693,10 @@
                 toast: $('toast'), toastMessage: $('toastMessage'),
                 cpuBar: $('cpuBar'), tempBar: $('tempBar'), sharesBar: $('sharesBar'),
                 minerStats: $('minerStats'), minerStatusText: $('minerStatusText'), lastBlockText: $('lastBlockText'),
+                headerAppBtnText: $('headerAppBtnText'), appTitle: $('appTitle'),
+                appDescStrong: $('appDescStrong'), appDescText: $('appDescText'),
+                f1: $('f1'), f2: $('f2'), f3: $('f3'), f4: $('f4'), f5: $('f5'),
+                btnAppStoreText: $('btnAppStoreText'), shareXText: $('shareXText'), shareFbText: $('shareFbText')
             };
 
             const langBtns = document.querySelectorAll('.lang-btn');
@@ -618,6 +725,19 @@
                 el.tempLabel.textContent = t('temp');
                 el.uptimeLabel.textContent = t('uptime');
                 el.footerText1.textContent = t('footer');
+                el.headerAppBtnText.textContent = t('headerAppBtn');
+                el.appTitle.textContent = t('appTitle');
+                el.appDescStrong.innerHTML = t('appDescStrong');
+                el.appDescText.innerHTML = t('appDescText');
+                el.f1.textContent = t('f1');
+                el.f2.textContent = t('f2');
+                el.f3.textContent = t('f3');
+                el.f4.textContent = t('f4');
+                el.f5.textContent = t('f5');
+                el.btnAppStoreText.textContent = t('btnAppStoreText');
+                el.shareXText.textContent = t('shareXText');
+                el.shareFbText.textContent = t('shareFbText');
+                
                 if (isMining) { el.btnText.textContent = t('stop'); el.statusStrong.textContent = t('mining'); } 
                 else { el.btnText.textContent = t('start'); el.statusStrong.textContent = t('inactive'); el.hashrateDesc.textContent = t('hashrateDesc'); }
                 if (!isMining) el.statusInfoText.textContent = t('statusInfo');
@@ -881,7 +1001,6 @@
                 saveToStorage();
             });
 
-            // Botones compartir
             document.getElementById('shareX').addEventListener('click', shareOnX);
             document.getElementById('shareFacebook').addEventListener('click', shareOnFacebook);
 
@@ -913,7 +1032,6 @@
                 });
             });
 
-            // Guardar al cerrar la página
             window.addEventListener('beforeunload', function() {
                 saveToStorage();
             });
@@ -948,7 +1066,6 @@
             console.log('🌍 Idiomas: Español, Inglés, Francés, Alemán, Japonés, Chino');
             console.log('📌 Pool por defecto: MoneroOcean');
             console.log('💾 Los datos se guardan automáticamente en localStorage');
-            console.log('📱 Botones de compartir al final de la página');
 
         })();
     </script>
