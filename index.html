@@ -1231,10 +1231,10 @@
                 ui.chartAvg.textContent = formatHashrate(values.reduce((sum, value) => sum + value, 0) / values.length);
             }
 
-            function renderWorkers(workers) {
-                ui.workersCount.textContent = `${workers.length} worker${workers.length === 1 ? '' : 's'}`;
+            function renderWorkers(workers, activeWorkers) {
+                ui.workersCount.textContent = `${activeWorkers.length} activos / ${workers.length} registrados`;
                 if (!workers.length) {
-                    ui.workerList.innerHTML = '<div class="worker-empty">El pool aún no informa trabajadores activos para esta wallet.</div>';
+                    ui.workerList.innerHTML = '<div class="worker-empty">El pool aún no informa workers para esta wallet. Tras iniciar un móvil, HashVault puede tardar unos minutos en mostrarlo.</div>';
                     return;
                 }
                 ui.workerList.innerHTML = workers.map((worker, index) => `
@@ -1259,12 +1259,13 @@
                     const collective = data.collective || {};
                     const revenue = data.revenue || {};
                     const workers = Array.isArray(data.collectiveWorkers) ? data.collectiveWorkers : [];
+                    const activeWorkers = workers.filter((worker) => workerHashrate(worker) > 0);
                     const hashrate = Number(collective.hashRate || 0);
                     const shares = Number(collective.validShares || 0);
                     const balance = Number(revenue.confirmedBalance || 0) / ATOMIC_UNITS_PER_XMR;
 
                     ui.hashrate.textContent = formatHashrate(hashrate);
-                    ui.hashrateDesc.textContent = `HashVault · ${workers.length} worker${workers.length === 1 ? '' : 's'} activos`;
+                    ui.hashrateDesc.textContent = `HashVault · ${activeWorkers.length} activos / ${workers.length} registrados`;
                     ui.shares.textContent = shares.toLocaleString('es-ES');
                     ui.sharesBar.style.width = `${Math.min(100, (shares / 500) * 100)}%`;
                     ui.cpu.textContent = '--';
@@ -1282,7 +1283,7 @@
                     history.push(hashrate);
                     if (history.length > 24) history.shift();
                     drawChart();
-                    renderWorkers(workers);
+                    renderWorkers(workers, activeWorkers);
                 } catch (error) {
                     ui.statusInfo.innerHTML = `<i class="fas fa-triangle-exclamation" style="color:#e74c3c;"></i> <span style="color:#e74c3c;">No se pudo consultar HashVault: ${error.message}</span>`;
                 }
