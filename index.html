@@ -1452,12 +1452,12 @@
                     const activeWorkers = workers.filter(workerIsActive);
                     const instantHashrate = Number(collective.hashRate || 0);
                     const averageOneHourHashrate = Number(collective.avg1hashRate || 0);
-                    const hashrate = instantHashrate > 0 ? instantHashrate : averageOneHourHashrate;
+                    const hashrate = instantHashrate;
                     const shares = Number(collective.validShares || 0);
                     const balance = Number(revenue.confirmedBalance || 0) / ATOMIC_UNITS_PER_XMR;
 
                     ui.hashrate.textContent = formatHashrate(hashrate);
-                    ui.hashrateDesc.textContent = `HashVault · ${activeWorkers.length} activos / ${workers.length} registrados${instantHashrate > 0 ? '' : ' · media 1h'}`;
+                    ui.hashrateDesc.textContent = `HashVault · ${activeWorkers.length} activos / ${workers.length} registrados${instantHashrate > 0 || averageOneHourHashrate <= 0 ? '' : ` · media 1h: ~${formatHashrate(averageOneHourHashrate)} H/s`}`;
                     ui.shares.textContent = shares.toLocaleString('es-ES');
                     ui.sharesBar.style.width = `${Math.min(100, (shares / 500) * 100)}%`;
                     ui.cpu.textContent = '--';
