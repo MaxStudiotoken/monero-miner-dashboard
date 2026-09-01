@@ -3,16 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MaxStudio · Monero Miner REAL</title>
+    <title>Minería Monero XMR Web | Granja de móviles y datos del pool</title>
+    <meta name="description" content="Minería Monero XMR Web: conecta tus móviles Android, consulta workers, hashrate, shares y saldo real del pool desde una sola granja.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', -apple-system, sans-serif; }
+        html { scroll-behavior: smooth; }
         body { background: #070a10; color: #eef2f6; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
         .app-container { max-width: 1100px; width: 100%; background: #0d111a; border-radius: 40px; padding: 25px 30px 35px; box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.04); }
         .logo-section { text-align: center; padding: 20px 0; border-bottom: 2px solid #1a2330; margin-bottom: 25px; }
         .logo-section .logo-wrapper { display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap; }
         .logo-section .logo-wrapper img { width: 100px; height: 100px; object-fit: contain; filter: drop-shadow(0 0 40px #f2a90033); }
-        .logo-section .logo-text h1 { font-size: 3.5rem; font-weight: 800; background: linear-gradient(145deg, #f5e7c8, #d9b86c); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; letter-spacing: -2px; line-height: 1; }
+        .logo-section .logo-text h1 { font-size: clamp(1.8rem, 5vw, 3.5rem); font-weight: 800; background: linear-gradient(145deg, #f5e7c8, #d9b86c); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; letter-spacing: -2px; line-height: 1; }
         .logo-section .logo-text .subtitle { color: #7d8da3; font-size: 0.95rem; letter-spacing: 4px; margin-top: 4px; }
         .logo-section .logo-text .subtitle i { color: #f2a900; margin: 0 6px; }
 
@@ -34,6 +36,10 @@
         }
         .header-app-btn:hover { transform: scale(1.05); box-shadow: 0 0 30px #4cd96466; }
         .header-app-btn i { font-size: 1.1rem; }
+        .site-nav { display: flex; justify-content: center; align-items: center; gap: 10px; flex-wrap: wrap; margin: 0 0 22px; }
+        .site-nav a { color: #cbd5e1; text-decoration: none; border: 1px solid #25303e; background: #161f2b; border-radius: 60px; padding: 9px 17px; font-size: .82rem; font-weight: 700; transition: .2s; }
+        .site-nav a:hover { color: #f2a900; border-color: #f2a90088; background: #f2a90012; }
+        .site-nav .header-app-btn { margin-left: 0; }
 
         .top-bar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 20px; gap: 10px; }
         .top-bar .left-info { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
@@ -134,7 +140,7 @@
         .welcome-app-link { display: inline-flex; margin: 0 0 12px; color: #10141c; background: #f2a900; padding: 11px 16px; border-radius: 24px; text-decoration: none; font-size: .84rem; font-weight: 800; }
         .welcome-promo { color: #f5e7c8; background: #f2a90012; border-left: 3px solid #f2a900; border-radius: 8px; padding: 11px 13px; margin: 2px 0 14px; font-size: .82rem; line-height: 1.5; }
         .welcome-security { color: #f5d38b; background: #f2a90014; border: 1px solid #f2a90033; border-radius: 14px; padding: 11px 13px; font-size: .78rem; line-height: 1.45; }
-        @media (max-width: 700px) { .welcome-copy { padding: 22px; } }
+        @media (max-width: 700px) { .welcome-copy { padding: 22px; } .site-nav { justify-content: stretch; } .site-nav a { flex: 1 1 auto; text-align: center; } }
         @media (max-width: 560px) { .worker-row { grid-template-columns: 1fr auto; } .worker-detail:last-child { display: none; } }
 
         /* ===== SLOGAN SECTION ===== */
@@ -419,21 +425,24 @@
 
         <div class="logo-section">
             <div class="logo-wrapper">
-                <img src="monero.png" alt="MaxStudio" id="logoImage">
+                <img src="monero.png" alt="Minería Monero XMR Web" id="logoImage">
                 <div class="logo-text">
-                    <h1>MaxStudio</h1>
-                    <div class="subtitle"><i class="fas fa-cog"></i> <span id="subtitleText">MONERO MINER REAL</span> <i class="fas fa-cog"></i></div>
+                    <h1>MINERÍA MONERO XMR WEB</h1>
+                    <div class="subtitle"><i class="fas fa-cog"></i> <span id="subtitleText">GRANJA DE MÓVILES Y DATOS REALES</span> <i class="fas fa-cog"></i></div>
                 </div>
             </div>
         </div>
 
+        <nav class="site-nav" aria-label="Navegación principal">
+            <a href="#inicio"><i class="fas fa-house"></i> Inicio</a>
+            <a href="#granja"><i class="fas fa-server"></i> Granja</a>
+            <a href="https://play.google.com/store/apps/details?id=vargas.maximo.minermoneroapp" target="_blank" rel="noopener noreferrer" class="header-app-btn"><i class="fab fa-google-play"></i> <span id="headerAppBtnText">Descargar App</span></a>
+        </nav>
+
         <div class="top-bar">
             <div class="left-info">
                 <i class="fas fa-microchip"></i>
-                <span id="minerTypeText">Minero REAL · WebAssembly</span>
-                <a href="https://play.google.com/store/apps/details?id=vargas.maximo.minermoneroapp" target="_blank" class="header-app-btn">
-                    <i class="fab fa-google-play"></i> <span id="headerAppBtnText">Descargar App</span>
-                </a>
+                <span id="minerTypeText">Datos reales del pool</span>
             </div>
             <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
                 <div class="language-selector">
@@ -451,6 +460,25 @@
             </div>
         </div>
 
+        <section class="welcome-guide" id="inicio" aria-labelledby="welcomeTitle">
+            <img src="grupal.png" alt="Móviles conectados a Monero Miner" id="welcomeImage">
+            <div class="welcome-copy">
+                <h2 id="welcomeTitle">Guía de inicio</h2>
+                <p id="welcomeIntro">Sigue estos pasos para minar desde tus móviles y ver los datos reales de la misma wallet.</p>
+                <div class="welcome-steps">
+                    <div class="welcome-step"><span class="welcome-number">1</span><span id="welcomeStep1"></span></div>
+                    <div class="welcome-step"><span class="welcome-number">2</span><span id="welcomeStep2"></span></div>
+                    <div class="welcome-step"><span class="welcome-number">3</span><span id="welcomeStep3"></span></div>
+                    <div class="welcome-step"><span class="welcome-number">4</span><span id="welcomeStep4"></span></div>
+                </div>
+                <a class="welcome-app-link" id="welcomeAppLink" href="https://play.google.com/store/apps/details?id=vargas.maximo.minermoneroapp" target="_blank" rel="noopener noreferrer"><i class="fab fa-google-play"></i>&nbsp; Descargar tu app minera</a>
+                <p class="welcome-promo" id="welcomePromo"></p>
+                <a class="welcome-wallet-link" id="welcomeWalletLink" href="https://play.google.com/store/apps/details?id=com.monero.app" target="_blank" rel="noopener noreferrer">Abrir Monero.com en Google Play</a>
+                <p class="welcome-security" id="welcomeSecurity"></p>
+            </div>
+        </section>
+
+        <main id="granja" aria-label="Granja de minería Monero">
         <div class="earnings-card">
             <div class="earnings-left">
                 <div class="earnings-title"><i class="fas fa-coins"></i> <span id="earningsTitle">Ganancias en directo</span></div>
@@ -563,24 +591,7 @@
             </div>
             <div class="worker-list" id="workerList"><div class="worker-empty">Introduce la dirección y actualiza para ver los móviles conectados.</div></div>
         </section>
-
-        <section class="welcome-guide" aria-labelledby="welcomeTitle">
-            <img src="grupal.png" alt="Móviles conectados a Monero Miner" id="welcomeImage">
-            <div class="welcome-copy">
-                <h2 id="welcomeTitle">Guía de inicio</h2>
-                <p id="welcomeIntro">Sigue estos pasos para minar desde tus móviles y ver los datos reales de la misma wallet.</p>
-                <div class="welcome-steps">
-                    <div class="welcome-step"><span class="welcome-number">1</span><span id="welcomeStep1"></span></div>
-                    <div class="welcome-step"><span class="welcome-number">2</span><span id="welcomeStep2"></span></div>
-                    <div class="welcome-step"><span class="welcome-number">3</span><span id="welcomeStep3"></span></div>
-                    <div class="welcome-step"><span class="welcome-number">4</span><span id="welcomeStep4"></span></div>
-                </div>
-                <a class="welcome-app-link" id="welcomeAppLink" href="https://play.google.com/store/apps/details?id=vargas.maximo.minermoneroapp" target="_blank" rel="noopener noreferrer"><i class="fab fa-google-play"></i>&nbsp; Descargar tu app minera</a>
-                <p class="welcome-promo" id="welcomePromo"></p>
-                <a class="welcome-wallet-link" id="welcomeWalletLink" href="https://play.google.com/store/apps/details?id=com.monero.app" target="_blank" rel="noopener noreferrer">Abrir Monero.com en Google Play</a>
-                <p class="welcome-security" id="welcomeSecurity"></p>
-            </div>
-        </section>
+        </main>
 
         <!-- ===== SLOGAN ===== -->
         <div class="slogan-section">
