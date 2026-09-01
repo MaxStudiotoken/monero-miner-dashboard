@@ -94,6 +94,100 @@
         .stat-item .stat-bar { width: 40px; height: 3px; background: #25303e; border-radius: 10px; overflow: hidden; margin-left: auto; }
         .stat-item .stat-bar .fill { height: 100%; background: linear-gradient(90deg, #f2a900, #d9b86c); border-radius: 10px; transition: width 0.5s; }
 
+        /* ===== NUEVA SECCIÓN APP ===== */
+        .app-section {
+            background: linear-gradient(135deg, #0d111a, #161f2b);
+            border-radius: 24px;
+            padding: 24px 28px;
+            margin: 20px 0 18px 0;
+            border: 1px solid #25303e;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 24px;
+        }
+        .app-section .app-info {
+            flex: 2 1 280px;
+        }
+        .app-section .app-info h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(145deg, #f5e7c8, #d9b86c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+        .app-section .app-info h2 i {
+            -webkit-text-fill-color: #f2a900;
+            font-size: 2rem;
+        }
+        .app-section .app-info .app-desc {
+            color: #94a3b8;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            max-width: 600px;
+        }
+        .app-section .app-info .app-desc strong {
+            color: #f2a900;
+            font-weight: 600;
+        }
+        .app-section .app-info .app-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 12px;
+        }
+        .app-section .app-info .app-features span {
+            background: #1a2330;
+            border-radius: 40px;
+            padding: 4px 16px 4px 12px;
+            font-size: 0.75rem;
+            color: #cbd5e1;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            border: 1px solid #25303e;
+        }
+        .app-section .app-info .app-features span i {
+            color: #f2a900;
+        }
+        .app-section .app-image {
+            flex: 1 1 140px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .app-section .app-image img {
+            max-width: 100%;
+            max-height: 160px;
+            border-radius: 20px;
+            border: 2px solid #25303e;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            object-fit: cover;
+            width: 140px;
+            height: 140px;
+            background: #0d111a;
+        }
+        .app-section .app-image img[src=""] {
+            display: none;
+        }
+        .app-section .app-image .app-icon-fallback {
+            width: 140px;
+            height: 140px;
+            background: #1a2330;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: #f2a900;
+            border: 2px dashed #25303e;
+        }
+
         /* ===== BOTONES COMPARTIR - ABAJO ===== */
         .share-section { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin: 16px 0 18px 0; padding-top: 16px; border-top: 1px solid #1a2330; }
         .share-btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 24px; border-radius: 60px; border: none; font-weight: 600; font-size: 0.85rem; cursor: pointer; transition: 0.3s; text-decoration: none; color: #fff; }
@@ -118,6 +212,32 @@
         .miner-stat-item .label { font-size: 0.6rem; color: #8899b0; text-transform: uppercase; }
         .miner-stat-item .value { font-size: 1.2rem; font-weight: 700; color: #f2a900; }
 
+        /* ===== BOTÓN APP STORE ===== */
+        .btn-app-store {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #1a2330;
+            border: 1px solid #25303e;
+            border-radius: 60px;
+            padding: 10px 22px;
+            color: #eef2f6;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-decoration: none;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+        .btn-app-store:hover {
+            background: #25303e;
+            border-color: #f2a900;
+            transform: scale(1.02);
+        }
+        .btn-app-store i {
+            color: #f2a900;
+            font-size: 1.4rem;
+        }
+
         @media (max-width: 768px) {
             .app-container { padding: 16px; }
             .logo-section .logo-text h1 { font-size: 2.4rem; }
@@ -138,6 +258,11 @@
             .pool-selector { grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); }
             .miner-stats { grid-template-columns: 1fr 1fr; }
             .share-section { justify-content: center; }
+            .app-section { flex-direction: column-reverse; text-align: center; }
+            .app-section .app-info h2 { justify-content: center; }
+            .app-section .app-info .app-features { justify-content: center; }
+            .app-section .app-image img { width: 120px; height: 120px; }
+            .btn-app-store { justify-content: center; }
         }
         @media (max-width: 480px) {
             .logo-section .logo-text h1 { font-size: 1.8rem; }
@@ -148,6 +273,8 @@
             .lang-btn { font-size: 0.55rem; padding: 3px 6px; }
             .pool-selector { grid-template-columns: 1fr 1fr; }
             .miner-stats { grid-template-columns: 1fr; }
+            .app-section .app-info h2 { font-size: 1.4rem; }
+            .app-section .app-info .app-desc { font-size: 0.85rem; }
         }
     </style>
 </head>
@@ -233,6 +360,31 @@
             <div class="hashrate-label">
                 <i class="fas fa-microchip"></i>
                 <span id="hashrateDesc">Esperando inicio...</span>
+            </div>
+        </div>
+
+        <!-- ===== NUEVA SECCIÓN: MONERO MINER APP ===== -->
+        <div class="app-section">
+            <div class="app-info">
+                <h2><i class="fab fa-android"></i> Monero Miner App</h2>
+                <div class="app-desc">
+                    <strong>📱 Minar criptomonedas sin grandes inversiones</strong><br>
+                    La app <strong>Monero Miner XMR</strong> fue creada para que <strong>personas normales</strong>, sin necesidad de costosos ordenadores, puedan minar Monero (XMR) de forma sencilla y accesible desde su móvil. 
+                    Con <strong>MaxStudio</strong>, cualquier persona puede empezar a minar con solo un clic, sin conocimientos técnicos y sin hardware especializado.
+                </div>
+                <div class="app-features">
+                    <span><i class="fas fa-check-circle"></i> Minado en la nube</span>
+                    <span><i class="fas fa-mobile-alt"></i> Fácil de usar</span>
+                    <span><i class="fas fa-coins"></i> Recompensas diarias</span>
+                    <span><i class="fas fa-shield-alt"></i> Seguro y confiable</span>
+                </div>
+                <a href="https://play.google.com/store/apps/details?id=vargas.maximo.minermoneroapp" target="_blank" class="btn-app-store">
+                    <i class="fab fa-google-play"></i> Descargar en Google Play
+                </a>
+            </div>
+            <div class="app-image">
+                <img id="appGroupImage" src="grupal.png" alt="Monero Miner App - Grupo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="app-icon-fallback" style="display:none;"><i class="fas fa-users"></i></div>
             </div>
         </div>
 
