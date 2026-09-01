@@ -113,6 +113,16 @@
         .stat-item .stat-label { font-size: 0.6rem; color: #8899b0; text-transform: uppercase; letter-spacing: 0.5px; }
         .stat-item .stat-bar { width: 40px; height: 3px; background: #25303e; border-radius: 10px; overflow: hidden; margin-left: auto; }
         .stat-item .stat-bar .fill { height: 100%; background: linear-gradient(90deg, #f2a900, #d9b86c); border-radius: 10px; transition: width 0.5s; }
+        .workers-panel { background: #161f2b; border: 1px solid #25303e; border-radius: 24px; margin-bottom: 18px; overflow: hidden; }
+        .workers-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 20px; border-bottom: 1px solid #25303e; }
+        .workers-header h3 { color: #eef2f6; font-size: .9rem; letter-spacing: .8px; }
+        .workers-header span { color: #f2a900; font-size: .75rem; }
+        .worker-list { display: grid; gap: 1px; background: #25303e; }
+        .worker-row { background: #0d111a; display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 14px; align-items: center; padding: 13px 20px; }
+        .worker-name { color: #eef2f6; font: 600 .8rem 'Menlo', 'Consolas', monospace; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .worker-detail { color: #94a3b8; font-size: .72rem; text-align: right; }
+        .worker-empty { background: #0d111a; color: #7d8da3; padding: 18px 20px; font-size: .8rem; }
+        @media (max-width: 560px) { .worker-row { grid-template-columns: 1fr auto; } .worker-detail:last-child { display: none; } }
 
         /* ===== SLOGAN SECTION ===== */
         .slogan-section {
@@ -532,6 +542,14 @@
                 <div class="stat-info"><span class="stat-value" id="uptimeValue">0s</span><span class="stat-label" id="uptimeLabel">Tiempo activo</span></div>
             </div>
         </div>
+
+        <section class="workers-panel" aria-live="polite">
+            <div class="workers-header">
+                <h3><i class="fas fa-mobile-alt"></i> Trabajadores de esta wallet</h3>
+                <span id="workersCount">0 workers</span>
+            </div>
+            <div class="worker-list" id="workerList"><div class="worker-empty">Introduce la dirección y actualiza para ver los móviles conectados.</div></div>
+        </section>
 
         <!-- ===== SLOGAN ===== -->
         <div class="slogan-section">
@@ -1146,6 +1164,156 @@
             console.log('🌍 Idiomas: Español, Inglés, Francés, Alemán, Japonés, Chino');
             console.log('📌 Pool por defecto: MoneroOcean');
 
+        })();
+    </script>
+    <script>
+        (function () {
+            'use strict';
+
+            const ATOMIC_UNITS_PER_XMR = 1_000_000_000_000;
+            const POLL_INTERVAL_MS = 30_000;
+            const history = [];
+            const $ = (id) => document.getElementById(id);
+            const ui = {
+                wallet: $('walletInput'),
+                hashrate: $('hashrateValue'),
+                hashrateDesc: $('hashrateDesc'),
+                shares: $('sharesValue'),
+                sharesBar: $('sharesBar'),
+                cpu: $('cpuValue'),
+                cpuBar: $('cpuBar'),
+                temp: $('tempValue'),
+                tempBar: $('tempBar'),
+                uptime: $('uptimeValue'),
+                uptimeLabel: $('uptimeLabel'),
+                earnings: $('earningsValue'),
+                earningsHour: $('earningsHour'),
+                earningsDay: $('earningsDay'),
+                statusDot: $('statusDot'),
+                statusText: $('statusText'),
+                statusInfo: $('miningStatus'),
+                chartLine: $('chartLine'),
+                areaFill: $('areaFill'),
+                chartDots: $('chartDots'),
+                chartHigh: $('chartHigh'),
+                chartAvg: $('chartAvg'),
+                workersCount: $('workersCount'),
+                workerList: $('workerList')
+            };
+
+            const formatHashrate = (value) => Number(value || 0).toLocaleString('es-ES');
+            const formatXmr = (value) => Number(value || 0).toFixed(12);
+            const formatLastShare = (timestamp) => {
+                if (!timestamp) return 'Sin shares';
+                const milliseconds = Number(timestamp) < 10_000_000_000 ? Number(timestamp) * 1000 : Number(timestamp);
+                return new Date(milliseconds).toLocaleString('es-ES');
+            };
+            const workerName = (worker, index) => worker.rigId || worker.rig_id || worker.name || worker.worker || worker.id || `worker-${index + 1}`;
+            const workerHashrate = (worker) => Number(worker.hashRate || worker.hashrate || worker.hr || 0);
+            const workerShares = (worker) => Number(worker.validShares || worker.shares || 0);
+
+            function drawChart() {
+                const values = history.length ? history : [0];
+                const width = 800;
+                const height = 140;
+                const padding = 14;
+                const max = Math.max(1, ...values);
+                const points = values.map((value, index) => {
+                    const x = values.length === 1 ? width : (index / (values.length - 1)) * width;
+                    const y = padding + (height - padding * 2) - (value / max) * (height - padding * 2);
+                    return `${x.toFixed(1)},${y.toFixed(1)}`;
+                });
+                ui.chartLine.setAttribute('points', points.join(' '));
+                ui.chartLine.className = `line-path${max > 0 ? '' : ' inactive'}`;
+                ui.areaFill.setAttribute('points', `0,${height - padding} ${points.join(' ')} ${width},${height - padding}`);
+                ui.chartDots.innerHTML = points.map((point) => `<circle cx="${point.split(',')[0]}" cy="${point.split(',')[1]}" class="dot" />`).join('');
+                ui.chartHigh.textContent = formatHashrate(Math.max(...values));
+                ui.chartAvg.textContent = formatHashrate(values.reduce((sum, value) => sum + value, 0) / values.length);
+            }
+
+            function renderWorkers(workers) {
+                ui.workersCount.textContent = `${workers.length} worker${workers.length === 1 ? '' : 's'}`;
+                if (!workers.length) {
+                    ui.workerList.innerHTML = '<div class="worker-empty">El pool aún no informa trabajadores activos para esta wallet.</div>';
+                    return;
+                }
+                ui.workerList.innerHTML = workers.map((worker, index) => `
+                    <div class="worker-row">
+                        <span class="worker-name">${String(workerName(worker, index)).replace(/[&<>"']/g, (char) => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' })[char])}</span>
+                        <span class="worker-detail">${formatHashrate(workerHashrate(worker))} H/s</span>
+                        <span class="worker-detail">${workerShares(worker).toLocaleString('es-ES')} shares</span>
+                    </div>`).join('');
+            }
+
+            async function refreshDashboard() {
+                const address = ui.wallet.value.trim();
+                if (!/^[48][0-9A-Za-z]{94,105}$/.test(address)) {
+                    ui.statusInfo.innerHTML = '<i class="fas fa-exclamation-triangle" style="color:#e74c3c;"></i> <span style="color:#e74c3c;">Introduce una dirección Monero válida para consultar el pool.</span>';
+                    return;
+                }
+                ui.statusInfo.innerHTML = '<i class="fas fa-spinner fa-spin"></i> <span>Consultando HashVault...</span>';
+                try {
+                    const response = await fetch(`https://api.hashvault.pro/v3/monero/wallet/${encodeURIComponent(address)}/stats?workers=true&chart=false`, { cache: 'no-store' });
+                    if (!response.ok) throw new Error(`HashVault respondió ${response.status}`);
+                    const data = await response.json();
+                    const collective = data.collective || {};
+                    const revenue = data.revenue || {};
+                    const workers = Array.isArray(data.collectiveWorkers) ? data.collectiveWorkers : [];
+                    const hashrate = Number(collective.hashRate || 0);
+                    const shares = Number(collective.validShares || 0);
+                    const balance = Number(revenue.confirmedBalance || 0) / ATOMIC_UNITS_PER_XMR;
+
+                    ui.hashrate.textContent = formatHashrate(hashrate);
+                    ui.hashrateDesc.textContent = `HashVault · ${workers.length} worker${workers.length === 1 ? '' : 's'} activos`;
+                    ui.shares.textContent = shares.toLocaleString('es-ES');
+                    ui.sharesBar.style.width = `${Math.min(100, (shares / 500) * 100)}%`;
+                    ui.cpu.textContent = '--';
+                    ui.cpuBar.style.width = '0%';
+                    ui.temp.textContent = '--';
+                    ui.tempBar.style.width = '0%';
+                    ui.uptimeLabel.textContent = 'Último share';
+                    ui.uptime.textContent = formatLastShare(collective.lastShare);
+                    ui.earnings.textContent = `${formatXmr(balance)} XMR`;
+                    ui.earningsHour.textContent = '--';
+                    ui.earningsDay.textContent = '--';
+                    ui.statusDot.className = `status-dot${hashrate > 0 ? '' : ' inactive'}`;
+                    ui.statusText.innerHTML = hashrate > 0 ? '<strong>POOL ACTIVO</strong> · HashVault' : '<strong class="inactive">SIN WORKERS ACTIVOS</strong> · HashVault';
+                    ui.statusInfo.innerHTML = '<i class="fas fa-circle-check" style="color:#4cd964;"></i> <span style="color:#4cd964;">Datos reales actualizados desde HashVault.</span>';
+                    history.push(hashrate);
+                    if (history.length > 24) history.shift();
+                    drawChart();
+                    renderWorkers(workers);
+                } catch (error) {
+                    ui.statusInfo.innerHTML = `<i class="fas fa-triangle-exclamation" style="color:#e74c3c;"></i> <span style="color:#e74c3c;">No se pudo consultar HashVault: ${error.message}</span>`;
+                }
+            }
+
+            const oldButton = $('btnMiner');
+            const refreshButton = oldButton.cloneNode(true);
+            oldButton.replaceWith(refreshButton);
+            refreshButton.className = 'btn-miner';
+            refreshButton.querySelector('i').className = 'fas fa-rotate';
+            refreshButton.querySelector('span').textContent = 'Actualizar datos';
+            refreshButton.addEventListener('click', refreshDashboard);
+
+            const oldClaimButton = $('btnClaim');
+            const claimButton = oldClaimButton.cloneNode(true);
+            oldClaimButton.replaceWith(claimButton);
+            claimButton.disabled = true;
+            claimButton.querySelector('span').textContent = 'Pago gestionado por HashVault';
+            $('claimStatus').textContent = 'El saldo mostrado es el confirmado pendiente de pago por el pool.';
+            document.querySelector('.pool-selector').style.display = 'none';
+            $('poolLabel').textContent = 'Pool fijo: HashVault';
+            document.querySelector('.slogan-section').style.display = 'none';
+            $('minerTypeText').textContent = 'Datos reales del pool';
+            $('footerText1').textContent = 'Dashboard real · HashVault';
+            const walletFromApp = new URLSearchParams(window.location.search).get('wallet');
+            if (/^[48][0-9A-Za-z]{94,105}$/.test(walletFromApp || '')) {
+                ui.wallet.value = walletFromApp;
+            }
+            ui.wallet.addEventListener('change', refreshDashboard);
+            refreshDashboard();
+            window.setInterval(refreshDashboard, POLL_INTERVAL_MS);
         })();
     </script>
 </body>
