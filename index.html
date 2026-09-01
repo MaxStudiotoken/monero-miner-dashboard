@@ -1288,9 +1288,13 @@
                 zh: { home: '首页', compare: '对比', farm: '矿场', download: '下载应用', earnings: '实时收益', performance: '挖矿性能', peak: '峰值', average: '平均', address: '门罗币地址', shares: '份额', cpu: 'CPU', temperature: '温度', lastShare: '最后份额', workers: '此钱包的矿工', benchmarkTitle: '手机性能参考对比', benchmarkIntro: '按本应用中的 RandomX 潜在性能从高到低排序。这些是估计范围，不是算力承诺。', benchmarkNote: '重要：温度、手机版本、可用内存、CPU 模式和电池都会改变结果。真实算力应以稳定挖矿数分钟后矿场中显示的数据为准。', oppoModel: 'OPPO A60 5G', oppoChip: 'Dimensity 6300 · 低内存兼容模式', oppoMode: '更新后测量' }
             };
             const ATOMIC_UNITS_PER_XMR = 1_000_000_000_000;
-            const POLL_INTERVAL_MS = 30_000;
+            const POLL_INTERVAL_MS = 12_000;
+            const REQUEST_TIMEOUT_MS = 8_000;
             const SAVED_WALLET_KEY = 'monero_dashboard_wallet';
             const history = [];
+            let isRefreshing = false;
+            let refreshSequence = 0;
+            let activeRequestController = null;
             const pageParams = new URLSearchParams(window.location.search);
             const configuredPool = pageParams.get('pool') === 'MoneroOcean'
                 ? { name: 'MoneroOcean', supportsDashboard: false, dashboard: 'https://moneroocean.stream/?addr=' }
@@ -1414,7 +1418,9 @@
                     </div>`).join('');
             }
 
-            async function refreshDashboard() {
+            async function refreshDashboard(force = false) {
+                if (isRefreshing && !force) return;
+                if (force && activeRequestController) activeRequestController.abort();
                 const address = ui.wallet.value.trim();
                 if (!/^[48][0-9A-Za-z]{94,105}$/.test(address)) {
                     ui.statusInfo.innerHTML = '<i class="fas fa-exclamation-triangle" style="color:#e74c3c;"></i> <span style="color:#e74c3c;">Introduce una dirección Monero válida para consultar el pool.</span>';
@@ -1441,11 +1447,20 @@
                     ui.workerList.innerHTML = '<div class="worker-empty">Este dashboard solo consulta la API pública de HashVault. No se muestran estimaciones para otros pools.</div>';
                     return;
                 }
+                const refreshId = ++refreshSequence;
+                const requestController = new AbortController();
+                activeRequestController = requestController;
+                const timeout = window.setTimeout(() => requestController.abort(), REQUEST_TIMEOUT_MS);
+                isRefreshing = true;
                 ui.statusInfo.innerHTML = '<i class="fas fa-spinner fa-spin"></i> <span>Consultando HashVault...</span>';
                 try {
-                    const response = await fetch(`https://api.hashvault.pro/v3/monero/wallet/${encodeURIComponent(address)}/stats?workers=true&chart=false`, { cache: 'no-store' });
+                    const response = await fetch(`https://api.hashvault.pro/v3/monero/wallet/${encodeURIComponent(address)}/stats?workers=true&chart=false`, {
+                        cache: 'no-store',
+                        signal: requestController.signal
+                    });
                     if (!response.ok) throw new Error(`HashVault respondió ${response.status}`);
                     const data = await response.json();
+                    if (refreshId !== refreshSequence) return;
                     const collective = data.collective || {};
                     const revenue = data.revenue || {};
                     const workers = Array.isArray(data.collectiveWorkers) ? data.collectiveWorkers : [];
@@ -1477,7 +1492,18 @@
                     drawChart();
                     renderWorkers(workers, activeWorkers);
                 } catch (error) {
-                    ui.statusInfo.innerHTML = `<i class="fas fa-triangle-exclamation" style="color:#e74c3c;"></i> <span style="color:#e74c3c;">No se pudo consultar HashVault: ${error.message}</span>`;
+                    if (refreshId === refreshSequence) {
+                        const message = error.name === 'AbortError'
+                            ? 'HashVault tardó demasiado; se reintentará automáticamente.'
+                            : `No se pudo consultar HashVault: ${error.message}`;
+                        ui.statusInfo.innerHTML = `<i class="fas fa-triangle-exclamation" style="color:#e74c3c;"></i> <span style="color:#e74c3c;">${message}</span>`;
+                    }
+                } finally {
+                    window.clearTimeout(timeout);
+                    if (refreshId === refreshSequence) {
+                        isRefreshing = false;
+                        activeRequestController = null;
+                    }
                 }
             }
 
@@ -1492,7 +1518,7 @@
                 if (!configuredPool.supportsDashboard && /^[48][0-9A-Za-z]{94,105}$/.test(address)) {
                     window.open(`${configuredPool.dashboard}${encodeURIComponent(address)}`, '_blank', 'noopener,noreferrer');
                 } else {
-                    refreshDashboard();
+                    refreshDashboard(true);
                 }
             });
 
@@ -1517,6 +1543,10 @@
                 saveWallet(walletFromApp);
             }
             ui.wallet.addEventListener('change', refreshDashboard);
+            window.addEventListener('focus', () => refreshDashboard());
+            document.addEventListener('visibilitychange', () => {
+                if (!document.hidden) refreshDashboard();
+            });
             document.querySelectorAll('.lang-btn').forEach((button) => {
                 button.addEventListener('click', () => {
                     document.querySelectorAll('.lang-btn').forEach((item) => item.classList.remove('active'));
