@@ -631,7 +631,7 @@
 
     <div class="toast" id="toast"><i class="fas fa-check-circle"></i><span id="toastMessage">¡Recompensa reclamada!</span></div>
 
-    <script>
+    <script type="text/plain" id="legacy-simulation-disabled">
         (function() {
             'use strict';
 
@@ -1241,6 +1241,10 @@
             const ATOMIC_UNITS_PER_XMR = 1_000_000_000_000;
             const POLL_INTERVAL_MS = 30_000;
             const history = [];
+            const pageParams = new URLSearchParams(window.location.search);
+            const configuredPool = pageParams.get('pool') === 'MoneroOcean'
+                ? { name: 'MoneroOcean', supportsDashboard: false, dashboard: 'https://moneroocean.stream/?addr=' }
+                : { name: 'HashVault', supportsDashboard: true, dashboard: null };
             const $ = (id) => document.getElementById(id);
             const ui = {
                 wallet: $('walletInput'),
@@ -1334,6 +1338,26 @@
                     ui.statusInfo.innerHTML = '<i class="fas fa-exclamation-triangle" style="color:#e74c3c;"></i> <span style="color:#e74c3c;">Introduce una dirección Monero válida para consultar el pool.</span>';
                     return;
                 }
+                if (!configuredPool.supportsDashboard) {
+                    ui.hashrate.textContent = '--';
+                    ui.hashrateDesc.textContent = 'MoneroOcean · datos disponibles en su panel oficial';
+                    ui.shares.textContent = '--';
+                    ui.sharesBar.style.width = '0%';
+                    ui.cpu.textContent = '--';
+                    ui.cpuBar.style.width = '0%';
+                    ui.temp.textContent = '--';
+                    ui.tempBar.style.width = '0%';
+                    ui.uptime.textContent = '--';
+                    ui.earnings.textContent = '-- XMR';
+                    ui.earningsHour.textContent = '--';
+                    ui.earningsDay.textContent = '--';
+                    ui.statusDot.className = 'status-dot inactive';
+                    ui.statusText.innerHTML = '<strong class="inactive">POOL CONFIGURADO</strong> · MoneroOcean';
+                    ui.statusInfo.innerHTML = `<i class="fas fa-circle-info" style="color:#f2a900;"></i> <span>Para datos reales de MoneroOcean, abre <a href="${configuredPool.dashboard}${encodeURIComponent(address)}" target="_blank" rel="noopener noreferrer">su panel oficial</a>.</span>`;
+                    ui.workersCount.textContent = 'Consulta el panel del pool';
+                    ui.workerList.innerHTML = '<div class="worker-empty">Este dashboard solo consulta la API pública de HashVault. No se muestran estimaciones para otros pools.</div>';
+                    return;
+                }
                 ui.statusInfo.innerHTML = '<i class="fas fa-spinner fa-spin"></i> <span>Consultando HashVault...</span>';
                 try {
                     const response = await fetch(`https://api.hashvault.pro/v3/monero/wallet/${encodeURIComponent(address)}/stats?workers=true&chart=false`, { cache: 'no-store' });
@@ -1377,21 +1401,28 @@
             oldButton.replaceWith(refreshButton);
             refreshButton.className = 'btn-miner';
             refreshButton.querySelector('i').className = 'fas fa-rotate';
-            refreshButton.querySelector('span').textContent = 'Actualizar datos';
-            refreshButton.addEventListener('click', refreshDashboard);
+            refreshButton.querySelector('span').textContent = configuredPool.supportsDashboard ? 'Actualizar datos' : 'Abrir panel MoneroOcean';
+            refreshButton.addEventListener('click', () => {
+                const address = ui.wallet.value.trim();
+                if (!configuredPool.supportsDashboard && /^[48][0-9A-Za-z]{94,105}$/.test(address)) {
+                    window.open(`${configuredPool.dashboard}${encodeURIComponent(address)}`, '_blank', 'noopener,noreferrer');
+                } else {
+                    refreshDashboard();
+                }
+            });
 
             const oldClaimButton = $('btnClaim');
             const claimButton = oldClaimButton.cloneNode(true);
             oldClaimButton.replaceWith(claimButton);
             claimButton.disabled = true;
-            claimButton.querySelector('span').textContent = 'Pago gestionado por HashVault';
-            $('claimStatus').textContent = 'El saldo mostrado es el confirmado pendiente de pago por el pool.';
+            claimButton.querySelector('span').textContent = configuredPool.supportsDashboard ? 'Pago gestionado por HashVault' : 'Pago gestionado por MoneroOcean';
+            $('claimStatus').textContent = configuredPool.supportsDashboard ? 'El saldo mostrado es el confirmado pendiente de pago por el pool.' : 'Consulta pagos y saldo en el panel oficial de MoneroOcean.';
             document.querySelector('.pool-selector').style.display = 'none';
-            $('poolLabel').textContent = 'Pool fijo: HashVault';
+            $('poolLabel').textContent = `Pool configurado: ${configuredPool.name}`;
             document.querySelector('.slogan-section').style.display = 'none';
-            $('minerTypeText').textContent = 'Datos reales del pool';
-            $('footerText1').textContent = 'Dashboard real · HashVault';
-            const walletFromApp = new URLSearchParams(window.location.search).get('wallet');
+            $('minerTypeText').textContent = configuredPool.supportsDashboard ? 'Datos reales del pool' : 'Enlace al pool configurado';
+            $('footerText1').textContent = configuredPool.supportsDashboard ? 'Dashboard real · HashVault' : 'MoneroOcean · sin estimaciones locales';
+            const walletFromApp = pageParams.get('wallet');
             if (/^[48][0-9A-Za-z]{94,105}$/.test(walletFromApp || '')) {
                 ui.wallet.value = walletFromApp;
             }
