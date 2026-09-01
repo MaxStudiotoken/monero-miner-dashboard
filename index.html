@@ -1467,6 +1467,8 @@
                     const activeWorkers = workers.filter(workerIsActive);
                     const instantHashrate = Number(collective.hashRate || 0);
                     const averageOneHourHashrate = Number(collective.avg1hashRate || 0);
+                    const displayedHashrate = instantHashrate > 0 ? instantHashrate : averageOneHourHashrate;
+                    const isShowingOneHourAverage = instantHashrate <= 0 && averageOneHourHashrate > 0;
                     const realPoolTrend = [
                         Number(collective.avg24hashRate || 0),
                         Number(collective.avg6hashRate || 0),
@@ -1474,12 +1476,12 @@
                         averageOneHourHashrate,
                         instantHashrate
                     ];
-                    const hashrate = instantHashrate;
+                    const hashrate = displayedHashrate;
                     const shares = Number(collective.validShares || 0);
                     const balance = Number(revenue.confirmedBalance || 0) / ATOMIC_UNITS_PER_XMR;
 
-                    ui.hashrate.textContent = formatHashrate(hashrate);
-                    ui.hashrateDesc.textContent = `HashVault · ${activeWorkers.length} activos / ${workers.length} registrados${instantHashrate > 0 || averageOneHourHashrate <= 0 ? '' : ` · media 1h: ~${formatHashrate(averageOneHourHashrate)} H/s`}`;
+                    ui.hashrate.textContent = formatHashrate(displayedHashrate);
+                    ui.hashrateDesc.textContent = `HashVault · ${activeWorkers.length} activos / ${workers.length} registrados${isShowingOneHourAverage ? ` · media real 1h: ~${formatHashrate(averageOneHourHashrate)} H/s` : ' · velocidad instantánea'}`;
                     ui.shares.textContent = shares.toLocaleString('es-ES');
                     ui.sharesBar.style.width = `${Math.min(100, (shares / 500) * 100)}%`;
                     ui.cpu.textContent = '--';
@@ -1493,7 +1495,7 @@
                     ui.earningsDay.textContent = '--';
                     ui.statusDot.className = `status-dot${activeWorkers.length > 0 ? '' : ' inactive'}`;
                     ui.statusText.innerHTML = activeWorkers.length > 0 ? '<strong>POOL ACTIVO</strong> · HashVault' : '<strong class="inactive">SIN WORKERS ACTIVOS</strong> · HashVault';
-                    ui.statusInfo.innerHTML = `<i class="fas fa-circle-check" style="color:#4cd964;"></i> <span style="color:#4cd964;">Datos reales actualizados desde HashVault.${instantHashrate > 0 ? '' : ' Sin velocidad instantánea; se muestra la media real de 1 hora.'}</span>`;
+                    ui.statusInfo.innerHTML = `<i class="fas fa-circle-check" style="color:#4cd964;"></i> <span style="color:#4cd964;">Datos reales actualizados desde HashVault.${isShowingOneHourAverage ? ' El pool no dio una muestra instantánea; se muestra su media real de 1 hora.' : ''}</span>`;
                     drawChart(realPoolTrend);
                     renderWorkers(workers, activeWorkers);
                 } catch (error) {
