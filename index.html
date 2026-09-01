@@ -122,6 +122,17 @@
         .worker-name { color: #eef2f6; font: 600 .8rem 'Menlo', 'Consolas', monospace; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
         .worker-detail { color: #94a3b8; font-size: .72rem; text-align: right; }
         .worker-empty { background: #0d111a; color: #7d8da3; padding: 18px 20px; font-size: .8rem; }
+        .welcome-guide { background: linear-gradient(135deg, #172334, #0d111a); border: 1px solid #f2a90055; border-radius: 28px; margin-bottom: 20px; overflow: hidden; display: grid; grid-template-columns: minmax(220px, .8fr) minmax(0, 1.2fr); }
+        .welcome-guide img { width: 100%; height: 100%; min-height: 330px; object-fit: cover; }
+        .welcome-copy { padding: 28px; }
+        .welcome-copy h2 { color: #f5e7c8; font-size: 1.7rem; margin-bottom: 8px; }
+        .welcome-copy > p { color: #94a3b8; line-height: 1.55; margin-bottom: 18px; }
+        .welcome-steps { display: grid; gap: 10px; }
+        .welcome-step { display: grid; grid-template-columns: 30px 1fr; gap: 10px; align-items: start; color: #dce5ef; font-size: .86rem; line-height: 1.45; }
+        .welcome-number { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; background: #f2a90022; border: 1px solid #f2a90066; color: #f2a900; font-weight: 700; }
+        .welcome-wallet-link { display: inline-flex; margin: 16px 0; color: #0b0e14; background: #4cd964; padding: 9px 15px; border-radius: 24px; text-decoration: none; font-size: .8rem; font-weight: 700; }
+        .welcome-security { color: #f5d38b; background: #f2a90014; border: 1px solid #f2a90033; border-radius: 14px; padding: 11px 13px; font-size: .78rem; line-height: 1.45; }
+        @media (max-width: 700px) { .welcome-guide { grid-template-columns: 1fr; } .welcome-guide img { min-height: 190px; max-height: 250px; } .welcome-copy { padding: 22px; } }
         @media (max-width: 560px) { .worker-row { grid-template-columns: 1fr auto; } .worker-detail:last-child { display: none; } }
 
         /* ===== SLOGAN SECTION ===== */
@@ -549,6 +560,22 @@
                 <span id="workersCount">0 workers</span>
             </div>
             <div class="worker-list" id="workerList"><div class="worker-empty">Introduce la dirección y actualiza para ver los móviles conectados.</div></div>
+        </section>
+
+        <section class="welcome-guide" aria-labelledby="welcomeTitle">
+            <img src="grupal.png" alt="Móviles conectados a Monero Miner" id="welcomeImage">
+            <div class="welcome-copy">
+                <h2 id="welcomeTitle">Guía de inicio</h2>
+                <p id="welcomeIntro">Sigue estos pasos para minar desde tus móviles y ver los datos reales de la misma wallet.</p>
+                <div class="welcome-steps">
+                    <div class="welcome-step"><span class="welcome-number">1</span><span id="welcomeStep1"></span></div>
+                    <div class="welcome-step"><span class="welcome-number">2</span><span id="welcomeStep2"></span></div>
+                    <div class="welcome-step"><span class="welcome-number">3</span><span id="welcomeStep3"></span></div>
+                    <div class="welcome-step"><span class="welcome-number">4</span><span id="welcomeStep4"></span></div>
+                </div>
+                <a class="welcome-wallet-link" id="welcomeWalletLink" href="https://play.google.com/store/apps/details?id=com.monero.app" target="_blank" rel="noopener noreferrer">Abrir Monero.com en Google Play</a>
+                <p class="welcome-security" id="welcomeSecurity"></p>
+            </div>
         </section>
 
         <!-- ===== SLOGAN ===== -->
@@ -1170,6 +1197,68 @@
         (function () {
             'use strict';
 
+            const WELCOME = {
+                es: {
+                    title: 'Guía de inicio',
+                    intro: 'Sigue estos pasos para minar desde tus móviles y ver los datos reales de la misma wallet.',
+                    walletLink: 'Abrir Monero.com en Google Play',
+                    step1: 'Instala Monero.com Wallet desde Google Play y crea o abre tu wallet.',
+                    step2: 'Copia únicamente tu dirección pública de recepción, que empieza por 4 o 8.',
+                    step3: 'En la app, pega esa dirección en «Dirección Monero» y pulsa «Iniciar minería». Usa la misma dirección en todos tus móviles.',
+                    step4: 'En este panel, pega la misma dirección y pulsa «Actualizar datos» para ver el hashrate, workers, shares y saldo del pool.',
+                    security: '<strong>Seguridad:</strong> nunca compartas ni escribas aquí tu semilla de recuperación, claves privadas o contraseña de wallet.'
+                },
+                en: {
+                    title: 'Getting started',
+                    intro: 'Follow these steps to mine from your phones and view real data for the same wallet.',
+                    walletLink: 'Open Monero.com on Google Play',
+                    step1: 'Install Monero.com Wallet from Google Play and create or open your wallet.',
+                    step2: 'Copy only your public receiving address, which starts with 4 or 8.',
+                    step3: 'In the app, paste that address into “Monero address” and tap “Start mining.” Use the same address on all your phones.',
+                    step4: 'In this dashboard, paste the same address and tap “Refresh data” to view pool hashrate, workers, shares, and balance.',
+                    security: '<strong>Security:</strong> never share or enter your recovery seed, private keys, or wallet password here.'
+                },
+                fr: {
+                    title: 'Guide de démarrage',
+                    intro: 'Suivez ces étapes pour miner depuis vos téléphones et voir les données réelles de la même wallet.',
+                    walletLink: 'Ouvrir Monero.com sur Google Play',
+                    step1: 'Installez Monero.com Wallet depuis Google Play et créez ou ouvrez votre wallet.',
+                    step2: 'Copiez uniquement votre adresse publique de réception, qui commence par 4 ou 8.',
+                    step3: 'Dans l’application, collez cette adresse dans « Adresse Monero » et appuyez sur « Démarrer ». Utilisez la même adresse sur tous vos téléphones.',
+                    step4: 'Dans ce tableau de bord, collez la même adresse et appuyez sur « Actualiser les données » pour voir les données réelles du pool.',
+                    security: '<strong>Sécurité :</strong> ne partagez jamais votre phrase de récupération, vos clés privées ou votre mot de passe ici.'
+                },
+                de: {
+                    title: 'Schnellstart',
+                    intro: 'Folge diesen Schritten, um mit deinen Telefonen zu minen und echte Daten derselben Wallet zu sehen.',
+                    walletLink: 'Monero.com bei Google Play öffnen',
+                    step1: 'Installiere Monero.com Wallet aus Google Play und erstelle oder öffne deine Wallet.',
+                    step2: 'Kopiere nur deine öffentliche Empfangsadresse, die mit 4 oder 8 beginnt.',
+                    step3: 'Füge diese Adresse in der App bei „Monero-Adresse“ ein und tippe auf „Starten“. Verwende auf allen Telefonen dieselbe Adresse.',
+                    step4: 'Füge in diesem Dashboard dieselbe Adresse ein und aktualisiere die Daten, um Hashrate, Worker, Shares und Pool-Guthaben zu sehen.',
+                    security: '<strong>Sicherheit:</strong> teile oder gib hier niemals deine Wiederherstellungsphrase, privaten Schlüssel oder dein Wallet-Passwort ein.'
+                },
+                ja: {
+                    title: 'はじめに',
+                    intro: 'この手順に従ってスマートフォンでマイニングし、同じウォレットの実データを確認します。',
+                    walletLink: 'Google Play で Monero.com を開く',
+                    step1: 'Google Play から Monero.com Wallet をインストールし、ウォレットを作成または開きます。',
+                    step2: '4 または 8 で始まる公開受取アドレスだけをコピーします。',
+                    step3: 'アプリの「Monero アドレス」に貼り付け、「開始」を押します。すべてのスマートフォンで同じアドレスを使います。',
+                    step4: 'このダッシュボードにも同じアドレスを貼り付け、データを更新してプールの実データを確認します。',
+                    security: '<strong>セキュリティ：</strong> リカバリーフレーズ、秘密鍵、ウォレットのパスワードをここに入力または共有しないでください。'
+                },
+                zh: {
+                    title: '开始使用',
+                    intro: '按照以下步骤在手机上挖矿，并查看同一钱包的真实数据。',
+                    walletLink: '在 Google Play 打开 Monero.com',
+                    step1: '从 Google Play 安装 Monero.com Wallet，然后创建或打开钱包。',
+                    step2: '只复制以 4 或 8 开头的公开收款地址。',
+                    step3: '在应用的“门罗币地址”中粘贴该地址，然后点击“开始”。所有手机都使用同一个地址。',
+                    step4: '在此面板中粘贴同一地址并更新数据，查看矿池的真实算力、矿工、份额和余额。',
+                    security: '<strong>安全提示：</strong> 切勿在这里输入或分享恢复助记词、私钥或钱包密码。'
+                }
+            };
             const ATOMIC_UNITS_PER_XMR = 1_000_000_000_000;
             const POLL_INTERVAL_MS = 30_000;
             const history = [];
@@ -1200,6 +1289,19 @@
                 workersCount: $('workersCount'),
                 workerList: $('workerList')
             };
+
+            function updateWelcome(language) {
+                const text = WELCOME[language] || WELCOME.es;
+                $('welcomeTitle').textContent = text.title;
+                $('welcomeIntro').textContent = text.intro;
+                $('welcomeWalletLink').textContent = text.walletLink;
+                $('welcomeStep1').textContent = text.step1;
+                $('welcomeStep2').textContent = text.step2;
+                $('welcomeStep3').textContent = text.step3;
+                $('welcomeStep4').textContent = text.step4;
+                $('welcomeSecurity').innerHTML = text.security;
+                $('welcomeImage').alt = text.title;
+            }
 
             const formatHashrate = (value) => Number(value || 0).toLocaleString('es-ES');
             const formatXmr = (value) => Number(value || 0).toFixed(12);
@@ -1313,6 +1415,10 @@
                 ui.wallet.value = walletFromApp;
             }
             ui.wallet.addEventListener('change', refreshDashboard);
+            document.querySelectorAll('.lang-btn').forEach((button) => {
+                button.addEventListener('click', () => updateWelcome(button.dataset.lang));
+            });
+            updateWelcome('es');
             refreshDashboard();
             window.setInterval(refreshDashboard, POLL_INTERVAL_MS);
         })();
