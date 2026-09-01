@@ -131,6 +131,8 @@
         .welcome-step { display: grid; grid-template-columns: 30px 1fr; gap: 10px; align-items: start; color: #dce5ef; font-size: .86rem; line-height: 1.45; }
         .welcome-number { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; background: #f2a90022; border: 1px solid #f2a90066; color: #f2a900; font-weight: 700; }
         .welcome-wallet-link { display: inline-flex; margin: 16px 0; color: #0b0e14; background: #4cd964; padding: 9px 15px; border-radius: 24px; text-decoration: none; font-size: .8rem; font-weight: 700; }
+        .welcome-app-link { display: inline-flex; margin: 0 0 12px; color: #10141c; background: #f2a900; padding: 11px 16px; border-radius: 24px; text-decoration: none; font-size: .84rem; font-weight: 800; }
+        .welcome-promo { color: #f5e7c8; background: #f2a90012; border-left: 3px solid #f2a900; border-radius: 8px; padding: 11px 13px; margin: 2px 0 14px; font-size: .82rem; line-height: 1.5; }
         .welcome-security { color: #f5d38b; background: #f2a90014; border: 1px solid #f2a90033; border-radius: 14px; padding: 11px 13px; font-size: .78rem; line-height: 1.45; }
         @media (max-width: 700px) { .welcome-guide { grid-template-columns: 1fr; } .welcome-guide img { min-height: 190px; max-height: 250px; } .welcome-copy { padding: 22px; } }
         @media (max-width: 560px) { .worker-row { grid-template-columns: 1fr auto; } .worker-detail:last-child { display: none; } }
@@ -573,6 +575,8 @@
                     <div class="welcome-step"><span class="welcome-number">3</span><span id="welcomeStep3"></span></div>
                     <div class="welcome-step"><span class="welcome-number">4</span><span id="welcomeStep4"></span></div>
                 </div>
+                <a class="welcome-app-link" id="welcomeAppLink" href="https://play.google.com/store/apps/details?id=vargas.maximo.minermoneroapp" target="_blank" rel="noopener noreferrer"><i class="fab fa-google-play"></i>&nbsp; Descargar tu app minera</a>
+                <p class="welcome-promo" id="welcomePromo"></p>
                 <a class="welcome-wallet-link" id="welcomeWalletLink" href="https://play.google.com/store/apps/details?id=com.monero.app" target="_blank" rel="noopener noreferrer">Abrir Monero.com en Google Play</a>
                 <p class="welcome-security" id="welcomeSecurity"></p>
             </div>
@@ -1164,6 +1168,8 @@
                 es: {
                     title: 'Guía de inicio',
                     intro: 'Sigue estos pasos para minar desde tus móviles y ver los datos reales de la misma wallet.',
+                    appLink: 'Descarga tu app minera para conectar tus móviles',
+                    promo: '<strong>Conecta tu red:</strong> usa la misma wallet en tus móviles para sumar hashrate y controlar todo desde esta web. Más dispositivos activos pueden aportar más potencia conjunta; las recompensas reales siempre las calcula el pool.',
                     walletLink: 'Abrir Monero.com en Google Play',
                     step1: 'Instala Monero.com Wallet desde Google Play y crea o abre tu wallet.',
                     step2: 'Copia únicamente tu dirección pública de recepción, que empieza por 4 o 8.',
@@ -1174,6 +1180,8 @@
                 en: {
                     title: 'Getting started',
                     intro: 'Follow these steps to mine from your phones and view real data for the same wallet.',
+                    appLink: 'Download your mining app to connect your phones',
+                    promo: '<strong>Build your network:</strong> use the same wallet on your phones to combine hashrate and monitor everything here. More active devices can add more combined power; the pool always calculates real rewards.',
                     walletLink: 'Open Monero.com on Google Play',
                     step1: 'Install Monero.com Wallet from Google Play and create or open your wallet.',
                     step2: 'Copy only your public receiving address, which starts with 4 or 8.',
@@ -1184,6 +1192,8 @@
                 fr: {
                     title: 'Guide de démarrage',
                     intro: 'Suivez ces étapes pour miner depuis vos téléphones et voir les données réelles de la même wallet.',
+                    appLink: 'Téléchargez votre appli de minage pour connecter vos téléphones',
+                    promo: '<strong>Créez votre réseau :</strong> utilisez le même wallet sur vos téléphones pour additionner le hashrate et tout suivre ici. Plus d’appareils actifs peuvent ajouter de la puissance ; le pool calcule toujours les récompenses réelles.',
                     walletLink: 'Ouvrir Monero.com sur Google Play',
                     step1: 'Installez Monero.com Wallet depuis Google Play et créez ou ouvrez votre wallet.',
                     step2: 'Copiez uniquement votre adresse publique de réception, qui commence par 4 ou 8.',
@@ -1194,6 +1204,8 @@
                 de: {
                     title: 'Schnellstart',
                     intro: 'Folge diesen Schritten, um mit deinen Telefonen zu minen und echte Daten derselben Wallet zu sehen.',
+                    appLink: 'Lade deine Mining-App herunter und verbinde deine Telefone',
+                    promo: '<strong>Baue dein Netzwerk auf:</strong> Nutze dieselbe Wallet auf deinen Telefonen, um Hashrate zu bündeln und alles hier zu überwachen. Mehr aktive Geräte können mehr gemeinsame Leistung liefern; der Pool berechnet die echten Belohnungen.',
                     walletLink: 'Monero.com bei Google Play öffnen',
                     step1: 'Installiere Monero.com Wallet aus Google Play und erstelle oder öffne deine Wallet.',
                     step2: 'Kopiere nur deine öffentliche Empfangsadresse, die mit 4 oder 8 beginnt.',
@@ -1204,6 +1216,8 @@
                 ja: {
                     title: 'はじめに',
                     intro: 'この手順に従ってスマートフォンでマイニングし、同じウォレットの実データを確認します。',
+                    appLink: 'マイニングアプリをダウンロードしてスマートフォンを接続',
+                    promo: '<strong>あなたのネットワークを作りましょう：</strong>同じウォレットを各スマートフォンで使うと、ハッシュレートを合算してここで管理できます。稼働中の端末が増えるほど合計性能は上がりますが、実際の報酬は常にプールが計算します。',
                     walletLink: 'Google Play で Monero.com を開く',
                     step1: 'Google Play から Monero.com Wallet をインストールし、ウォレットを作成または開きます。',
                     step2: '4 または 8 で始まる公開受取アドレスだけをコピーします。',
@@ -1214,6 +1228,8 @@
                 zh: {
                     title: '开始使用',
                     intro: '按照以下步骤在手机上挖矿，并查看同一钱包的真实数据。',
+                    appLink: '下载挖矿应用并连接你的手机',
+                    promo: '<strong>建立你的设备网络：</strong>在所有手机上使用同一钱包，即可汇总算力并在此查看。更多活跃设备可以带来更高的总算力；实际奖励始终由矿池计算。',
                     walletLink: '在 Google Play 打开 Monero.com',
                     step1: '从 Google Play 安装 Monero.com Wallet，然后创建或打开钱包。',
                     step2: '只复制以 4 或 8 开头的公开收款地址。',
@@ -1257,6 +1273,8 @@
                 const text = WELCOME[language] || WELCOME.es;
                 $('welcomeTitle').textContent = text.title;
                 $('welcomeIntro').textContent = text.intro;
+                $('welcomeAppLink').innerHTML = '<i class="fab fa-google-play"></i>&nbsp; ' + text.appLink;
+                $('welcomePromo').innerHTML = text.promo;
                 $('welcomeWalletLink').textContent = text.walletLink;
                 $('welcomeStep1').textContent = text.step1;
                 $('welcomeStep2').textContent = text.step2;
