@@ -590,31 +590,6 @@
             </div>
         </div>
 
-        <!-- ===== SECCIÓN APP - IMAGEN GIGANTE 500px ===== -->
-        <div class="app-section">
-            <div class="app-info">
-                <h2><i class="fas fa-rocket"></i> <span id="appTitle">Monero Miner App</span></h2>
-                <div class="app-desc" id="appDesc">
-                    <strong id="appDescStrong">🔥 Minar criptomonedas nunca fue tan fácil!</strong><br>
-                    <span id="appDescText">La app <strong>Monero Miner XMR</strong> fue creada para que <strong>cualquier persona</strong>, sin necesidad de costosos ordenadores o conocimientos técnicos, pueda minar Monero (XMR) directamente desde su móvil. Con <strong>MaxStudio</strong>, <span class="highlight">tú también puedes generar ingresos pasivos</span> de forma sencilla, segura y sin complicaciones. <strong>¡Únete a la revolución del minado accesible!</strong></span>
-                </div>
-                <div class="app-features">
-                    <span><i class="fas fa-cloud"></i> <span id="f1">Minado en la nube</span></span>
-                    <span><i class="fas fa-mobile-alt"></i> <span id="f2">Fácil y rápido</span></span>
-                    <span><i class="fas fa-coins"></i> <span id="f3">Recompensas diarias</span></span>
-                    <span><i class="fas fa-shield-alt"></i> <span id="f4">100% seguro</span></span>
-                    <span><i class="fas fa-bolt"></i> <span id="f5">Sin hardware caro</span></span>
-                </div>
-                <a href="https://play.google.com/store/apps/details?id=vargas.maximo.minermoneroapp" target="_blank" class="btn-app-store">
-                    <i class="fab fa-google-play"></i> <span id="btnAppStoreText">Descargar en Google Play</span>
-                </a>
-            </div>
-            <div class="app-image">
-                <img id="appGroupImage" src="grupal.png" alt="Monero Miner App - Grupo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                <div class="app-icon-fallback" style="display:none;"><i class="fas fa-users"></i></div>
-            </div>
-        </div>
-
         <!-- ===== DESCRIPCIÓN DEL PROYECTO ===== -->
         <div class="project-desc">
             <div class="item">
@@ -842,10 +817,7 @@
                 toast: $('toast'), toastMessage: $('toastMessage'),
                 cpuBar: $('cpuBar'), tempBar: $('tempBar'), sharesBar: $('sharesBar'),
                 minerStats: $('minerStats'), minerStatusText: $('minerStatusText'), lastBlockText: $('lastBlockText'),
-                headerAppBtnText: $('headerAppBtnText'), appTitle: $('appTitle'),
-                appDescStrong: $('appDescStrong'), appDescText: $('appDescText'),
-                f1: $('f1'), f2: $('f2'), f3: $('f3'), f4: $('f4'), f5: $('f5'),
-                btnAppStoreText: $('btnAppStoreText'), shareXText: $('shareXText'), shareFbText: $('shareFbText')
+                headerAppBtnText: $('headerAppBtnText'), shareXText: $('shareXText'), shareFbText: $('shareFbText')
             };
 
             const langBtns = document.querySelectorAll('.lang-btn');
@@ -872,15 +844,6 @@
                 el.uptimeLabel.textContent = t('uptime');
                 el.footerText1.textContent = t('footer');
                 el.headerAppBtnText.textContent = t('headerAppBtn');
-                el.appTitle.textContent = t('appTitle');
-                el.appDescStrong.innerHTML = t('appDescStrong');
-                el.appDescText.innerHTML = t('appDescText');
-                el.f1.textContent = t('f1');
-                el.f2.textContent = t('f2');
-                el.f3.textContent = t('f3');
-                el.f4.textContent = t('f4');
-                el.f5.textContent = t('f5');
-                el.btnAppStoreText.textContent = t('btnAppStoreText');
                 el.shareXText.textContent = t('shareXText');
                 el.shareFbText.textContent = t('shareFbText');
                 
