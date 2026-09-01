@@ -140,8 +140,21 @@
         .welcome-app-link { display: inline-flex; margin: 0 0 12px; color: #10141c; background: #f2a900; padding: 11px 16px; border-radius: 24px; text-decoration: none; font-size: .84rem; font-weight: 800; }
         .welcome-promo { color: #f5e7c8; background: #f2a90012; border-left: 3px solid #f2a900; border-radius: 8px; padding: 11px 13px; margin: 2px 0 14px; font-size: .82rem; line-height: 1.5; }
         .welcome-security { color: #f5d38b; background: #f2a90014; border: 1px solid #f2a90033; border-radius: 14px; padding: 11px 13px; font-size: .78rem; line-height: 1.45; }
+        .benchmark-section { background: linear-gradient(135deg, #141d2a, #0d111a); border: 1px solid #25303e; border-radius: 28px; padding: 26px; margin-bottom: 20px; }
+        .benchmark-section h2 { color: #f5e7c8; font-size: 1.55rem; margin-bottom: 8px; }
+        .benchmark-section > p { color: #94a3b8; line-height: 1.55; font-size: .87rem; margin-bottom: 18px; }
+        .benchmark-list { display: grid; gap: 8px; }
+        .benchmark-row { display: grid; grid-template-columns: 34px minmax(0, 1fr) auto auto; align-items: center; gap: 12px; border: 1px solid #25303e; background: #0d111a; border-radius: 14px; padding: 12px 14px; }
+        .benchmark-rank { color: #f2a900; font-weight: 800; text-align: center; }
+        .benchmark-model { color: #eef2f6; font-size: .84rem; font-weight: 700; }
+        .benchmark-chip { color: #7d8da3; font-size: .72rem; margin-top: 3px; }
+        .benchmark-rate { color: #4cd964; font: 800 .9rem 'Menlo', 'Consolas', monospace; white-space: nowrap; }
+        .benchmark-mode { color: #f5d38b; font-size: .7rem; text-align: right; white-space: nowrap; }
+        .benchmark-row.provisional { border-color: #f2a90055; }
+        .benchmark-row.provisional .benchmark-rate { color: #f2a900; }
+        .benchmark-note { color: #f5d38b !important; background: #f2a90012; border-left: 3px solid #f2a900; border-radius: 8px; padding: 11px 13px; margin: 16px 0 0 !important; font-size: .78rem !important; }
         @media (max-width: 700px) { .welcome-copy { padding: 22px; } .site-nav { justify-content: stretch; } .site-nav a { flex: 1 1 auto; text-align: center; } }
-        @media (max-width: 560px) { .worker-row { grid-template-columns: 1fr auto; } .worker-detail:last-child { display: none; } }
+        @media (max-width: 560px) { .worker-row { grid-template-columns: 1fr auto; } .worker-detail:last-child { display: none; } .benchmark-section { padding: 20px; } .benchmark-row { grid-template-columns: 28px minmax(0, 1fr) auto; gap: 8px; } .benchmark-mode { display: none; } }
 
         /* ===== SLOGAN SECTION ===== */
         .slogan-section {
@@ -435,6 +448,7 @@
 
         <nav class="site-nav" aria-label="Navegación principal">
             <a href="#inicio"><i class="fas fa-house"></i> <span id="navHome">Inicio</span></a>
+            <a href="#comparativa"><i class="fas fa-ranking-star"></i> <span id="navCompare">Comparativa</span></a>
             <a href="#granja"><i class="fas fa-server"></i> <span id="navFarm">Granja</span></a>
             <a href="https://play.google.com/store/apps/details?id=vargas.maximo.minermoneroapp" target="_blank" rel="noopener noreferrer" class="header-app-btn"><i class="fab fa-google-play"></i> <span id="headerAppBtnText">Descargar App</span></a>
         </nav>
@@ -476,6 +490,21 @@
                 <a class="welcome-wallet-link" id="welcomeWalletLink" href="https://play.google.com/store/apps/details?id=com.monero.app" target="_blank" rel="noopener noreferrer">Abrir Monero.com en Google Play</a>
                 <p class="welcome-security" id="welcomeSecurity"></p>
             </div>
+        </section>
+
+        <section class="benchmark-section" id="comparativa" aria-labelledby="benchmarkTitle">
+            <h2 id="benchmarkTitle">Comparativa orientativa de móviles</h2>
+            <p id="benchmarkIntro">Ordenados de mayor a menor rendimiento potencial en RandomX con esta app. Son rangos estimados, no una promesa de hashrate.</p>
+            <div class="benchmark-list">
+                <div class="benchmark-row"><span class="benchmark-rank">1</span><div><div class="benchmark-model">ASUS ROG Phone 8</div><div class="benchmark-chip">Snapdragon 8 Gen 3</div></div><span class="benchmark-rate">450-800 H/s</span><span class="benchmark-mode">50-75% CPU</span></div>
+                <div class="benchmark-row"><span class="benchmark-rank">2</span><div><div class="benchmark-model">Samsung Galaxy S24 Ultra</div><div class="benchmark-chip">Snapdragon 8 Gen 3</div></div><span class="benchmark-rate">400-700 H/s</span><span class="benchmark-mode">50-75% CPU</span></div>
+                <div class="benchmark-row"><span class="benchmark-rank">3</span><div><div class="benchmark-model">Xiaomi 14</div><div class="benchmark-chip">Snapdragon 8 Gen 3</div></div><span class="benchmark-rate">380-680 H/s</span><span class="benchmark-mode">50-75% CPU</span></div>
+                <div class="benchmark-row"><span class="benchmark-rank">4</span><div><div class="benchmark-model">Redmi Note 13 Pro+</div><div class="benchmark-chip">Dimensity 7200-Ultra</div></div><span class="benchmark-rate">160-300 H/s</span><span class="benchmark-mode">25-50% CPU</span></div>
+                <div class="benchmark-row"><span class="benchmark-rank">5</span><div><div class="benchmark-model">Google Pixel 7</div><div class="benchmark-chip">Google Tensor G2</div></div><span class="benchmark-rate">120-230 H/s</span><span class="benchmark-mode">25-50% CPU</span></div>
+                <div class="benchmark-row"><span class="benchmark-rank">6</span><div><div class="benchmark-model">Samsung Galaxy A54</div><div class="benchmark-chip">Exynos 1380</div></div><span class="benchmark-rate">90-180 H/s</span><span class="benchmark-mode">25% CPU</span></div>
+                <div class="benchmark-row provisional"><span class="benchmark-rank">7</span><div><div class="benchmark-model" id="oppoModel">Tu OPPO (modelo pendiente)</div><div class="benchmark-chip" id="oppoChip">Gama baja/media, estimación provisional</div></div><span class="benchmark-rate">40-120 H/s</span><span class="benchmark-mode" id="oppoMode">Medir en tu granja</span></div>
+            </div>
+            <p class="benchmark-note" id="benchmarkNote">Importante: temperatura, versión del móvil, memoria disponible, modo CPU y batería cambian el resultado. El hashrate real es el que aparece en Granja después de varios minutos de minado estable.</p>
         </section>
 
         <main id="granja" aria-label="Granja de minería Monero">
@@ -1250,12 +1279,12 @@
                 }
             };
             const PAGE_COPY = {
-                es: { home: 'Inicio', farm: 'Granja', download: 'Descargar App', earnings: 'Ganancias en directo', performance: 'Rendimiento de minado', peak: 'Pico', average: 'Promedio', address: 'Dirección Monero', shares: 'Shares', cpu: 'CPU', temperature: 'Temperatura', lastShare: 'Último share', workers: 'Trabajadores de esta wallet' },
-                en: { home: 'Home', farm: 'Farm', download: 'Download App', earnings: 'Live earnings', performance: 'Mining performance', peak: 'Peak', average: 'Average', address: 'Monero address', shares: 'Shares', cpu: 'CPU', temperature: 'Temperature', lastShare: 'Last share', workers: 'Workers for this wallet' },
-                fr: { home: 'Accueil', farm: 'Ferme', download: 'Télécharger l’app', earnings: 'Gains en direct', performance: 'Performance de minage', peak: 'Pic', average: 'Moyenne', address: 'Adresse Monero', shares: 'Parts', cpu: 'CPU', temperature: 'Température', lastShare: 'Dernière part', workers: 'Workers de ce wallet' },
-                de: { home: 'Start', farm: 'Farm', download: 'App herunterladen', earnings: 'Live-Einnahmen', performance: 'Schürfleistung', peak: 'Spitze', average: 'Durchschnitt', address: 'Monero-Adresse', shares: 'Shares', cpu: 'CPU', temperature: 'Temperatur', lastShare: 'Letzter Share', workers: 'Worker dieser Wallet' },
-                ja: { home: 'ホーム', farm: 'ファーム', download: 'アプリをダウンロード', earnings: 'ライブ収益', performance: 'マイニング性能', peak: '最大', average: '平均', address: 'Monero アドレス', shares: 'シェア', cpu: 'CPU', temperature: '温度', lastShare: '最終シェア', workers: 'このウォレットのワーカー' },
-                zh: { home: '首页', farm: '矿场', download: '下载应用', earnings: '实时收益', performance: '挖矿性能', peak: '峰值', average: '平均', address: '门罗币地址', shares: '份额', cpu: 'CPU', temperature: '温度', lastShare: '最后份额', workers: '此钱包的矿工' }
+                es: { home: 'Inicio', compare: 'Comparativa', farm: 'Granja', download: 'Descargar App', earnings: 'Ganancias en directo', performance: 'Rendimiento de minado', peak: 'Pico', average: 'Promedio', address: 'Dirección Monero', shares: 'Shares', cpu: 'CPU', temperature: 'Temperatura', lastShare: 'Último share', workers: 'Trabajadores de esta wallet', benchmarkTitle: 'Comparativa orientativa de móviles', benchmarkIntro: 'Ordenados de mayor a menor rendimiento potencial en RandomX con esta app. Son rangos estimados, no una promesa de hashrate.', benchmarkNote: 'Importante: temperatura, versión del móvil, memoria disponible, modo CPU y batería cambian el resultado. El hashrate real es el que aparece en Granja después de varios minutos de minado estable.', oppoModel: 'Tu OPPO (modelo pendiente)', oppoChip: 'Gama baja/media, estimación provisional', oppoMode: 'Medir en tu granja' },
+                en: { home: 'Home', compare: 'Compare', farm: 'Farm', download: 'Download App', earnings: 'Live earnings', performance: 'Mining performance', peak: 'Peak', average: 'Average', address: 'Monero address', shares: 'Shares', cpu: 'CPU', temperature: 'Temperature', lastShare: 'Last share', workers: 'Workers for this wallet', benchmarkTitle: 'Phone reference comparison', benchmarkIntro: 'Sorted from higher to lower potential RandomX performance in this app. These are estimated ranges, not a hashrate promise.', benchmarkNote: 'Important: temperature, phone version, available memory, CPU mode, and battery change the result. The real hashrate is the one shown in Farm after several minutes of stable mining.', oppoModel: 'Your OPPO (model pending)', oppoChip: 'Entry/mid-range, provisional estimate', oppoMode: 'Measure it in your farm' },
+                fr: { home: 'Accueil', compare: 'Comparatif', farm: 'Ferme', download: 'Télécharger l’app', earnings: 'Gains en direct', performance: 'Performance de minage', peak: 'Pic', average: 'Moyenne', address: 'Adresse Monero', shares: 'Parts', cpu: 'CPU', temperature: 'Température', lastShare: 'Dernière part', workers: 'Workers de ce wallet', benchmarkTitle: 'Comparatif indicatif des téléphones', benchmarkIntro: 'Classés du potentiel RandomX le plus élevé au plus faible dans cette application. Ce sont des plages estimées, pas une promesse de hashrate.', benchmarkNote: 'Important : température, version du téléphone, mémoire disponible, mode CPU et batterie modifient le résultat. Le hashrate réel est celui affiché dans Ferme après plusieurs minutes stables.', oppoModel: 'Votre OPPO (modèle en attente)', oppoChip: 'Entrée/milieu de gamme, estimation provisoire', oppoMode: 'Mesurez-le dans votre ferme' },
+                de: { home: 'Start', compare: 'Vergleich', farm: 'Farm', download: 'App herunterladen', earnings: 'Live-Einnahmen', performance: 'Schürfleistung', peak: 'Spitze', average: 'Durchschnitt', address: 'Monero-Adresse', shares: 'Shares', cpu: 'CPU', temperature: 'Temperatur', lastShare: 'Letzter Share', workers: 'Worker dieser Wallet', benchmarkTitle: 'Orientierender Smartphone-Vergleich', benchmarkIntro: 'Nach möglicher RandomX-Leistung in dieser App von hoch nach niedrig sortiert. Dies sind Schätzbereiche, keine Hashrate-Zusage.', benchmarkNote: 'Wichtig: Temperatur, Telefonversion, verfügbarer Speicher, CPU-Modus und Akku ändern das Ergebnis. Die echte Hashrate steht nach mehreren stabilen Minuten in der Farm.', oppoModel: 'Dein OPPO (Modell offen)', oppoChip: 'Einsteiger/Mittelklasse, vorläufige Schätzung', oppoMode: 'In deiner Farm messen' },
+                ja: { home: 'ホーム', compare: '比較', farm: 'ファーム', download: 'アプリをダウンロード', earnings: 'ライブ収益', performance: 'マイニング性能', peak: '最大', average: '平均', address: 'Monero アドレス', shares: 'シェア', cpu: 'CPU', temperature: '温度', lastShare: '最終シェア', workers: 'このウォレットのワーカー', benchmarkTitle: 'スマートフォン性能の目安', benchmarkIntro: 'このアプリでのRandomX性能の目安を高い順に表示します。推定範囲であり、ハッシュレートを保証するものではありません。', benchmarkNote: '重要：温度、端末のバージョン、空きメモリ、CPUモード、バッテリーにより結果は変わります。実際のハッシュレートは、安定稼働後にファームで確認してください。', oppoModel: 'あなたのOPPO（機種未確認）', oppoChip: 'エントリー/ミドルレンジ、暫定推定', oppoMode: 'ファームで測定' },
+                zh: { home: '首页', compare: '对比', farm: '矿场', download: '下载应用', earnings: '实时收益', performance: '挖矿性能', peak: '峰值', average: '平均', address: '门罗币地址', shares: '份额', cpu: 'CPU', temperature: '温度', lastShare: '最后份额', workers: '此钱包的矿工', benchmarkTitle: '手机性能参考对比', benchmarkIntro: '按本应用中的 RandomX 潜在性能从高到低排序。这些是估计范围，不是算力承诺。', benchmarkNote: '重要：温度、手机版本、可用内存、CPU 模式和电池都会改变结果。真实算力应以稳定挖矿数分钟后矿场中显示的数据为准。', oppoModel: '你的 OPPO（型号待确认）', oppoChip: '入门/中端，临时估计', oppoMode: '在你的矿场中测量' }
             };
             const ATOMIC_UNITS_PER_XMR = 1_000_000_000_000;
             const POLL_INTERVAL_MS = 30_000;
@@ -1310,6 +1339,7 @@
             function updatePageLanguage(language) {
                 const text = PAGE_COPY[language] || PAGE_COPY.es;
                 $('navHome').textContent = text.home;
+                $('navCompare').textContent = text.compare;
                 $('navFarm').textContent = text.farm;
                 $('headerAppBtnText').textContent = text.download;
                 $('earningsTitle').textContent = text.earnings;
@@ -1322,6 +1352,12 @@
                 $('tempLabel').textContent = text.temperature;
                 $('uptimeLabel').textContent = text.lastShare;
                 $('workersTitle').textContent = text.workers;
+                $('benchmarkTitle').textContent = text.benchmarkTitle;
+                $('benchmarkIntro').textContent = text.benchmarkIntro;
+                $('benchmarkNote').textContent = text.benchmarkNote;
+                $('oppoModel').textContent = text.oppoModel;
+                $('oppoChip').textContent = text.oppoChip;
+                $('oppoMode').textContent = text.oppoMode;
             }
 
             const formatHashrate = (value) => Number(value || 0).toLocaleString('es-ES');
