@@ -122,8 +122,8 @@
         .worker-name { color: #eef2f6; font: 600 .8rem 'Menlo', 'Consolas', monospace; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
         .worker-detail { color: #94a3b8; font-size: .72rem; text-align: right; }
         .worker-empty { background: #0d111a; color: #7d8da3; padding: 18px 20px; font-size: .8rem; }
-        .welcome-guide { background: linear-gradient(135deg, #172334, #0d111a); border: 1px solid #f2a90055; border-radius: 28px; margin-bottom: 20px; overflow: hidden; display: grid; grid-template-columns: minmax(220px, .8fr) minmax(0, 1.2fr); }
-        .welcome-guide img { width: 100%; height: 100%; min-height: 330px; object-fit: cover; }
+        .welcome-guide { background: linear-gradient(135deg, #172334, #0d111a); border: 1px solid #f2a90055; border-radius: 28px; margin-bottom: 20px; overflow: hidden; }
+        .welcome-guide img { display: block; width: 100%; height: auto; object-fit: contain; }
         .welcome-copy { padding: 28px; }
         .welcome-copy h2 { color: #f5e7c8; font-size: 1.7rem; margin-bottom: 8px; }
         .welcome-copy > p { color: #94a3b8; line-height: 1.55; margin-bottom: 18px; }
@@ -134,7 +134,7 @@
         .welcome-app-link { display: inline-flex; margin: 0 0 12px; color: #10141c; background: #f2a900; padding: 11px 16px; border-radius: 24px; text-decoration: none; font-size: .84rem; font-weight: 800; }
         .welcome-promo { color: #f5e7c8; background: #f2a90012; border-left: 3px solid #f2a900; border-radius: 8px; padding: 11px 13px; margin: 2px 0 14px; font-size: .82rem; line-height: 1.5; }
         .welcome-security { color: #f5d38b; background: #f2a90014; border: 1px solid #f2a90033; border-radius: 14px; padding: 11px 13px; font-size: .78rem; line-height: 1.45; }
-        @media (max-width: 700px) { .welcome-guide { grid-template-columns: 1fr; } .welcome-guide img { min-height: 190px; max-height: 250px; } .welcome-copy { padding: 22px; } }
+        @media (max-width: 700px) { .welcome-copy { padding: 22px; } }
         @media (max-width: 560px) { .worker-row { grid-template-columns: 1fr auto; } .worker-detail:last-child { display: none; } }
 
         /* ===== SLOGAN SECTION ===== */
