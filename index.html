@@ -1224,7 +1224,7 @@
                     return `${x.toFixed(1)},${y.toFixed(1)}`;
                 });
                 ui.chartLine.setAttribute('points', points.join(' '));
-                ui.chartLine.className = `line-path${max > 0 ? '' : ' inactive'}`;
+                ui.chartLine.setAttribute('class', `line-path${max > 0 ? '' : ' inactive'}`);
                 ui.areaFill.setAttribute('points', `0,${height - padding} ${points.join(' ')} ${width},${height - padding}`);
                 ui.chartDots.innerHTML = points.map((point) => `<circle cx="${point.split(',')[0]}" cy="${point.split(',')[1]}" class="dot" />`).join('');
                 ui.chartHigh.textContent = formatHashrate(Math.max(...values));
