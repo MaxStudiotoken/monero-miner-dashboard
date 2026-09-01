@@ -434,8 +434,8 @@
         </div>
 
         <nav class="site-nav" aria-label="Navegación principal">
-            <a href="#inicio"><i class="fas fa-house"></i> Inicio</a>
-            <a href="#granja"><i class="fas fa-server"></i> Granja</a>
+            <a href="#inicio"><i class="fas fa-house"></i> <span id="navHome">Inicio</span></a>
+            <a href="#granja"><i class="fas fa-server"></i> <span id="navFarm">Granja</span></a>
             <a href="https://play.google.com/store/apps/details?id=vargas.maximo.minermoneroapp" target="_blank" rel="noopener noreferrer" class="header-app-btn"><i class="fab fa-google-play"></i> <span id="headerAppBtnText">Descargar App</span></a>
         </nav>
 
@@ -586,7 +586,7 @@
 
         <section class="workers-panel" aria-live="polite">
             <div class="workers-header">
-                <h3><i class="fas fa-mobile-alt"></i> Trabajadores de esta wallet</h3>
+                <h3><i class="fas fa-mobile-alt"></i> <span id="workersTitle">Trabajadores de esta wallet</span></h3>
                 <span id="workersCount">0 workers</span>
             </div>
             <div class="worker-list" id="workerList"><div class="worker-empty">Introduce la dirección y actualiza para ver los móviles conectados.</div></div>
@@ -1249,6 +1249,14 @@
                     security: '<strong>安全提示：</strong> 切勿在这里输入或分享恢复助记词、私钥或钱包密码。'
                 }
             };
+            const PAGE_COPY = {
+                es: { home: 'Inicio', farm: 'Granja', download: 'Descargar App', earnings: 'Ganancias en directo', performance: 'Rendimiento de minado', peak: 'Pico', average: 'Promedio', address: 'Dirección Monero', shares: 'Shares', cpu: 'CPU', temperature: 'Temperatura', lastShare: 'Último share', workers: 'Trabajadores de esta wallet' },
+                en: { home: 'Home', farm: 'Farm', download: 'Download App', earnings: 'Live earnings', performance: 'Mining performance', peak: 'Peak', average: 'Average', address: 'Monero address', shares: 'Shares', cpu: 'CPU', temperature: 'Temperature', lastShare: 'Last share', workers: 'Workers for this wallet' },
+                fr: { home: 'Accueil', farm: 'Ferme', download: 'Télécharger l’app', earnings: 'Gains en direct', performance: 'Performance de minage', peak: 'Pic', average: 'Moyenne', address: 'Adresse Monero', shares: 'Parts', cpu: 'CPU', temperature: 'Température', lastShare: 'Dernière part', workers: 'Workers de ce wallet' },
+                de: { home: 'Start', farm: 'Farm', download: 'App herunterladen', earnings: 'Live-Einnahmen', performance: 'Schürfleistung', peak: 'Spitze', average: 'Durchschnitt', address: 'Monero-Adresse', shares: 'Shares', cpu: 'CPU', temperature: 'Temperatur', lastShare: 'Letzter Share', workers: 'Worker dieser Wallet' },
+                ja: { home: 'ホーム', farm: 'ファーム', download: 'アプリをダウンロード', earnings: 'ライブ収益', performance: 'マイニング性能', peak: '最大', average: '平均', address: 'Monero アドレス', shares: 'シェア', cpu: 'CPU', temperature: '温度', lastShare: '最終シェア', workers: 'このウォレットのワーカー' },
+                zh: { home: '首页', farm: '矿场', download: '下载应用', earnings: '实时收益', performance: '挖矿性能', peak: '峰值', average: '平均', address: '门罗币地址', shares: '份额', cpu: 'CPU', temperature: '温度', lastShare: '最后份额', workers: '此钱包的矿工' }
+            };
             const ATOMIC_UNITS_PER_XMR = 1_000_000_000_000;
             const POLL_INTERVAL_MS = 30_000;
             const history = [];
@@ -1297,6 +1305,23 @@
                 $('welcomeStep4').textContent = text.step4;
                 $('welcomeSecurity').innerHTML = text.security;
                 $('welcomeImage').alt = text.title;
+            }
+
+            function updatePageLanguage(language) {
+                const text = PAGE_COPY[language] || PAGE_COPY.es;
+                $('navHome').textContent = text.home;
+                $('navFarm').textContent = text.farm;
+                $('headerAppBtnText').textContent = text.download;
+                $('earningsTitle').textContent = text.earnings;
+                $('chartTitle').textContent = text.performance;
+                $('peakText').textContent = text.peak;
+                $('avgText').textContent = text.average;
+                $('walletLabel').textContent = text.address;
+                $('sharesLabel').textContent = text.shares;
+                $('cpuLabel').textContent = text.cpu;
+                $('tempLabel').textContent = text.temperature;
+                $('uptimeLabel').textContent = text.lastShare;
+                $('workersTitle').textContent = text.workers;
             }
 
             const formatHashrate = (value) => Number(value || 0).toLocaleString('es-ES');
@@ -1390,7 +1415,7 @@
                     ui.cpuBar.style.width = '0%';
                     ui.temp.textContent = '--';
                     ui.tempBar.style.width = '0%';
-                    ui.uptimeLabel.textContent = 'Último share';
+                    ui.uptimeLabel.textContent = (PAGE_COPY[document.querySelector('.lang-btn.active')?.dataset.lang] || PAGE_COPY.es).lastShare;
                     ui.uptime.textContent = formatLastShare(collective.lastShare);
                     ui.earnings.textContent = `${formatXmr(balance)} XMR`;
                     ui.earningsHour.textContent = '--';
@@ -1439,9 +1464,15 @@
             }
             ui.wallet.addEventListener('change', refreshDashboard);
             document.querySelectorAll('.lang-btn').forEach((button) => {
-                button.addEventListener('click', () => updateWelcome(button.dataset.lang));
+                button.addEventListener('click', () => {
+                    document.querySelectorAll('.lang-btn').forEach((item) => item.classList.remove('active'));
+                    button.classList.add('active');
+                    updateWelcome(button.dataset.lang);
+                    updatePageLanguage(button.dataset.lang);
+                });
             });
             updateWelcome('es');
+            updatePageLanguage('es');
             refreshDashboard();
             window.setInterval(refreshDashboard, POLL_INTERVAL_MS);
         })();
